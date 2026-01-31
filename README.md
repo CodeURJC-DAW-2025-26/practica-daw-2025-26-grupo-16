@@ -3,8 +3,8 @@
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
-| [Nombre 1] | [email1]@alumnos.urjc.es | [User1] |
-| [Nombre 2] | [email2]@alumnos.urjc.es | [User2] |
+| **Adrián Esteban Martín** | a.estebanm.2021@alumnos.urjc.es | [aadri-2003](https://github.com/aadri-2003) |
+| **Laura Pineda Ballesteros**  | l.pineda.2022@alumnos.urjc.es | [lauraxpb](https://github.com/lauraxpb) |
 | [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
 | [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
 
@@ -16,40 +16,39 @@
 [Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
 
 ### **Entidades**
-Indicar las entidades principales que gestionará la aplicación y las relaciones entre ellas:
+Las principales entidades de la aplicación son:
 
-1. **[Entidad 1]**: [Ej: Usuario]
-2. **[Entidad 2]**: [Ej: Producto]
-3. **[Entidad 3]**: [Ej: Pedido]
-4. **[Entidad 4]**: [Ej: Categoría]
+1. **Usuario**: Clientes del gimnasio que pueden acceder a entrenamientos y planes de nutrición.
+2. **Nutrición**: Planes alimenticios personalizados según los objetivos del usuario.
+3. **Entrenamiento**: Rutinas de ejercicios personalizadas para cada usuario.
+4. **Comentario Entrenamiento**: Los usuarios pueden publicar comentarios sobre los entrenamientos.
+5. **Comentario Nutrición**: Los usuarios pueden publicar comentarios sobre la nutrición.
 
 **Relaciones entre entidades:**
-- [Ej: Usuario - Pedido: Un usuario puede tener múltiples pedidos (1:N)]
-- [Ej: Pedido - Producto: Un pedido puede contener múltiples productos y un producto puede estar en múltiples pedidos (N:M)]
-- [Ej: Producto - Categoría: Un producto pertenece a una categoría (N:1)]
-- [Descripción de otras relaciones relevantes]
+La relación entre las diferentes entidades la representamos con el siguiente diagrama
+
+![image](https://github.com/user-attachments/assets/4bc5973a-0ea9-4801-81b8-f486ba7dab55)
 
 ### **Permisos de los Usuarios**
-Describir los permisos de cada tipo de usuario e indicar de qué entidades es dueño:
 
 * **Usuario Anónimo**: 
-  - Permisos: [Ej: Visualización de catálogo, búsqueda de productos, registro]
+  - Permisos: Puede ver los diferentes entreamientos y rutinas disponibles, no puede acceder a los comentarios personalizados de entrenamiento ni a los comentarios de nutrición, puede registrarse
   - No es dueño de ninguna entidad
 
 * **Usuario Registrado**: 
-  - Permisos: [Ej: Gestión de perfil, realizar pedidos, crear valoraciones]
-  - Es dueño de: [Ej: Sus propios Pedidos, su Perfil de Usuario, sus Valoraciones]
+  - Permisos: Puede ver los diferentes comentarios publicados, puede publicar un comentario,  puede acceder a sus planes de entrenamiento, puede solicitar planes personalizados o automáticos de entrenamiento, puede acceder a sus planes de nutrición, puede solicitar planes personalizados o automáticos de nutrición]
+  - Es dueño de: Sus propios Entrenamientos, sus propias Nutriciones, sus Comentarios]
 
 * **Administrador**: 
-  - Permisos: [Ej: Gestión completa de productos (CRUD), visualización de estadísticas, moderación de contenido]
-  - Es dueño de: [Ej: Productos, Categorías, puede gestionar todos los Pedidos y Usuarios]
+  - Permisos: Tiene todos los permisos de un usuario registrado y permisos para crear planes de entrenamiento y de nutrición, además, podrá eliminar tanto dietas y rutinas(y sus respectivos comentarios).
+  - Es dueño de: Todas las entidades.
 
 ### **Imágenes**
-Indicar qué entidades tendrán asociadas una o varias imágenes:
+Las entidades tienen asignadas las siguientes imágenes:
 
-- **[Entidad con imágenes 1]**: [Ej: Usuario - Una imagen de avatar por usuario]
-- **[Entidad con imágenes 2]**: [Ej: Producto - Múltiples imágenes por producto (galería)]
-- **[Entidad con imágenes 3]**: [Ej: Categoría - Una imagen representativa por categoría]
+- **Usuario**: Los usuarios podrán tener foto de perfil
+- **Entrenamiento**: Los entrenamientos tendrán fotos asignadas
+- **Nutrición**: Las nutriciones tendrán fotos asignadas
 
 ### **Gráficos**
 Indicar qué información se mostrará usando gráficos y de qué tipo serán:
@@ -60,12 +59,10 @@ Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 - **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
 
 ### **Tecnología Complementaria**
-Indicar qué tecnología complementaria se empleará:
+Añadiremos las siguientes tecnologías complementarias:
 
-- [Ej: Envío de correos electrónicos automáticos mediante JavaMailSender]
-- [Ej: Generación de PDFs de facturas usando iText o similar]
-- [Ej: Sistema de autenticación OAuth2 o JWT]
-- [Otras tecnologías externas que se integrarán]
+- **Entrenamiento**: Generará PDFs con planes de entrenamiento
+- - **Nutrición**: Generará PDFs con planes de nutrición.
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
