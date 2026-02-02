@@ -62,7 +62,7 @@ Indicar qué información se mostrará usando gráficos y de qué tipo serán:
 Añadiremos las siguientes tecnologías complementarias:
 
 - **Entrenamiento**: Generará PDFs con planes de entrenamiento
-- - **Nutrición**: Generará PDFs con planes de nutrición.
+- **Nutrición**: Generará PDFs con planes de nutrición.
 
 ### **Algoritmo o Consulta Avanzada**
 Indicar cuál será el algoritmo o consulta avanzada que se implementará:
