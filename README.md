@@ -13,7 +13,7 @@
 ## 🎭 **Preparación 1: Definición del Proyecto**
 
 ### **Descripción del Tema**
-[Escribe aquí una descripción breve y concisa de qué trata tu aplicación, el sector al que pertenece y qué valor aporta al usuario].
+Nuestra aplicación trata sobre un gimnasio, en la que los usuarios tienen acceso a entrenamientos y nutriciones para mejorar su forma física.
 
 ### **Entidades**
 Las principales entidades de la aplicación son:
@@ -51,12 +51,9 @@ Las entidades tienen asignadas las siguientes imágenes:
 - **Nutrición**: Las nutriciones tendrán fotos asignadas
 
 ### **Gráficos**
-Indicar qué información se mostrará usando gráficos y de qué tipo serán:
+La entidad de nutrición tendrá un gráfico circular:
 
-- **Gráfico 1**: [Ej: Ventas mensuales - Gráfico de barras]
-- **Gráfico 2**: [Ej: Productos más vendidos - Gráfico de tarta/circular]
-- **Gráfico 3**: [Ej: Evolución de usuarios registrados - Gráfico de líneas]
-- **Gráfico 4**: [Ej: Distribución de pedidos por categoría - Gráfico de barras horizontales]
+- **Gráfico 1**: el plan de nutrición tendrá un gráfico para mostrar información de la dieta de forma más sencilla y atractiva para el usuario.
 
 ### **Tecnología Complementaria**
 Añadiremos las siguientes tecnologías complementarias:
@@ -65,11 +62,9 @@ Añadiremos las siguientes tecnologías complementarias:
 - **Nutrición**: Generará PDFs con planes de nutrición.
 
 ### **Algoritmo o Consulta Avanzada**
-Indicar cuál será el algoritmo o consulta avanzada que se implementará:
 
-- **Algoritmo/Consulta**: [Ej: Sistema de recomendaciones basado en el historial de compras del usuario]
-- **Descripción**: [Ej: Analiza los productos comprados previamente y sugiere productos similares o complementarios utilizando filtrado colaborativo]
-- **Alternativa**: [Ej: Consulta compleja que agrupe ventas por categoría, mes y región, con cálculo de tendencias]
+- **Algoritmo/Consulta**: Generar plan
+- **Descripción**: Implementaremos un algoritmo que genere un plan de entrenamiento y un plan de nutrición en base a los objetivos y a la información del usuario.
 
 ---
 
