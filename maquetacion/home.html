@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - PowerGym</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <nav class="navbar">
+                <div class="logo">⚡ PowerGym</div>
+                <ul class="nav-menu">
+                    <li><span style="color: white;">Juan García Martínez</span></li>
+                    <li><span class="badge badge-success">Socio Premium</span></li>
+                    <li><a href="profile-user.html" class="nav-link">Mi Perfil</a></li>
+                    <li><a href="login.html" class="nav-link">Salir</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3 style="margin-bottom: 1.5rem; color: var(--navy-blue);">Menú Principal</h3>
+                <ul class="sidebar-menu">
+                    <li><a href="home.html" class="active"><span>📊</span> Dashboard</a></li>
+                    <li><a href="#"><span>📅</span> Mis Clases</a></li>
+                    <li><a href="#"><span>🏋️</span> Reservar Clase</a></li>
+                    <li><a href="create-training.html"><span>💪</span> Mi Entrenamiento</a></li>
+                    <li><a href="nutrition-details.html"><span>🥗</span> Plan Nutricional</a></li>
+                    <li><a href="progress.html"><span>📈</span> Mi Progreso</a></li>
+                    <li><a href="#"><span>💳</span> Mis Pagos</a></li>
+                    <li><a href="#"><span>🏆</span> Logros</a></li>
+                </ul>
+
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h4>💡 Consejo del Día</h4>
+                        <p style="font-size: 0.9rem;">Hidrátate bien antes, durante y después del entrenamiento. El agua es esencial para el rendimiento.</p>
+                    </div>
+                </div>
+
+                <div class="card mt-3">
+                    <div class="card-body">
+                        <h4>⏰ Próxima Clase</h4>
+                        <p><strong>Spinning</strong></p>
+                        <p style="font-size: 0.9rem;">Hoy a las 18:00</p>
+                        <p style="font-size: 0.9rem;">Sala 2 - Instructor: María</p>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <h1 class="page-title">Bienvenido, Juan 👋</h1>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-4 mb-4">
+                    <div class="stat-card">
+                        <div class="stat-value">28</div>
+                        <div class="stat-label">Días de Socio</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Clases Asistidas</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">5.2kg</div>
+                        <div class="stat-label">Progreso</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">85%</div>
+                        <div class="stat-label">Asistencia</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-3">
+                    <!-- Clases de Hoy -->
+                    <div class="card">
+                        <div class="card-header">
+                            📅 Clases de Hoy
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+                                <div class="flex-between mb-2">
+                                    <strong>Spinning</strong>
+                                    <span class="badge badge-info">18:00</span>
+                                </div>
+                                <p class="text-secondary" style="font-size: 0.9rem;">Sala 2 • María López</p>
+                                <p style="font-size: 0.9rem;">Plazas: 8/15</p>
+                                <button class="btn btn-primary btn-small mt-2">Reservar Plaza</button>
+                            </div>
+
+                            <div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+                                <div class="flex-between mb-2">
+                                    <strong>Yoga</strong>
+                                    <span class="badge badge-info">19:30</span>
+                                </div>
+                                <p class="text-secondary" style="font-size: 0.9rem;">Sala 3 • Ana Ruiz</p>
+                                <p style="font-size: 0.9rem;">Plazas: 12/20</p>
+                                <button class="btn btn-primary btn-small mt-2">Reservar Plaza</button>
+                            </div>
+
+                            <div>
+                                <div class="flex-between mb-2">
+                                    <strong>CrossFit</strong>
+                                    <span class="badge badge-info">20:00</span>
+                                </div>
+                                <p class="text-secondary" style="font-size: 0.9rem;">Box Principal • Carlos Pérez</p>
+                                <p style="font-size: 0.9rem;">Plazas: 10/12</p>
+                                <button class="btn btn-primary btn-small mt-2">Reservar Plaza</button>
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="#" class="btn btn-secondary btn-small">Ver Todas las Clases</a>
+                        </div>
+                    </div>
+
+                    <!-- Mi Entrenamiento -->
+                    <div class="card">
+                        <div class="card-header">
+                            💪 Mi Rutina Actual
+                        </div>
+                        <div class="card-body">
+                            <h3>Rutina de Fuerza</h3>
+                            <p class="mb-3">Semana 4 de 8 • Nivel Intermedio</p>
+                            
+                            <div class="mb-3">
+                                <div class="flex-between mb-1">
+                                    <span>Progreso Semanal</span>
+                                    <span>3/5 días</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 60%">60%</div>
+                                </div>
+                            </div>
+
+                            <h4 class="mt-3 mb-2">Hoy toca:</h4>
+                            <ul style="padding-left: 1.5rem;">
+                                <li>Press de Banca: 4x10</li>
+                                <li>Sentadillas: 4x12</li>
+                                <li>Dominadas: 3x8</li>
+                                <li>Peso Muerto: 4x8</li>
+                            </ul>
+
+                            <div class="alert alert-info mt-3">
+                                <strong>💡 Tip:</strong> Descansa 90 segundos entre series
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <a href="create-training.html" class="btn btn-primary btn-small">Ver Detalles</a>
+                            <button class="btn btn-success btn-small">Marcar Completado</button>
+                        </div>
+                    </div>
+
+                    <!-- Plan Nutricional -->
+                    <div class="card">
+                        <div class="card-header">
+                            🥗 Nutrición de Hoy
+                        </div>
+                        <div class="card-body">
+                            <h3>Dieta Balanceada</h3>
+                            <p class="mb-3">2,450 kcal • 200g proteína</p>
+                            
+                            <div class="mb-2">
+                                <div class="flex-between mb-1">
+                                    <span>Calorías</span>
+                                    <span>1,850 / 2,450</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 75%"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-2">
+                                <div class="flex-between mb-1">
+                                    <span>Proteínas</span>
+                                    <span>145g / 200g</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 72%"></div>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <div class="flex-between mb-1">
+                                    <span>Agua</span>
+                                    <span>2.0L / 3L</span>
+                                </div>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: 67%"></div>
+                                </div>
+                            </div>
+
+                            <h4 class="mt-3 mb-2">Próxima comida:</h4>
+                            <p><strong>Cena (20:00)</strong></p>
+                            <ul style="padding-left: 1.5rem; font-size: 0.9rem;">
+                                <li>200g salmón</li>
+                                <li>Verduras al vapor</li>
+                                <li>100g boniato</li>
+                            </ul>
+                        </div>
+                        <div class="card-footer">
+                            <a href="nutrition-details.html" class="btn btn-primary btn-small">Ver Plan Completo</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actividad Reciente -->
+                <div class="card mt-4">
+                    <div class="card-header">
+                        📋 Actividad Reciente
+                    </div>
+                    <div class="card-body">
+                        <div class="grid grid-2">
+                            <div class="flex gap-2 mb-2">
+                                <span class="badge badge-success">✓</span>
+                                <div>
+                                    <strong>Clase de Spinning completada</strong>
+                                    <p class="text-secondary">Ayer a las 18:00</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <span class="badge badge-info">📊</span>
+                                <div>
+                                    <strong>Peso actualizado: 78.5 kg</strong>
+                                    <p class="text-secondary">Hace 2 días</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <span class="badge badge-primary">🍎</span>
+                                <div>
+                                    <strong>Plan nutricional ajustado</strong>
+                                    <p class="text-secondary">Hace 3 días</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 mb-2">
+                                <span class="badge badge-warning">🏆</span>
+                                <div>
+                                    <strong>Logro desbloqueado: 10 clases</strong>
+                                    <p class="text-secondary">Hace 5 días</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Instalaciones -->
+                <div class="grid grid-4 mt-4">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div style="font-size: 2.5rem;">🏃</div>
+                            <h4>Zona Cardio</h4>
+                            <p class="text-secondary">15 máquinas disponibles</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div style="font-size: 2.5rem;">💪</div>
+                            <h4>Zona Pesas</h4>
+                            <p class="text-secondary">Libre</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div style="font-size: 2.5rem;">🧘</div>
+                            <h4>Salas Actividades</h4>
+                            <p class="text-secondary">3 salas disponibles</p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div style="font-size: 2.5rem;">🚿</div>
+                            <h4>Vestuarios</h4>
+                            <p class="text-secondary">Abierto 6:00-23:00</p>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

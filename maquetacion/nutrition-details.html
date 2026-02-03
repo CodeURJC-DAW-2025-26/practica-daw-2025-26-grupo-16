@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Plan Nutricional - PowerGym</title>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="navbar">
+				<div class="logo">⚡ PowerGym</div>
+				<ul class="nav-menu">
+					<li><a href="home.html" class="nav-link">Inicio</a></li>
+					<li>
+						<a href="nutrition-details.html" class="nav-link active"
+							>Nutrición</a
+						>
+					</li>
+					<li>
+						<a href="create-training.html" class="nav-link">Entrenamientos</a>
+					</li>
+					<li><a href="progress.html" class="nav-link">Progreso</a></li>
+					<li><a href="profile-user.html" class="nav-link">Mi Perfil</a></li>
+					<li><a href="login.html" class="nav-link">Salir</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main Content -->
+		<main class="container dashboard-container">
+			<div class="flex-between mb-4">
+				<h1 class="page-title" style="margin-bottom: 0">Dieta Balanceada</h1>
+				<div class="flex gap-2">
+					<a href="edit-nutrition.html" class="btn btn-primary">Editar Plan</a>
+					<button class="btn btn-secondary">Duplicar</button>
+				</div>
+			</div>
+
+			<div class="grid grid-3 mb-4">
+				<div class="stat-card">
+					<div class="stat-value">2,450</div>
+					<div class="stat-label">Calorías/día</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">200g</div>
+					<div class="stat-label">Proteínas</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">280g</div>
+					<div class="stat-label">Carbohidratos</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">65g</div>
+					<div class="stat-label">Grasas</div>
+				</div>
+			</div>
+
+			<div class="card mb-4">
+				<div class="card-header">Información del Plan</div>
+				<div class="card-body">
+					<div class="grid grid-2">
+						<div>
+							<p><strong>Tipo:</strong> Pérdida de Peso</p>
+							<p><strong>Creado:</strong> 15 de Enero, 2026</p>
+							<p><strong>Última Modificación:</strong> 28 de Enero, 2026</p>
+						</div>
+						<div>
+							<p>
+								<strong>Estado:</strong>
+								<span class="badge badge-success">Activo</span>
+							</p>
+							<p><strong>Duración:</strong> 8 semanas</p>
+							<p><strong>Adherencia:</strong> 85%</p>
+						</div>
+					</div>
+					<div class="mt-3">
+						<p><strong>Descripción:</strong></p>
+						<p>
+							Plan nutricional balanceado diseñado para pérdida de peso gradual
+							manteniendo la masa muscular. Incluye macronutrientes balanceados
+							y variedad de alimentos saludables.
+						</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Comidas del Día -->
+			<h2 class="mb-3">Plan de Comidas</h2>
+
+			<div class="grid grid-2">
+				<!-- Desayuno -->
+				<div class="card mb-3">
+					<div class="card-header">🌅 Desayuno (7:00 - 8:00)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>3 huevos revueltos</li>
+							<li>2 tostadas integrales</li>
+							<li>1 plátano mediano</li>
+							<li>1 taza de café negro</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">450 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">25g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">45g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">15g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Snack Mañana -->
+				<div class="card mb-3">
+					<div class="card-header">🍎 Snack Media Mañana (10:30)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>1 manzana</li>
+							<li>30g de almendras</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">250 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">8g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">28g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">14g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Almuerzo -->
+				<div class="card mb-3">
+					<div class="card-header">🍽️ Almuerzo (13:00 - 14:00)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>200g pechuga de pollo a la plancha</li>
+							<li>150g arroz integral cocido</li>
+							<li>Ensalada mixta con aceite de oliva</li>
+							<li>1 yogur griego natural</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">680 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">58g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">72g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">16g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Snack Tarde -->
+				<div class="card mb-3">
+					<div class="card-header">🥤 Snack Tarde (17:00)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>Batido de proteína (30g)</li>
+							<li>1 plátano</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">280 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">32g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">38g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">3g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Cena -->
+				<div class="card mb-3">
+					<div class="card-header">🌙 Cena (20:00 - 21:00)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>200g salmón a la plancha</li>
+							<li>250g verduras al vapor (brócoli, zanahoria)</li>
+							<li>100g boniato asado</li>
+							<li>Ensalada verde</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">550 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">48g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">42g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">22g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Pre-Dormir -->
+				<div class="card mb-3">
+					<div class="card-header">😴 Antes de Dormir (22:30)</div>
+					<div class="card-body">
+						<h4>Alimentos:</h4>
+						<ul>
+							<li>Caseína (25g) o requesón bajo en grasa</li>
+						</ul>
+						<div class="grid grid-4 mt-3">
+							<div>
+								<strong>Calorías:</strong><br />
+								<span class="badge badge-info">120 kcal</span>
+							</div>
+							<div>
+								<strong>Proteínas:</strong><br />
+								<span class="badge badge-primary">25g</span>
+							</div>
+							<div>
+								<strong>Carbos:</strong><br />
+								<span class="badge badge-primary">3g</span>
+							</div>
+							<div>
+								<strong>Grasas:</strong><br />
+								<span class="badge badge-primary">2g</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Comentarios -->
+			<div class="card mt-4">
+				<div class="card-header">💬 Comentarios y Notas</div>
+				<div class="card-body">
+					<!-- Formulario para nuevo comentario -->
+					<form id="commentForm" class="mb-4">
+						<div class="form-group">
+							<label for="commentText" class="form-label"
+								>Añadir un comentario</label
+							>
+							<textarea
+								id="commentText"
+								class="form-control"
+								rows="3"
+								placeholder="Escribe tu comentario, observación o nota sobre este plan..."
+								required
+							></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">
+							Publicar Comentario
+						</button>
+					</form>
+
+					<!-- Lista de comentarios -->
+					<div id="commentsList">
+						<div class="comment">
+							<div class="comment-header">
+								<span class="comment-author">Juan García</span>
+								<span class="comment-date">Hace 2 horas</span>
+							</div>
+							<div class="comment-body">
+								Estoy muy satisfecho con este plan. He perdido 2kg en la primera
+								semana sin sentir hambre. Los macros están muy bien balanceados.
+							</div>
+						</div>
+
+						<div class="comment">
+							<div class="comment-header">
+								<span class="comment-author">Dr. Martínez (Nutricionista)</span>
+								<span class="comment-date">Hace 1 día</span>
+							</div>
+							<div class="comment-body">
+								Excelente progreso. Recuerda mantener una buena hidratación
+								(mínimo 2.5L de agua al día) y ajustar las porciones según tu
+								nivel de actividad física.
+							</div>
+						</div>
+
+						<div class="comment">
+							<div class="comment-header">
+								<span class="comment-author">Juan García</span>
+								<span class="comment-date">Hace 3 días</span>
+							</div>
+							<div class="comment-body">
+								He notado que me cuesta un poco llegar a las 200g de proteína
+								diarias. ¿Alguna sugerencia para aumentar la ingesta sin añadir
+								muchas calorías?
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Notas Adicionales -->
+			<div class="card mt-4">
+				<div class="card-header">📝 Notas y Recomendaciones</div>
+				<div class="card-body">
+					<div class="alert alert-info">
+						<strong>Recomendación:</strong> Beber al menos 2.5 litros de agua al
+						día
+					</div>
+					<ul>
+						<li>Ajustar las porciones según el nivel de actividad diaria</li>
+						<li>
+							Consumir las comidas en los horarios indicados para mantener el
+							metabolismo activo
+						</li>
+						<li>Los snacks son opcionales si no se siente hambre</li>
+						<li>
+							Se pueden intercambiar las proteínas por opciones similares (pollo
+							por pavo, salmón por atún, etc.)
+						</li>
+						<li>
+							Consultar con nutricionista antes de realizar cambios
+							significativos
+						</li>
+					</ul>
+				</div>
+			</div>
+		</main>
+
+		<script src="js/comments.js"></script>
+	</body>
+</html>

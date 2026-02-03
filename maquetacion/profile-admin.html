@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Panel Administrador - PowerGym</title>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="navbar">
+				<div class="logo">⚡ PowerGym Admin</div>
+				<ul class="nav-menu">
+					<li>
+						<a href="profile-admin.html" class="nav-link active">Dashboard</a>
+					</li>
+					<li><a href="#" class="nav-link">Usuarios</a></li>
+					<li><a href="#" class="nav-link">Planes</a></li>
+					<li><a href="#" class="nav-link">Reportes</a></li>
+					<li><a href="login.html" class="nav-link">Salir</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main Content -->
+		<main class="container dashboard-container">
+			<h1 class="page-title">Panel de Administración</h1>
+
+			<!-- Admin Stats -->
+			<div class="grid grid-4 mb-4">
+				<div class="stat-card">
+					<div class="stat-value">1,248</div>
+					<div class="stat-label">Usuarios Activos</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">342</div>
+					<div class="stat-label">Nuevos Este Mes</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">5,890</div>
+					<div class="stat-label">Entrenamientos</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">156</div>
+					<div class="stat-label">Planes Activos</div>
+				</div>
+			</div>
+
+			<div class="grid grid-2">
+				<!-- Gestión de Usuarios -->
+				<div class="card">
+					<div class="card-header">Usuarios Recientes</div>
+					<div class="card-body">
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Usuario</th>
+									<th>Email</th>
+									<th>Estado</th>
+									<th>Acciones</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>María López</td>
+									<td>maria.lopez@email.com</td>
+									<td><span class="badge badge-success">Activo</span></td>
+									<td>
+										<button class="btn btn-small btn-primary">Editar</button>
+									</td>
+								</tr>
+								<tr>
+									<td>Pedro Sánchez</td>
+									<td>pedro.sanchez@email.com</td>
+									<td><span class="badge badge-success">Activo</span></td>
+									<td>
+										<button class="btn btn-small btn-primary">Editar</button>
+									</td>
+								</tr>
+								<tr>
+									<td>Ana Martínez</td>
+									<td>ana.martinez@email.com</td>
+									<td><span class="badge badge-warning">Inactivo</span></td>
+									<td>
+										<button class="btn btn-small btn-primary">Editar</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="card-footer">
+						<button class="btn btn-primary btn-small">
+							Ver Todos los Usuarios
+						</button>
+					</div>
+				</div>
+
+				<!-- Gestión de Planes -->
+				<div class="card">
+					<div class="card-header">Planes Nutricionales</div>
+					<div class="card-body">
+						<div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0">
+							<div class="flex-between mb-2">
+								<h4>Plan de Pérdida de Peso</h4>
+								<span class="badge badge-success">Activo</span>
+							</div>
+							<p class="text-secondary">Usuarios activos: 87</p>
+							<button class="btn btn-small btn-primary">Editar</button>
+							<button class="btn btn-small btn-secondary">Ver Detalles</button>
+						</div>
+
+						<div class="mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0">
+							<div class="flex-between mb-2">
+								<h4>Plan de Ganancia Muscular</h4>
+								<span class="badge badge-success">Activo</span>
+							</div>
+							<p class="text-secondary">Usuarios activos: 65</p>
+							<button class="btn btn-small btn-primary">Editar</button>
+							<button class="btn btn-small btn-secondary">Ver Detalles</button>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-2">
+								<h4>Plan Vegetariano</h4>
+								<span class="badge badge-success">Activo</span>
+							</div>
+							<p class="text-secondary">Usuarios activos: 42</p>
+							<button class="btn btn-small btn-primary">Editar</button>
+							<button class="btn btn-small btn-secondary">Ver Detalles</button>
+						</div>
+					</div>
+					<div class="card-footer">
+						<a href="create-nutrition.html" class="btn btn-primary btn-small"
+							>Crear Nuevo Plan</a
+						>
+					</div>
+				</div>
+			</div>
+
+			<!-- Estadísticas y Reportes -->
+			<div class="card mt-4">
+				<div class="card-header">Actividad de la Plataforma</div>
+				<div class="card-body">
+					<div class="grid grid-3">
+						<div>
+							<h4 class="mb-2">Usuarios por Objetivo</h4>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Pérdida de peso</span>
+									<span>548</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 44%"></div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Ganancia muscular</span>
+									<span>425</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 34%"></div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Mantenimiento</span>
+									<span>275</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 22%"></div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h4 class="mb-2">Nivel de Actividad</h4>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Muy activos</span>
+									<span>412</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 33%"></div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Moderadamente activos</span>
+									<span>586</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 47%"></div>
+								</div>
+							</div>
+							<div class="mb-2">
+								<div class="flex-between mb-1">
+									<span>Ligeramente activos</span>
+									<span>250</span>
+								</div>
+								<div class="progress">
+									<div class="progress-bar" style="width: 20%"></div>
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<h4 class="mb-2">Acciones Rápidas</h4>
+							<button class="btn btn-primary btn-block mb-2">
+								Crear Usuario
+							</button>
+							<button class="btn btn-primary btn-block mb-2">
+								Crear Plan Nutricional
+							</button>
+							<button class="btn btn-primary btn-block mb-2">
+								Crear Entrenamiento
+							</button>
+							<button class="btn btn-secondary btn-block mb-2">
+								Generar Reporte
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Últimas Notificaciones -->
+			<div class="card mt-4">
+				<div class="card-header">Notificaciones del Sistema</div>
+				<div class="card-body">
+					<div class="alert alert-info">
+						<strong>Actualización de Sistema:</strong> Nueva versión 2.5.0
+						disponible
+					</div>
+					<div class="alert alert-success">
+						<strong>Objetivo Alcanzado:</strong> 1,000+ usuarios activos este
+						mes
+					</div>
+					<div class="flex-between">
+						<span>342 nuevos usuarios registrados esta semana</span>
+						<span class="badge badge-success">+15%</span>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

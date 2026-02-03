@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mi Perfil - PowerGym</title>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="navbar">
+				<div class="logo">⚡ PowerGym</div>
+				<ul class="nav-menu">
+					<li><a href="home.html" class="nav-link">Inicio</a></li>
+					<li>
+						<a href="nutrition-details.html" class="nav-link">Nutrición</a>
+					</li>
+					<li>
+						<a href="create-training.html" class="nav-link">Entrenamientos</a>
+					</li>
+					<li><a href="progress.html" class="nav-link">Progreso</a></li>
+					<li>
+						<a href="profile-user.html" class="nav-link active">Mi Perfil</a>
+					</li>
+					<li><a href="login.html" class="nav-link">Salir</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main Content -->
+		<main class="container dashboard-container">
+			<!-- Profile Header -->
+			<div class="profile-header">
+				<img
+					src="https://via.placeholder.com/96"
+					alt="Avatar"
+					class="avatar avatar-large"
+				/>
+				<div class="profile-info">
+					<h2>Juan García Martínez</h2>
+					<p>Miembro desde Enero 2026 • 28 días activo</p>
+					<div class="flex gap-2 mt-2">
+						<span class="badge badge-primary">Usuario Premium</span>
+						<span class="badge badge-success">Objetivo: Pérdida de peso</span>
+					</div>
+				</div>
+			</div>
+
+			<!-- Profile Stats -->
+			<div class="profile-stats">
+				<div class="stat-card">
+					<div class="stat-value">78.5kg</div>
+					<div class="stat-label">Peso Actual</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">175cm</div>
+					<div class="stat-label">Altura</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">25.6</div>
+					<div class="stat-label">IMC</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">18%</div>
+					<div class="stat-label">Grasa Corporal</div>
+				</div>
+			</div>
+
+			<div class="grid grid-2">
+				<!-- Información Personal -->
+				<div class="card">
+					<div class="card-header">Información Personal</div>
+					<div class="card-body">
+						<form>
+							<div class="form-group">
+								<label class="form-label">Nombre Completo</label>
+								<input
+									type="text"
+									class="form-control"
+									value="Juan García Martínez"
+								/>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Correo Electrónico</label>
+								<input
+									type="email"
+									class="form-control"
+									value="juan.garcia@email.com"
+								/>
+							</div>
+
+							<div class="grid grid-2">
+								<div class="form-group">
+									<label class="form-label">Edad</label>
+									<input type="number" class="form-control" value="28" />
+								</div>
+								<div class="form-group">
+									<label class="form-label">Género</label>
+									<select class="form-control">
+										<option selected>Masculino</option>
+										<option>Femenino</option>
+										<option>Otro</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="grid grid-2">
+								<div class="form-group">
+									<label class="form-label">Altura (cm)</label>
+									<input type="number" class="form-control" value="175" />
+								</div>
+								<div class="form-group">
+									<label class="form-label">Peso (kg)</label>
+									<input type="number" class="form-control" value="78.5" />
+								</div>
+							</div>
+
+							<button type="submit" class="btn btn-primary">
+								Guardar Cambios
+							</button>
+						</form>
+					</div>
+				</div>
+
+				<!-- Objetivos y Preferencias -->
+				<div class="card">
+					<div class="card-header">Objetivos y Preferencias</div>
+					<div class="card-body">
+						<form>
+							<div class="form-group">
+								<label class="form-label">Objetivo Principal</label>
+								<select class="form-control">
+									<option selected>Pérdida de peso</option>
+									<option>Ganancia muscular</option>
+									<option>Mantenimiento</option>
+									<option>Definición</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Nivel de Actividad</label>
+								<select class="form-control">
+									<option>Sedentario</option>
+									<option>Ligeramente activo</option>
+									<option selected>Moderadamente activo</option>
+									<option>Muy activo</option>
+									<option>Extremadamente activo</option>
+								</select>
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Peso Objetivo (kg)</label>
+								<input type="number" class="form-control" value="75" />
+							</div>
+
+							<div class="form-group">
+								<label class="form-label">Restricciones Alimentarias</label>
+								<textarea class="form-control" rows="3">
+Sin lactosa, sin gluten</textarea
+								>
+							</div>
+
+							<button type="submit" class="btn btn-primary">
+								Actualizar Objetivos
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- Historial de Actividad -->
+			<div class="card mt-4">
+				<div class="card-header">Historial de Actividad</div>
+				<div class="card-body">
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Fecha</th>
+								<th>Actividad</th>
+								<th>Duración</th>
+								<th>Calorías</th>
+								<th>Estado</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>03/02/2026</td>
+								<td>Entrenamiento de Fuerza</td>
+								<td>45 min</td>
+								<td>320 kcal</td>
+								<td><span class="badge badge-success">Completado</span></td>
+							</tr>
+							<tr>
+								<td>02/02/2026</td>
+								<td>Cardio HIIT</td>
+								<td>30 min</td>
+								<td>280 kcal</td>
+								<td><span class="badge badge-success">Completado</span></td>
+							</tr>
+							<tr>
+								<td>01/02/2026</td>
+								<td>Yoga y Estiramiento</td>
+								<td>40 min</td>
+								<td>150 kcal</td>
+								<td><span class="badge badge-warning">Parcial</span></td>
+							</tr>
+							<tr>
+								<td>31/01/2026</td>
+								<td>Entrenamiento de Fuerza</td>
+								<td>50 min</td>
+								<td>350 kcal</td>
+								<td><span class="badge badge-success">Completado</span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>

@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Mi Progreso - PowerGym</title>
+		<link rel="stylesheet" href="css/styles.css" />
+	</head>
+	<body>
+		<!-- Header -->
+		<header class="header">
+			<nav class="navbar">
+				<div class="logo">⚡ PowerGym</div>
+				<ul class="nav-menu">
+					<li><a href="home.html" class="nav-link">Inicio</a></li>
+					<li>
+						<a href="nutrition-details.html" class="nav-link">Nutrición</a>
+					</li>
+					<li>
+						<a href="create-training.html" class="nav-link">Entrenamientos</a>
+					</li>
+					<li><a href="progress.html" class="nav-link active">Progreso</a></li>
+					<li><a href="profile-user.html" class="nav-link">Mi Perfil</a></li>
+					<li><a href="login.html" class="nav-link">Salir</a></li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Main Content -->
+		<main class="container dashboard-container">
+			<h1 class="page-title">Mi Progreso y Logros</h1>
+
+			<!-- Resumen de Progreso -->
+			<div class="grid grid-4 mb-4">
+				<div class="stat-card">
+					<div class="stat-value">28</div>
+					<div class="stat-label">Días Activo</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">-5.2kg</div>
+					<div class="stat-label">Peso Perdido</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">12</div>
+					<div class="stat-label">Entrenamientos</div>
+				</div>
+				<div class="stat-card">
+					<div class="stat-value">85%</div>
+					<div class="stat-label">Adherencia</div>
+				</div>
+			</div>
+
+			<div class="grid grid-2">
+				<!-- Evolución de Peso -->
+				<div class="card mb-4">
+					<div class="card-header">📊 Evolución de Peso</div>
+					<div class="card-body">
+						<div class="flex-between mb-3">
+							<div>
+								<p class="text-secondary">Peso Inicial</p>
+								<h3>83.7 kg</h3>
+							</div>
+							<div>
+								<p class="text-secondary">Peso Actual</p>
+								<h3>78.5 kg</h3>
+							</div>
+							<div>
+								<p class="text-secondary">Objetivo</p>
+								<h3>75.0 kg</h3>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Progreso hacia el objetivo</span>
+								<span>60%</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 60%">60%</div>
+							</div>
+						</div>
+
+						<div class="alert alert-success">
+							<strong>¡Excelente!</strong> Llevas 5.2 kg perdidos de 8.7 kg
+							totales
+						</div>
+
+						<table class="table mt-3">
+							<thead>
+								<tr>
+									<th>Fecha</th>
+									<th>Peso</th>
+									<th>Cambio</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>03/02/2026</td>
+									<td>78.5 kg</td>
+									<td><span class="badge badge-success">-0.3 kg</span></td>
+								</tr>
+								<tr>
+									<td>27/01/2026</td>
+									<td>78.8 kg</td>
+									<td><span class="badge badge-success">-0.5 kg</span></td>
+								</tr>
+								<tr>
+									<td>20/01/2026</td>
+									<td>79.3 kg</td>
+									<td><span class="badge badge-success">-0.8 kg</span></td>
+								</tr>
+								<tr>
+									<td>13/01/2026</td>
+									<td>80.1 kg</td>
+									<td><span class="badge badge-success">-1.2 kg</span></td>
+								</tr>
+								<tr>
+									<td>06/01/2026</td>
+									<td>81.3 kg</td>
+									<td><span class="badge badge-success">-2.4 kg</span></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<!-- Composición Corporal -->
+				<div class="card mb-4">
+					<div class="card-header">💪 Composición Corporal</div>
+					<div class="card-body">
+						<div class="grid grid-2 mb-4">
+							<div
+								class="text-center p-3"
+								style="
+									background: var(--bg-secondary);
+									border-radius: var(--border-radius-md);
+								"
+							>
+								<h4>IMC Actual</h4>
+								<div class="stat-value" style="font-size: 2.5rem">25.6</div>
+								<span class="badge badge-success">Normal</span>
+							</div>
+							<div
+								class="text-center p-3"
+								style="
+									background: var(--bg-secondary);
+									border-radius: var(--border-radius-md);
+								"
+							>
+								<h4>Grasa Corporal</h4>
+								<div class="stat-value" style="font-size: 2.5rem">18%</div>
+								<span class="badge badge-success">Saludable</span>
+							</div>
+						</div>
+
+						<h4 class="mb-2">Medidas Corporales</h4>
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Pecho</span>
+								<span>98 cm (-2 cm)</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 95%"></div>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Cintura</span>
+								<span>82 cm (-4 cm)</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 90%"></div>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Cadera</span>
+								<span>95 cm (-2 cm)</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 93%"></div>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Muslo</span>
+								<span>56 cm (-1 cm)</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 95%"></div>
+							</div>
+						</div>
+
+						<div class="mb-3">
+							<div class="flex-between mb-1">
+								<span>Brazo</span>
+								<span>35 cm (=)</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 100%"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Logros y Medallas -->
+			<div class="card mb-4">
+				<div class="card-header">🏆 Logros y Medallas</div>
+				<div class="card-body">
+					<div class="grid grid-4">
+						<div
+							class="text-center p-3"
+							style="
+								background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+								border-radius: var(--border-radius-md);
+								color: white;
+							"
+						>
+							<div style="font-size: 3rem">🥇</div>
+							<h4>Primera Semana</h4>
+							<p>Completaste tu primera semana</p>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+								border-radius: var(--border-radius-md);
+								color: white;
+							"
+						>
+							<div style="font-size: 3rem">💪</div>
+							<h4>10 Entrenamientos</h4>
+							<p>Completaste 10 entrenamientos</p>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+								border-radius: var(--border-radius-md);
+								color: white;
+							"
+						>
+							<div style="font-size: 3rem">⚖️</div>
+							<h4>5 kg Perdidos</h4>
+							<p>Perdiste tus primeros 5 kg</p>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+								border-radius: var(--border-radius-md);
+								color: white;
+							"
+						>
+							<div style="font-size: 3rem">🎯</div>
+							<h4>Racha de 7 Días</h4>
+							<p>7 días consecutivos activo</p>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: var(--bg-secondary);
+								border-radius: var(--border-radius-md);
+								opacity: 0.6;
+							"
+						>
+							<div style="font-size: 3rem">🔒</div>
+							<h4>Mes Completo</h4>
+							<p>Completa 30 días</p>
+							<small>Faltan 2 días</small>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: var(--bg-secondary);
+								border-radius: var(--border-radius-md);
+								opacity: 0.6;
+							"
+						>
+							<div style="font-size: 3rem">🔒</div>
+							<h4>20 Entrenamientos</h4>
+							<p>Completa 20 entrenamientos</p>
+							<small>Faltan 8</small>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: var(--bg-secondary);
+								border-radius: var(--border-radius-md);
+								opacity: 0.6;
+							"
+						>
+							<div style="font-size: 3rem">🔒</div>
+							<h4>Objetivo Alcanzado</h4>
+							<p>Alcanza tu peso objetivo</p>
+							<small>Faltan 3.5 kg</small>
+						</div>
+
+						<div
+							class="text-center p-3"
+							style="
+								background: var(--bg-secondary);
+								border-radius: var(--border-radius-md);
+								opacity: 0.6;
+							"
+						>
+							<div style="font-size: 3rem">🔒</div>
+							<h4>Racha de 30 Días</h4>
+							<p>30 días consecutivos</p>
+							<small>Mejor racha: 7 días</small>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Estadísticas de Entrenamiento -->
+			<div class="grid grid-2">
+				<div class="card">
+					<div class="card-header">📈 Estadísticas de Entrenamiento</div>
+					<div class="card-body">
+						<div class="mb-3">
+							<h4>Total de Entrenamientos: 12</h4>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Fuerza</span>
+								<span>5 sesiones</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 42%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Cardio</span>
+								<span>4 sesiones</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 33%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>HIIT</span>
+								<span>2 sesiones</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 17%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Yoga/Flexibilidad</span>
+								<span>1 sesión</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 8%"></div>
+							</div>
+						</div>
+
+						<div class="mt-4">
+							<p><strong>Tiempo Total:</strong> 540 minutos (9 horas)</p>
+							<p><strong>Calorías Quemadas:</strong> ~3,850 kcal</p>
+							<p><strong>Promedio por Semana:</strong> 3 entrenamientos</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="card">
+					<div class="card-header">🍎 Adherencia Nutricional</div>
+					<div class="card-body">
+						<div class="mb-4">
+							<div class="flex-between mb-1">
+								<span>Adherencia Global</span>
+								<span>85%</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 85%">85%</div>
+							</div>
+						</div>
+
+						<h4 class="mb-2">Promedios Semanales</h4>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Calorías</span>
+								<span>2,420 / 2,450</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 98%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Proteínas</span>
+								<span>185g / 200g</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 92%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Carbohidratos</span>
+								<span>268g / 280g</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 95%"></div>
+							</div>
+						</div>
+
+						<div class="mb-2">
+							<div class="flex-between mb-1">
+								<span>Grasas</span>
+								<span>58g / 65g</span>
+							</div>
+							<div class="progress">
+								<div class="progress-bar" style="width: 89%"></div>
+							</div>
+						</div>
+
+						<div class="mt-4">
+							<p><strong>Días en Plan:</strong> 28 días</p>
+							<p><strong>Comidas Registradas:</strong> 82 de 84</p>
+							<p><strong>Consumo de Agua:</strong> 2.6L/día promedio</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Notas de Progreso -->
+			<div class="card mt-4">
+				<div class="card-header">📝 Notas de Progreso</div>
+				<div class="card-body">
+					<div class="alert alert-info mb-3">
+						<strong>Semana 4:</strong> Excelente progreso. La pérdida de peso es
+						constante y saludable (0.6-0.8 kg/semana). Continúa con el plan
+						actual.
+					</div>
+					<div class="alert alert-success mb-3">
+						<strong>Semana 3:</strong> Gran adherencia al plan nutricional. Se
+						nota mejora en la energía durante los entrenamientos.
+					</div>
+					<div class="comment mb-2">
+						<div class="comment-header">
+							<span class="comment-author">Dr. Martínez (Nutricionista)</span>
+							<span class="comment-date">Hace 3 días</span>
+						</div>
+						<div class="comment-body">
+							Excelente progreso Juan. Tu adherencia es muy buena. Recomiendo
+							aumentar ligeramente la ingesta de proteína post-entrenamiento
+							para mejorar la recuperación.
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</body>
+</html>
