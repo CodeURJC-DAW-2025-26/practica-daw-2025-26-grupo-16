@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PowerGym</title>
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">⚡ PowerGym</div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="nutritionDetails.html" class="nav-link">Nutritions</a></li>
+          <li><a href="trainingDetails.html" class="nav-link">Trainings</a></li>
+          <li><a href="progress.html" class="nav-link">Progress</a></li>
+          <li><a href="profile-user.html" class="nav-link">Profile</a></li>
+          <li><a href="login.html" class="nav-link">Log out</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+
+      <h2 class="text-center mb-4">Edit Training</h2>
+
+      <div class="card">
+        <div class="card-header">Edit training</div>
+        <div class="card-body">
+
+          <form id="editTrainingForm" enctype="multipart/form-data">
+
+            <div class="mb-3">
+              <label class="form-label">Training Image</label>
+              <input
+                type="file"
+                class="form-control"
+                accept="image/*"/>
+              <img src="../images/chest.png" style="max-width: 150px; display: block; margin: 10px auto;"">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Training Name</label>
+              <input
+                type="text"
+                class="form-control"
+                value="Chest Plan"
+                required/>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Duration (minutes)</label>
+              <input
+                type="number"
+                class="form-control"
+                value="60"
+                required/>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Training Goal</label>
+              <select class="form-control" required>
+                <option value="">Select an option…</option>
+                <option value="gain" selected>Increase weight</option>
+                <option value="maintain">Maintain weight</option>
+                <option value="lose">Lose weight</option>
+              </select>
+            </div>
+
+            <div class="mb-4">
+              <label class="form-label">Exercises of the Training</label>
+              <textarea
+                class="form-control"
+                rows="6"
+                required>Squats – 4x10
+Bench press – 4x8
+Deadlift – 3x6
+Plank – 3x30s</textarea>
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+          <div class="grid grid-2">
+              <button type="submit" class="btn btn-primary">
+                          Save
+              </button>
+              <button type="button" class="btn btn-primary" onclick="history.back()">
+                          Cancel
+              </button>
+            </div>
+    </main>
+
+    <footer class="footer-full">
+        <div>© 2026 PowerGym</div>
+        <div>
+            <a href="#">Privacy</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#">Terms</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#">FAQ</a>
+        </div>
+    </footer>
+
+  </body>
+</html>

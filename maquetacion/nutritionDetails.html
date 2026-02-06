@@ -3,18 +3,18 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Training Details - PowerGym</title>
+    <title>PowerGym</title>
     <link rel="stylesheet" href="css/styles.css" />
   </head>
   <body>
-
+    
     <header class="header">
       <nav class="navbar">
         <div class="logo">⚡ PowerGym</div>
         <ul class="nav-menu">
-          <li><a href="home.html" class="nav-link">Home</a></li>
-          <li><a href="nutrition.html" class="nav-link">Nutritions</a></li>
-          <li><a href="training-detail.html" class="nav-link active">Trainings</a></li>
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="nutritionDetails.html" class="nav-link active">Nutritions</a></li>
+          <li><a href="trainingDetails.html" class="nav-link">Trainings</a></li>
           <li><a href="progress.html" class="nav-link">Progress</a></li>
           <li><a href="profile-user.html" class="nav-link">Profile</a></li>
           <li><a href="login.html" class="nav-link">Log out</a></li>
@@ -22,63 +22,64 @@
       </nav>
     </header>
 
+    
     <main class="container mt-5">
 
-      <h2 class="text-center mb-4">Training Details</h2>
+      <h2 class="text-center mb-4">Diet Details</h2>
 
       <div class="diet-container">
+
         <div class="diet-image">
-          <div class="card mb-4">
-            <label class="form-label fw-bold">Training Image</label>
-            <img src="../images/chest.png" alt="Training image" class="card-img-top" />
-          </div>
-        </div>
+      		<div class="card mb-4">
+				<label class="form-label fw-bold">Diet Image</label>
+        		<img src="../images/maintenance-diet.png" alt="Imagen dieta" class="card-img-top" />
+      		</div>
+    	</div>
 
         <div class="diet-info">
-
           <div class="card mb-3">
             <div class="card-body">
               <label class="form-label fw-bold">Name</label>
-              <p class="form-control">Chest Plan</p>
+              <p class="form-control">Maintenance Diet</p>
             </div>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
-              <label class="form-label fw-bold">Duration</label>
-              <p class="form-control">60</p>
+              <label class="form-label fw-bold">Number of Calories</label>
+              <p class="form-control">2450 kcal</p>
             </div>
           </div>
 
           <div class="card mb-3">
             <div class="card-body">
               <label class="form-label fw-bold">Goal</label>
-              <p class="form-control">Increase volume</p>
+              <p class="form-control">Maintain weight</p>
             </div>
           </div>
 
           <div class="card mb-4">
             <div class="card-body">
-              <label class="form-label fw-bold">Exercises</label>
+              <label class="form-label fw-bold">Meals of the Day</label>
               <textarea class="form-control" rows="6" readonly>
-Press de banca : 4x8-10
-Press inclinado con mancuernas: 4x10
-Fondos en paralelas: 3x10
-Cruces en polea: 4x12
+Breakfast: 80 g of oats, a banana and a coffee
+Meal: 180 g of chicken, a salad and an apple
+Snack: toast with avocado and turkey and a yogurt
+Dinner: 2 eggs with vegetables
               </textarea>
             </div>
           </div>
 
+          
           <div class="btn-row">
-            <a href="#" class="btn btn-primary">Add Comment</a>
-            <button class="btn btn-primary">Subscribe</button>
-            <a href="comments.html" class="btn btn-primary">View Comments</a>
-            <button class="btn btn-primary">Edit</button>
-            <button class="btn btn-primary">Delete</button>
-            <a href="trainings.html" class="btn btn-primary">Return</a>
-            <a href="#" class="btn btn-primary">Download PDF</a>
-          </div>
-
+			<a href="#" class="btn btn-primary">Add Comment</a>
+			<button class="btn btn-primary">Subscribe</button>
+			<a href="comments.html" class="btn btn-primary">View Comments</a>
+			<button class="btn btn-primary">Edit</button>
+			<button class="btn btn-primary">Delete</button>
+			<a href="nutrition.html" class="btn btn-primary">Return</a>
+			<a href="#" class="btn btn-primary">Download PDF</a>
+		  </div>
         </div>
       </div>
 
@@ -94,6 +95,5 @@ Cruces en polea: 4x12
             <a href="#">FAQ</a>
         </div>
     </footer>
-
   </body>
 </html>
