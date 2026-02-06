@@ -440,3 +440,7 @@ footer {
   align-items: start;
 }
 
+.footer-full a {
+  color: red;
+}
+
