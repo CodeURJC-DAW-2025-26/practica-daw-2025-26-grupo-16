@@ -136,6 +136,16 @@ p {
   padding: 0.75rem 1rem;
 }
 
+
+
+.nutrition-page .card-img {
+  max-width: 100%;
+  height: 200px;
+  display: block;
+  margin: 0.5rem auto;
+  object-fit: cover;
+}
+
 /* =====================================================
    STATS
 ===================================================== */
@@ -431,7 +441,7 @@ footer {
 }
 
 .index-card p {
-    color: #FF0000; 
+    color: #ffffff; 
 }
 
 .index-info {
@@ -444,3 +454,6 @@ footer {
   color: red;
 }
 
+.text-center {
+  text-align: center;
+}
