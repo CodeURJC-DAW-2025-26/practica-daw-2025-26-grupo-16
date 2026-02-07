@@ -1,76 +1,80 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Iniciar Sesión - PowerGym</title>
-    <link rel="stylesheet" href="css/styles.css">
-    <style>
-        body {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #0ea5e9 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PowerGym</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <h1 class="auth-title">PowerGym</h1>
-                <p class="auth-subtitle">Inicia sesión para acceder al sistema</p>
-            </div>
 
-            <form id="loginForm" class="auth-form">
-                <div class="form-group">
-                    <label for="email" class="form-label">Correo Electrónico o DNI</label>
-                    <input 
-                        type="text" 
-                        id="email" 
-                        name="email" 
-                        class="form-control" 
-                        placeholder="tu@email.com o 12345678A"
-                        required
-                    >
-                </div>
+<body class="background-image">
+    
+    <header class="header">
+      <nav class="navbar">
+        <div class="logo">⚡ PowerGym</div>
+        <ul class="nav-menu">
+          <li><a href="index.html" class="nav-link">Home</a></li>
+          <li><a href="nutritions.html" class="nav-link">Nutritions</a></li>
+          <li><a href="trainings.html" class="nav-link">Trainings</a></li>
+          <li><a href="progress.html" class="nav-link">Progress</a></li>
+          <li><a href="profile-user.html" class="nav-link">Profile</a></li>
+          <li><a href="login.html" class="nav-link active">Log in</a></li>
+        </ul>
+      </nav>
+    </header>
 
-                <div class="form-group">
-                    <label for="password" class="form-label">Contraseña</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        class="form-control" 
-                        placeholder="••••••••"
-                        required
-                    >
-                </div>
+  <main class="container-center">
 
-                <div class="form-group flex-between">
-                    <label class="flex gap-1">
-                        <input type="checkbox" name="remember">
-                        <span>Recordarme</span>
-                    </label>
-                    <a href="#" class="text-small">¿Olvidaste tu contraseña?</a>
-                </div>
+    <div class="card" style="max-width: 420px; width: 100%;">
 
-                <button type="submit" class="btn btn-primary btn-block">Iniciar Sesión</button>
-            </form>
+      <h1 class="background-title">⚡POWERGYM</h1>
 
-            <div class="auth-footer">
-                <p>¿Nuevo socio? <a href="register.html">Regístrate aquí</a></p>
-                <p><a href="index.html">← Volver a inicio</a></p>
-            </div>
-        </div>
+      <div class="card-body">
+
+        <h3 class="text-center mb-3">Welcome back!</h3>
+        <br>
+
+        <form id="loginForm">
+
+          <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="text" class="form-control"placeholder="usuario@email.com" required/>
+            <br>
+            <br>
+            <label class="form-label">Password</label>
+            <input type="password" class="form-control" placeholder="********" required/>
+          </div>
+
+          <br>
+          <button type="submit" class="btn btn-primary" style="width:100%;">
+            Log in
+          </button>
+
+        </form>
+
+      </div>
+
+      <div class="card-body text-center" style="border-top:1px solid #222;">
+        <p style="color:white; font-size:0.8rem;">
+          Don't have an account?
+          <a href="register.html" style="color:var(--primary);">Sign up</a>
+        </p>
+      </div>
+
     </div>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            window.location.href = 'home.html';
-        });
-    </script>
+  </main>
+
+    <footer class="footer-full">
+        <div>© 2026 PowerGym</div>
+        <div>
+            <a href="#">Privacy</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#">Terms</a>
+            <span class="mx-1">&middot;</span>
+            <a href="#">FAQ</a>
+        </div>
+    </footer>
+
 </body>
 </html>

@@ -435,9 +435,12 @@ footer {
     background-color: rgba(0, 0, 0, 0.5);
     padding: 20px;
     border-radius: 10px;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-align: center;
 	color: #FF0000;
+
 }
 
 .index-card p {
