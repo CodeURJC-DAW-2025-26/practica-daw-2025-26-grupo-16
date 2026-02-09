@@ -373,7 +373,7 @@ footer {
     background-image: url('../../images/background.png'); 
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat-y;
     font-family: Arial, sans-serif;
     color: white;
     display: flex;
