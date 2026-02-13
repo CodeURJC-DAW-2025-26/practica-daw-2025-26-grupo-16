@@ -132,7 +132,7 @@ p {
 }
 
 .card-header {
-  background:  #000000;
+  background: transparent;
   color: var(--secondary);
   padding: 0.6rem 1rem;
   font-weight: 700;
