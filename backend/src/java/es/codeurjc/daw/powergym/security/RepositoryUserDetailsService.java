@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.security;
+package es.codeurjc.daw.powergym.security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.library.model.User;
-import es.codeurjc.daw.library.repository.UserRepository;
+import es.codeurjc.daw.powergym.model.User;
+import es.codeurjc.daw.powergym.repository.UserRepository;
 
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {

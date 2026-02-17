@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.service;
+package es.codeurjc.daw.powergym.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -13,11 +13,11 @@ import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.library.model.Book;
-import es.codeurjc.daw.library.model.Image;
-import es.codeurjc.daw.library.model.Shop;
-import es.codeurjc.daw.library.model.User;
-import es.codeurjc.daw.library.repository.UserRepository;
+import es.codeurjc.daw.powergym.model.Book;
+import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.model.Shop;
+import es.codeurjc.daw.powergym.model.User;
+import es.codeurjc.daw.powergym.repository.UserRepository;
 
 @Service
 public class DatabaseInitializer {

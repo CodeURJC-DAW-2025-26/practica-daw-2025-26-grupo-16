@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.security;
+package es.codeurjc.daw.powergym.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
