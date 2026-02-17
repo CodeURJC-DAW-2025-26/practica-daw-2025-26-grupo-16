@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.controller;
+package es.codeurjc.daw.powergym.controller;
 
 import java.sql.SQLException;
 
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import es.codeurjc.daw.library.service.ImageService;
+import es.codeurjc.daw.powergym.service.ImageService;
 
 @Controller
 public class ImageController {

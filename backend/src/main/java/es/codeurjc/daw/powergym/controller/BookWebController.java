@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.controller;
+package es.codeurjc.daw.powergym.controller;
 
 import java.io.IOException;
 import java.security.Principal;
@@ -18,11 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import es.codeurjc.daw.library.model.Book;
-import es.codeurjc.daw.library.model.Image;
-import es.codeurjc.daw.library.service.BookService;
-import es.codeurjc.daw.library.service.ImageService;
-import es.codeurjc.daw.library.service.ShopService;
+import es.codeurjc.daw.powergym.model.Book;
+import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.service.BookService;
+import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.ShopService;
 
 @Controller
 public class BookWebController {

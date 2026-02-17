@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.service;
+package es.codeurjc.daw.powergym.service;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,8 +11,8 @@ import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.library.model.Image;
-import es.codeurjc.daw.library.repository.ImageRepository;
+import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.repository.ImageRepository;
 
 @Service
 public class ImageService {

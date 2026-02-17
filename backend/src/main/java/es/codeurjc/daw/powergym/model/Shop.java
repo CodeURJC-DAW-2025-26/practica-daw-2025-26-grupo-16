@@ -1,4 +1,4 @@
-package es.codeurjc.daw.library.model;
+package es.codeurjc.daw.powergym.model;
 
 import java.util.List;
 
