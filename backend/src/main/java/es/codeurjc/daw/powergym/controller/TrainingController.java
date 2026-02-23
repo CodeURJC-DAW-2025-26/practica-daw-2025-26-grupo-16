@@ -46,7 +46,7 @@ public class TrainingController {
 		}
 	}
 
-	@GetMapping("/")
+	@GetMapping("/trainings")
 	public String showTrainings(Model model) {
 
 		model.addAttribute("trainings", trainingService.findAll());

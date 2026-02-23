@@ -46,7 +46,7 @@ public class NutritionController {
 		}
 	}
 
-	@GetMapping("/")
+	@GetMapping("/nutritions")
 	public String showNutritions(Model model) {
 
 		model.addAttribute("nutritions", nutritionService.findAll());
