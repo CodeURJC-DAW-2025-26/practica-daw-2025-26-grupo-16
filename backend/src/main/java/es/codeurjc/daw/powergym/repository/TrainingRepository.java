@@ -16,8 +16,8 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     List<Training> findByName(String name);
     Page<Training> findById(Long id, Pageable pageable);
 
-    @EntityGraph(attributePaths = "user")
-    Optional<Training> findByWithUserById(Long id);
+    /*@EntityGraph(attributePaths = "user")
+    Optional<Training> findByWithUserById(Long id);*/
 
 }
 

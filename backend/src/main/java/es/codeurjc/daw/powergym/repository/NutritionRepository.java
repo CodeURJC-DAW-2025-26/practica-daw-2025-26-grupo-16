@@ -16,7 +16,7 @@ public interface NutritionRepository extends JpaRepository<Nutrition, Long> {
     List<Nutrition> findByName(String name);
     Page<Nutrition> findById(Long id, Pageable pageable);
 
-    @EntityGraph(attributePaths = "user")
-    Optional<Nutrition> findByWithUserById(Long id);
+    /*@EntityGraph(attributePaths = "user")
+    Optional<Nutrition> findByWithUserById(Long id);*/
 
 }
