@@ -1,0 +1,107 @@
+{{>header}}
+
+<form action="/edittraining" method="post" enctype="multipart/form-data" class="container mt-5 mb-5">
+	
+    <input type="hidden" name="id" value="{{training.id}}" />
+
+	<h2 class="text-center mt-5 mb-4">Edit Training</h2>
+
+	<div class="diet-container">
+		<div class="diet-image">
+			<div class="card mb-4">
+				<label class="form-label fw-bold">Training Image</label>
+				{{#training.image}}
+				<img src="/images/{{training.image.id}}" class="card-img-top" alt="Training image"/>
+				<input type="hidden" name="removeImage" value="false" />
+				<div class="form-check mt-2">
+					<input
+						type="checkbox"
+						class="form-check-input"
+						id="removeImage"
+						name="removeImage"
+						value="true"
+					/>
+					<label class="form-check-label" for="removeImage">Remove image</label>
+				</div>
+				{{/training.image}} {{^training.image}}
+				<img src="/assets/images/no_image.png" class="card-img-top" alt="No image"/>
+				<input type="hidden" name="removeImage" value="false" />
+				{{/training.image}}
+				<input
+					type="file"
+					name="imageField"
+					class="form-control mt-2"
+					accept=".jpg, .jpeg, .png"
+				/>
+			</div>
+		</div>
+
+		<div class="diet-info">
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold" for="name">Training Name</label>
+					<input
+						id="name"
+						type="text"
+						name="name"
+						class="form-control"
+						value="{{training.name}}"
+						required
+					/>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold" for="time">Duration (minutes)</label>
+					<input
+						id="time"
+						type="number"
+						name="time"
+						class="form-control"
+						min="1"
+						value="{{training.time}}"
+						required
+					/>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold" for="goal">Training Goal</label>
+					<input
+						id="goal"
+						type="text"
+						name="goal"
+						class="form-control"
+						value="{{training.goal}}"
+						required
+					/>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold" for="description">Exercises of the Training</label>
+					<textarea
+						id="description"
+						name="description"
+						class="form-control"
+						rows="6"
+						required
+					>
+            {{training.description}}</textarea>
+            </div>
+			</div>
+
+			<input type="hidden" name="_csrf" value="{{token}}" />
+
+			<div class="btn-row">
+				<button type="submit" class="btn btn-primary">Save</button>
+				<a href="/trainings/{{training.id}}" class="btn btn-primary">Cancel</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+{{>footer}}

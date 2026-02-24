@@ -1,0 +1,78 @@
+{{>header}}
+
+<div class="pg-container mt-5 mb-5">
+	<h2 class="text-center mt-5 mb-4">Training Details</h2>
+
+	<div class="row g-4 align-items-start">
+		<div class="col-12 col-lg-5">
+			<div class="card mb-4">
+				<label class="form-label fw-bold">Training Image</label>
+				{{#training.image}}
+				<img
+					src="/images/{{training.image.id}}"
+					alt="Training image"
+					class="img-fluid rounded"
+					style="max-height: 420px; width: 100%; object-fit: cover"
+				/>
+				{{/training.image}} {{^training.image}}
+				<img
+					src="/assets/images/no_image.png"
+					alt="No image"
+					class="img-fluid rounded"
+					style="max-height: 420px; width: 100%; object-fit: contain"
+				/>
+				{{/training.image}}
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-7">
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Name</label>
+					<p class="form-control">{{training.name}}</p>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Duration</label>
+					<p class="form-control">{{training.time}} minutes</p>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Goal</label>
+					<p class="form-control">{{training.goal}}</p>
+				</div>
+			</div>
+
+			<div class="card mb-4">
+				<div class="card-body">
+					<label class="form-label fw-bold">Exercises</label>
+					<textarea class="form-control" rows="6" readonly>
+{{training.description}}</textarea
+					>
+				</div>
+			</div>
+
+			<div class="btn-row">
+				{{#logged}}
+				<a href="/edittraining/{{training.id}}" class="btn btn-primary">Edit</a>
+				{{#admin}}
+				<form
+					action="/deletetraining/{{training.id}}"
+					method="post"
+					class="d-inline"
+				>
+					<button type="submit" class="btn btn-primary">Delete</button>
+					<input type="hidden" name="_csrf" value="{{token}}" />
+				</form>
+				{{/admin}} {{/logged}}
+				<a href="/trainings" class="btn btn-primary">Return</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{>footer}}
