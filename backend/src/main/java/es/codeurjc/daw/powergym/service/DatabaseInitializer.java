@@ -43,16 +43,19 @@ public class DatabaseInitializer {
 		Training training1 = new Training("Push Day",
 				"Full upper body push workout including bench press, incline press, and shoulder isolation exercises.",
 				"Build chest and shoulder strength", 60);
+		setTrainingImage(training1, "/static/assets/images/chest.png");
 		trainingRepository.save(training1);
 
 		Training training2 = new Training("Pull Day",
 				"Back and biceps focused workout with deadlifts, rows, pull-ups, and bicep curls.",
 				"Develop back thickness and arm size", 60);
+		setTrainingImage(training2, "/static/assets/images/arm.png");
 		trainingRepository.save(training2);
 
 		Training training3 = new Training("Leg Day",
 				"Lower body strength and hypertrophy with squats, leg press, leg curls, and calf raises.",
 				"Build leg strength and size", 75);
+		setTrainingImage(training3, "/static/assets/images/leg.png");
 		trainingRepository.save(training3);
 
 		Training training4 = new Training("HIIT Cardio",
@@ -87,5 +90,12 @@ public class DatabaseInitializer {
 
 		userRepository.save(new User("user", passwordEncoder.encode("pass"), "USER"));
 		userRepository.save(new User("admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
+	}
+
+	private void setTrainingImage(Training training, String classpathResource) throws IOException {
+		Resource image = new ClassPathResource(classpathResource);
+
+		Image createdImage = imageService.createImage(image.getInputStream());
+		training.setImage(createdImage);
 	}
 }
