@@ -40,21 +40,30 @@ public class DatabaseInitializer {
 	@PostConstruct
 	public void init() throws IOException, URISyntaxException {
 
-		Training training1 = new Training("Push Day",
-				"Full upper body push workout including bench press, incline press, and shoulder isolation exercises.",
-				"Build chest and shoulder strength", 60);
+		Training training1 = new Training("Chest Plan",
+				"Bench press: 4x8-10\n" + 
+				"Incline dumbbell press: 4x10\n" +
+				"Parallel bar dips: 3x10\n" +
+				"Pulley crossovers: 4x12\n",
+				"Increase weight", 60);
 		setTrainingImage(training1, "/static/assets/images/chest.png");
 		trainingRepository.save(training1);
 
-		Training training2 = new Training("Pull Day",
-				"Back and biceps focused workout with deadlifts, rows, pull-ups, and bicep curls.",
-				"Develop back thickness and arm size", 60);
+		Training training2 = new Training("Arms Plan",
+				"Barbell curl: 4x10\n" +
+				"Hammer curl with dumbbells: 3x12\n" +
+				"French press: 4x10\n" +
+				"Parallel bar dips: 3x10\n",
+				"Increase weight", 45);
 		setTrainingImage(training2, "/static/assets/images/arm.png");
 		trainingRepository.save(training2);
 
-		Training training3 = new Training("Leg Day",
-				"Lower body strength and hypertrophy with squats, leg press, leg curls, and calf raises.",
-				"Build leg strength and size", 75);
+		Training training3 = new Training("Legs Plan",
+				"Squats: 4x8-10\n" +
+				"Romanian deadlift: 3x12\n" +
+				"Quad extensions: 3x15\n" +
+				"Calf raises: 4x15\n",
+				"Increase weight", 90);
 		setTrainingImage(training3, "/static/assets/images/leg.png");
 		trainingRepository.save(training3);
 
@@ -68,22 +77,31 @@ public class DatabaseInitializer {
 				"Strengthen core and improve mobility", 45);
 		trainingRepository.save(training5);
 
-		Nutrition nutrition1 = new Nutrition("High Protein Bulking",
-				"Calorie surplus diet focused on lean muscle gain with 2.2g protein per kg bodyweight.",
-				"Muscle gain", 3200);
-		setNutritionImage(nutrition1, "static/assets/images/caloric-diet.png");
+		Nutrition nutrition1 = new Nutrition("Maintenance Diet",
+				"Breakfast: 2 scrambled eggs + 50 g oats\n" + 
+				"Lunch: 150 g chicken + salad with oil\n" +
+				"Snack: Plain Greek yoghurt with almonds\n" + 
+				"Dinner: 120 g salmon + sautéed vegetables",
+				"Maintain weight", 2450);
+		setNutritionImage(nutrition1, "static/assets/images/maintenance-diet.png");
 		nutritionRepository.save(nutrition1);
 
-		Nutrition nutrition2 = new Nutrition("Lean Cutting",
-				"Calorie deficit diet for fat loss while preserving muscle mass with high protein intake.",
-				"Fat loss", 2000);
+		Nutrition nutrition2 = new Nutrition("Deficit Diet",
+				"Breakfast: 2 eggs + coffee\n" +
+				"Lunch: Salad + 100g chicken breast\n" + 
+				"Snack: Slice of wholemeal bread\n" + 
+				"Dinner: Vegetables + 150g fish",
+				"Lose weight", 1200);
 		setNutritionImage(nutrition2, "static/assets/images/deficit-diet.png");
 		nutritionRepository.save(nutrition2);
 
-		Nutrition nutrition3 = new Nutrition("Maintenance",
-				"Balanced macronutrient intake to maintain current weight and athletic performance.",
-				"Maintain weight", 2500);
-		setNutritionImage(nutrition3, "static/assets/images/maintenance-diet.png");
+		Nutrition nutrition3 = new Nutrition("Caloric Diet",
+				"Breakfast: 6 eggs + 60g oats with milk\n" + 
+				"Lunch: Bowl of rice + 150g lean meat\n" + 
+				"Snack: Protein shake + nuts\n" + 
+				"Dinner: 150g salmon + 200g potatoes",
+				"Increase weight", 3700);
+		setNutritionImage(nutrition3, "static/assets/images/caloric-diet.png");
 		nutritionRepository.save(nutrition3);
 
 		Nutrition nutrition4 = new Nutrition("Strength Focus",
