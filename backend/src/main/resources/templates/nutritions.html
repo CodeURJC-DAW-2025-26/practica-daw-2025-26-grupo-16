@@ -26,11 +26,17 @@
 		{{/nutritions}}
 	</div>
 
-	{{#logged}}
-	<div class="text-center mt-4">
-		<a href="/createnutrition" class="btn btn-primary">Add nutrition</a>
+	<div class="btn-row" style="justify-content: center; margin-top: 2rem;">
+		<div class="btn-btn primary">
+			<button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+		</div>
+
+		{{#logged}}
+		<div class="btn-btn primary">
+			<a href="/createnutrition" class="btn btn-primary">Add nutrition</a>
+		</div>
+		{{/logged}}
 	</div>
-	{{/logged}}
 </main>
 
 {{>footer}}

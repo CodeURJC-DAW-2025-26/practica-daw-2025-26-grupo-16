@@ -25,11 +25,17 @@
 		{{/trainings}}
 	</div>
 
-	{{#logged}}
-	<div class="btn-row" style="justify-content: center; margin-top: 2rem">
-		<a href="/createtraining" class="btn btn-primary">Add training</a>
+	<div class="btn-row" style="justify-content: center; margin-top: 2rem;">
+		<div class="btn-btn primary">
+			<button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+		</div>
+
+		{{#logged}}
+		<div class="btn-btn primary">
+			<a href="/createtraining" class="btn btn-primary">Add training</a>
+		</div>
+		{{/logged}}
 	</div>
-	{{/logged}}
 </div>
 
 {{>footer}}
