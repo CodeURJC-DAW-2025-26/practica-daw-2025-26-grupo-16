@@ -42,6 +42,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/images/**").permitAll()
 						.requestMatchers("/books/**").permitAll()
 						.requestMatchers("/assets/**").permitAll() // Allow access to static resources
+						.requestMatchers("/css/**").permitAll()
 						.requestMatchers("/favicon.ico").permitAll()
 						// PRIVATE PAGES
 						.requestMatchers("/newbook").hasAnyRole("USER")
