@@ -1,0 +1,85 @@
+{{>header}}
+
+<main class="container mt-5">
+	<h2 class="text-center mt-5 mb-4">Nutrition Details</h2>
+
+	<div class="row">
+		<div class="col-12 col-lg-5 mb-4">
+			<div class="card">
+				<label class="form-label fw-bold">Nutrition Image</label>
+				{{#nutrition.image}}
+				<img
+					src="/images/{{nutrition.image.id}}"
+					alt="{{nutrition.name}}"
+					class="card-img-top"
+				/>
+				{{/nutrition.image}} {{^nutrition.image}}
+				<img
+					src="/assets/images/no_image.png"
+					alt="No image"
+					class="card-img-top"
+				/>
+				{{/nutrition.image}}
+			</div>
+		</div>
+
+		<div class="col-12 col-lg-7">
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Name</label>
+					<p class="form-control">{{nutrition.name}}</p>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Number of Calories</label>
+					<p class="form-control">{{nutrition.calories}} kcal</p>
+				</div>
+			</div>
+
+			<div class="card mb-3">
+				<div class="card-body">
+					<label class="form-label fw-bold">Goal</label>
+					<p class="form-control">{{nutrition.goal}}</p>
+				</div>
+			</div>
+
+			<div class="card mb-4">
+				<div class="card-body">
+					<label class="form-label fw-bold">Meals of the Day</label>
+					<textarea class="form-control" rows="6" readonly>
+{{nutrition.description}}</textarea
+					>
+				</div>
+			</div>
+
+			<div class="btn-row">
+				{{#logged}}
+				<a href="/editnutrition/{{nutrition.id}}" class="btn btn-primary"
+					>Edit</a
+				>
+				{{/logged}} {{#admin}}
+				<form
+					action="/deletenutrition/{{nutrition.id}}"
+					method="post"
+					style="display: inline"
+				>
+					<input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+					<button
+						type="submit"
+						class="btn btn-primary"
+						onclick="
+							return confirm('Are you sure you want to delete this nutrition?');
+						"
+					>
+						Delete
+					</button>
+				</form>
+				{{/admin}}
+			</div>
+		</div>
+	</div>
+</main>
+
+{{>footer}}

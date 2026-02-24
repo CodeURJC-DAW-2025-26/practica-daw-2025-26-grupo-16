@@ -71,16 +71,19 @@ public class DatabaseInitializer {
 		Nutrition nutrition1 = new Nutrition("High Protein Bulking",
 				"Calorie surplus diet focused on lean muscle gain with 2.2g protein per kg bodyweight.",
 				"Muscle gain", 3200);
+		setNutritionImage(nutrition1, "static/assets/images/caloric-diet.png");
 		nutritionRepository.save(nutrition1);
 
 		Nutrition nutrition2 = new Nutrition("Lean Cutting",
 				"Calorie deficit diet for fat loss while preserving muscle mass with high protein intake.",
 				"Fat loss", 2000);
+		setNutritionImage(nutrition2, "static/assets/images/deficit-diet.png");
 		nutritionRepository.save(nutrition2);
 
 		Nutrition nutrition3 = new Nutrition("Maintenance",
 				"Balanced macronutrient intake to maintain current weight and athletic performance.",
 				"Maintain weight", 2500);
+		setNutritionImage(nutrition3, "static/assets/images/maintenance-diet.png");
 		nutritionRepository.save(nutrition3);
 
 		Nutrition nutrition4 = new Nutrition("Strength Focus",
@@ -97,5 +100,12 @@ public class DatabaseInitializer {
 
 		Image createdImage = imageService.createImage(image.getInputStream());
 		training.setImage(createdImage);
+	}
+
+	private void setNutritionImage(Nutrition nutrition, String classpathResource) throws IOException {
+		Resource image = new ClassPathResource(classpathResource);
+
+		Image createdImage = imageService.createImage(image.getInputStream());
+		nutrition.setImage(createdImage);
 	}
 }

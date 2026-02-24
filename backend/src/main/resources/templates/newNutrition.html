@@ -1,0 +1,87 @@
+{{>header}}
+
+<main class="container mt-5">
+	<h2 class="text-center mt-5 mb-4">Create New Nutrition</h2>
+
+	<form action="/createnutrition" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+
+		<div class="row">
+			<div class="col-12 col-lg-5 mb-4">
+				<div class="card">
+					<label class="form-label fw-bold">Nutrition Image</label>
+					<input
+						type="file"
+						name="imageField"
+						class="form-control"
+						accept="image/*"
+					/>
+				</div>
+			</div>
+
+			<div class="col-12 col-lg-7">
+				<div class="card mb-3">
+					<div class="card-body">
+						<label class="form-label fw-bold">Nutrition Name</label>
+						<input
+							type="text"
+							name="name"
+							class="form-control"
+							placeholder="Name of the nutrition plan"
+							required
+						/>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-body">
+						<label class="form-label fw-bold">Calories (kcal)</label>
+						<input
+							type="number"
+							name="calories"
+							class="form-control"
+							placeholder="Calories of the nutrition in kcal"
+							required
+						/>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-body">
+						<label class="form-label fw-bold">Nutrition Goal</label>
+						<select name="goal" class="form-control" required>
+							<option value="">Select an option…</option>
+							<option value="Increase weight">Increase weight</option>
+							<option value="Maintain weight">Maintain weight</option>
+							<option value="Lose weight">Lose weight</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="card mb-3">
+					<div class="card-body">
+						<label class="form-label fw-bold">Meals of the Nutrition</label>
+						<textarea
+							name="description"
+							class="form-control"
+							rows="6"
+							placeholder="Examples:
+Breakfast: 2 scrambled eggs + 50 g oats
+Lunch: 150 g chicken + salad with oil
+Snack: Plain Greek yoghurt with almonds
+Dinner: 120 g salmon + sautéed vegetables"
+							required
+						></textarea>
+					</div>
+				</div>
+
+				<div class="btn-row">
+					<button type="submit" class="btn btn-primary me-2">Create</button>
+					<a href="/nutritions" class="btn btn-primary">Cancel</a>
+				</div>
+			</div>
+		</div>
+	</form>
+</main>
+
+{{>footer}}

@@ -107,7 +107,13 @@ public class NutritionController {
 
 		Optional<Nutrition> nutrition = nutritionService.findById(id);
 		if (nutrition.isPresent()) {
-			model.addAttribute("nutrition", nutrition.get());
+			Nutrition n = nutrition.get();
+			model.addAttribute("nutrition", n);
+
+			model.addAttribute("goalIsIncrease", "Increase weight".equals(n.getGoal()));
+			model.addAttribute("goalIsMaintain", "Maintain weight".equals(n.getGoal()));
+			model.addAttribute("goalIsLose", "Lose weight".equals(n.getGoal()));
+			
 			return "editNutritionPage";
 		} else {
 			return "nutritions";

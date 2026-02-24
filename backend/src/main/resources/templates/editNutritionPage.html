@@ -1,0 +1,81 @@
+{{>header}}
+
+    <main class="container mt-5">
+
+      <h2 class="text-center mt-5 mb-4">Edit Nutrition</h2>
+
+      <form action="/editnutrition" method="post" enctype="multipart/form-data">
+      <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+      <input type="hidden" name="id" value="{{nutrition.id}}" />
+
+      <div class="row">
+
+        <div class="col-12 col-lg-5 mb-4">
+          <div class="card">
+            <label class="form-label fw-bold">Nutrition Image</label>
+            {{#nutrition.image}}
+            <img src="/images/{{nutrition.image.id}}" class="card-img-top" alt="{{nutrition.name}}"/>
+            {{/nutrition.image}}
+            {{^nutrition.image}}
+            <img src="/assets/images/no_image.png" class="card-img-top" alt="No image"/>
+            {{/nutrition.image}}
+            <input type="file" name="imageField" class="form-control mt-2" accept="image/*"/>
+            {{#nutrition.image}}
+            <div class="form-check mt-2">
+              <input class="form-check-input" type="checkbox" name="removeImage" id="removeImage">
+              <label class="form-check-label" for="removeImage">
+                Remove image
+              </label>
+            </div>
+            {{/nutrition.image}}
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7">
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <label class="form-label fw-bold">Nutrition Name</label>
+              <input type="text" name="name" class="form-control" value="{{nutrition.name}}" required/>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <label class="form-label fw-bold">Calories (kcal)</label>
+              <input type="number" name="calories" class="form-control" value="{{nutrition.calories}}" required/>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <label class="form-label fw-bold">Nutrition Goal</label>
+              <select name="goal" class="form-control" required>
+                <option value="">Select an option…</option>
+                <option value="Increase weight" {{#goalIsIncrease}}selected{{/goalIsIncrease}}>Increase weight</option>
+                <option value="Maintain weight" {{#goalIsMaintain}}selected{{/goalIsMaintain}}>Maintain weight</option>
+                <option value="Lose weight" {{#goalIsLose}}selected{{/goalIsLose}}>Lose weight</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-body">
+              <label class="form-label fw-bold">Meals of the Nutrition</label>
+              <textarea name="description" class="form-control" rows="6" required>{{nutrition.description}}</textarea>
+            </div>
+          </div>
+
+          <div class="btn-row">
+            <button type="submit" class="btn btn-primary me-2">Save Changes</button>
+            <a href="/nutritions/{{nutrition.id}}" class="btn btn-primary">Cancel</a>
+          </div>
+
+        </div>
+      </div>
+      
+      </form>
+
+    </main>
+
+{{>footer}}
