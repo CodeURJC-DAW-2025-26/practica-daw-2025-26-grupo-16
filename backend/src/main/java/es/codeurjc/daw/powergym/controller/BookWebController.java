@@ -57,7 +57,7 @@ public class BookWebController {
 
 		model.addAttribute("books", bookService.findAll());
 
-		return "books";
+		return "index";
 	}
 
 	@GetMapping("/books/{id}")
