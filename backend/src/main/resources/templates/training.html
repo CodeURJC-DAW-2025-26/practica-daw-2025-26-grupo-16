@@ -57,9 +57,8 @@
 			</div>
 
 			<div class="btn-row">
-				{{#logged}}
-				<a href="/editTraining/{{training.id}}" class="btn btn-primary">Edit</a>
 				{{#admin}}
+				<a href="/editTraining/{{training.id}}" class="btn btn-primary">Edit</a>
 				<form
 					action="/deleteTraining/{{training.id}}"
 					method="post"
@@ -68,7 +67,7 @@
 					<button type="submit" class="btn btn-primary">Delete</button>
 					<input type="hidden" name="_csrf" value="{{token}}" />
 				</form>
-				{{/admin}} {{/logged}}
+				{{/admin}}
 				<a href="/trainings" class="btn btn-primary">Return</a>
 			</div>
 		</div>

@@ -109,8 +109,8 @@ public class DatabaseInitializer {
 				"Strength gain", 2800);
 		nutritionRepository.save(nutrition4);
 
-		userRepository.save(new User("user", passwordEncoder.encode("pass"), "USER"));
-		userRepository.save(new User("admin", passwordEncoder.encode("adminpass"), "USER", "ADMIN"));
+		userRepository.save(new User("user", passwordEncoder.encode("user"), "USER"));
+		userRepository.save(new User("admin", passwordEncoder.encode("admin"), "USER", "ADMIN"));
 	}
 
 	private void setTrainingImage(Training training, String classpathResource) throws IOException {

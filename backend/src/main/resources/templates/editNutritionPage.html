@@ -5,7 +5,7 @@
       <h2 class="text-center mt-5 mb-4">Edit Nutrition</h2>
 
       <form action="/editNutrition" method="post" enctype="multipart/form-data">
-      <input type="hidden" name="_csrf" value="{{_csrf.token}}" />
+      <input type="hidden" name="_csrf" value="{{token}}" />
       <input type="hidden" name="id" value="{{nutrition.id}}" />
 
       <div class="row">
@@ -20,9 +20,10 @@
             <img src="/assets/images/no_image.png" class="card-img-top" alt="No image"/>
             {{/nutrition.image}}
             <input type="file" name="imageField" class="form-control mt-2" accept="image/*"/>
+            <input type="hidden" name="removeImage" value="false" />
             {{#nutrition.image}}
             <div class="form-check mt-2">
-              <input class="form-check-input" type="checkbox" name="removeImage" id="removeImage">
+              <input class="form-check-input" type="checkbox" name="removeImage" id="removeImage" value="true">
               <label class="form-check-label" for="removeImage">
                 Remove image
               </label>
