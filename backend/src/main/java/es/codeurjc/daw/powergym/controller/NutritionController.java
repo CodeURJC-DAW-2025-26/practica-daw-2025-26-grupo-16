@@ -67,7 +67,7 @@ public class NutritionController {
 
 	}
 
-	@PostMapping("/deletenutrition/{id}")
+	@PostMapping("/deleteNutrition/{id}")
 	public String deleteNutrition(Model model, @PathVariable long id) {
 
 		Optional<Nutrition> nutrition = nutritionService.findById(id);
@@ -78,7 +78,7 @@ public class NutritionController {
 		return "deletednutrition";
 	}
 
-	@GetMapping("/createnutrition")
+	@GetMapping("/createNutrition")
 	public String createNutrition(Model model) {
 
 		model.addAttribute("nutrition", new Nutrition());
@@ -86,7 +86,7 @@ public class NutritionController {
 		return "newNutrition";
 	}
 
-	@PostMapping("/createnutrition")
+	@PostMapping("/createNutrition")
 	public String createNutritionProcess(Model model, Nutrition nutrition, MultipartFile imageField
 			) throws IOException {
 
@@ -102,7 +102,7 @@ public class NutritionController {
 		return "redirect:/nutritions/" + nutrition.getId();
 	}
 
-	@GetMapping("/editnutrition/{id}")
+	@GetMapping("/editNutrition/{id}")
 	public String editNutrition(Model model, @PathVariable long id) {
 
 		Optional<Nutrition> nutrition = nutritionService.findById(id);
@@ -120,7 +120,7 @@ public class NutritionController {
 		}
 	}
 
-	@PostMapping("/editnutrition")
+	@PostMapping("/editNutrition")
 	public String editNutritionProcess(Model model, Nutrition nutrition, boolean removeImage, MultipartFile imageField)
 			throws IOException, SQLException {
 

@@ -67,7 +67,7 @@ public class TrainingController {
 
 	}
 
-	@PostMapping("/deletetraining/{id}")
+	@PostMapping("/deleteTraining/{id}")
 	public String deleteTraining(Model model, @PathVariable long id) {
 
 		Optional<Training> training = trainingService.findById(id);
@@ -78,7 +78,7 @@ public class TrainingController {
 		return "deletedtraining";
 	}
 
-	@GetMapping("/createtraining")
+	@GetMapping("/createTraining")
 	public String createTraining(Model model) {
 
 		model.addAttribute("training", new Training());
@@ -86,7 +86,7 @@ public class TrainingController {
 		return "newTraining";
 	}
 
-	@PostMapping("/createtraining")
+	@PostMapping("/createTraining")
 	public String createTrainingProcess(Model model, Training training, MultipartFile imageField
 			) throws IOException {
 
@@ -102,7 +102,7 @@ public class TrainingController {
 		return "redirect:/trainings/" + training.getId();
 	}
 
-	@GetMapping("/edittraining/{id}")
+	@GetMapping("/editTraining/{id}")
 	public String editTraining(Model model, @PathVariable long id) {
 
 		Optional<Training> training = trainingService.findById(id);
@@ -114,7 +114,7 @@ public class TrainingController {
 		}
 	}
 
-	@PostMapping("/edittraining")
+	@PostMapping("/editTraining")
 	public String editTrainingProcess(Model model, Training training, boolean removeImage, MultipartFile imageField)
 			throws IOException, SQLException {
 

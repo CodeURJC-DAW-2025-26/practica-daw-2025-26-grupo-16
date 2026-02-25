@@ -56,12 +56,12 @@
 
 			<div class="btn-row">
 				{{#logged}}
-				<a href="/editnutrition/{{nutrition.id}}" class="btn btn-primary"
+				<a href="/editNutrition/{{nutrition.id}}" class="btn btn-primary"
 					>Edit</a
 				>
 				{{/logged}} {{#admin}}
 				<form
-					action="/deletenutrition/{{nutrition.id}}"
+					action="/deleteNutrition/{{nutrition.id}}"
 					method="post"
 					style="display: inline"
 				>
