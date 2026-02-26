@@ -76,6 +76,34 @@
 					</button>
 				</form>
 				{{/admin}}
+
+				{{#logged}}
+					{{#subscribed}}
+					<form
+						action="/unsubscribeNutrition/{{nutrition.id}}"
+						method="post"
+						class="d-inline"
+					>
+						<button type="submit" class="btn btn-primary">
+							Unsubscribe from Nutrition
+						</button>
+						<input type="hidden" name="_csrf" value="{{token}}" />
+					</form>
+					{{/subscribed}}
+
+					{{^subscribed}}
+					<form
+						action="/subscribeNutrition/{{nutrition.id}}"
+						method="post"
+						class="d-inline"
+					>
+						<button type="submit" class="btn btn-primary">
+							Subscribe to Nutrition
+						</button>
+						<input type="hidden" name="_csrf" value="{{token}}" />
+					</form>
+					{{/subscribed}}
+				{{/logged}}
 				<a href="/nutritions" class="btn btn-primary">Return</a>
 			</div>
 		</div>

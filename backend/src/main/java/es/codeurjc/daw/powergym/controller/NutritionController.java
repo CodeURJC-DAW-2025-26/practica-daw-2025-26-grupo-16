@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
+import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.repository.UserRepository;
 import es.codeurjc.daw.powergym.service.NutritionService;
 import es.codeurjc.daw.powergym.service.ImageService;
 
@@ -29,6 +31,9 @@ public class NutritionController {
 
 	@Autowired
 	private ImageService imageService;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -55,11 +60,20 @@ public class NutritionController {
 	}
 
 	@GetMapping("/nutritions/{id}")
-	public String showNutrition(Model model, @PathVariable long id) {
+	public String showNutrition(Model model, @PathVariable long id, HttpServletRequest request) {
 
 		Optional<Nutrition> nutrition = nutritionService.findById(id);
 		if (nutrition.isPresent()) {
 			model.addAttribute("nutrition", nutrition.get());
+
+			Principal principal = request.getUserPrincipal();
+			if (principal != null) {
+				Optional<User> user = userRepository.findByName(principal.getName());
+				if (user.isPresent()) {
+					model.addAttribute("subscribed", nutrition.get().getSubscribers().contains(user.get()));
+				}
+			}
+			
 			return "nutrition";
 		} else {
 			return "nutritions";
@@ -157,6 +171,40 @@ public class NutritionController {
 				nutrition.setImage(dbNutrition.getImage());
 			}
 		}
+	}
+
+	@PostMapping("/subscribeNutrition/{id}")
+	public String subscribeNutrition(Model model, @PathVariable long id, HttpServletRequest request) {
+
+		Optional<Nutrition> nutrition = nutritionService.findById(id);
+		Principal principal = request.getUserPrincipal();
+
+		if (nutrition.isPresent() && principal != null) {
+			Optional<User> user = userRepository.findByName(principal.getName());
+			if (user.isPresent()) {
+				nutrition.get().getSubscribers().add(user.get());
+				nutritionService.save(nutrition.get());
+			}
+		}
+
+		return "redirect:/nutritions/" + id;
+	}
+
+	@PostMapping("/unsubscribeNutrition/{id}")
+	public String unsubscribeNutrition(Model model, @PathVariable long id, HttpServletRequest request) {
+
+		Optional<Nutrition> nutrition = nutritionService.findById(id);
+		Principal principal = request.getUserPrincipal();
+
+		if (nutrition.isPresent() && principal != null) {
+			Optional<User> user = userRepository.findByName(principal.getName());
+			if (user.isPresent()) {
+				nutrition.get().getSubscribers().remove(user.get());
+				nutritionService.save(nutrition.get());
+			}
+		}
+
+		return "redirect:/nutritions/" + id;
 	}
 
 }

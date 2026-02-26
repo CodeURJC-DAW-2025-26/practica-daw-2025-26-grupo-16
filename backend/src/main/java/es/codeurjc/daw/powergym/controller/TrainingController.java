@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.model.Training;
+import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.repository.UserRepository;
 import es.codeurjc.daw.powergym.service.TrainingService;
 import es.codeurjc.daw.powergym.service.ImageService;
 
@@ -29,6 +31,9 @@ public class TrainingController {
 
 	@Autowired
 	private ImageService imageService;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -55,11 +60,20 @@ public class TrainingController {
 	}
 
 	@GetMapping("/trainings/{id}")
-	public String showTraining(Model model, @PathVariable long id) {
+	public String showTraining(Model model, @PathVariable long id, HttpServletRequest request) {
 
 		Optional<Training> training = trainingService.findById(id);
 		if (training.isPresent()) {
 			model.addAttribute("training", training.get());
+
+			Principal principal = request.getUserPrincipal();
+			if (principal != null) {
+				Optional<User> user = userRepository.findByName(principal.getName());
+				if (user.isPresent()) {
+					model.addAttribute("subscribed", training.get().getSubscribers().contains(user.get()));
+				}
+			}
+			
 			return "training";
 		} else {
 			return "trainings";
@@ -151,6 +165,40 @@ public class TrainingController {
 				training.setImage(dbTraining.getImage());
 			}
 		}
+	}
+
+	@PostMapping("/subscribeTraining/{id}")
+	public String subscribeTraining(Model model, @PathVariable long id, HttpServletRequest request) {
+
+		Optional<Training> training = trainingService.findById(id);
+		Principal principal = request.getUserPrincipal();
+
+		if (training.isPresent() && principal != null) {
+			Optional<User> user = userRepository.findByName(principal.getName());
+			if (user.isPresent()) {
+				training.get().getSubscribers().add(user.get());
+				trainingService.save(training.get());
+			}
+		}
+
+		return "redirect:/trainings/" + id;
+	}
+
+	@PostMapping("/unsubscribeTraining/{id}")
+	public String unsubscribeTraining(Model model, @PathVariable long id, HttpServletRequest request) {
+
+		Optional<Training> training = trainingService.findById(id);
+		Principal principal = request.getUserPrincipal();
+
+		if (training.isPresent() && principal != null) {
+			Optional<User> user = userRepository.findByName(principal.getName());
+			if (user.isPresent()) {
+				training.get().getSubscribers().remove(user.get());
+				trainingService.save(training.get());
+			}
+		}
+
+		return "redirect:/trainings/" + id;
 	}
 
 }

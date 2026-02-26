@@ -68,6 +68,34 @@
 					<input type="hidden" name="_csrf" value="{{token}}" />
 				</form>
 				{{/admin}}
+
+				{{#logged}}
+					{{#subscribed}}
+					<form
+						action="/unsubscribeTraining/{{training.id}}"
+						method="post"
+						class="d-inline"
+					>
+						<button type="submit" class="btn btn-primary">
+							Unsubscribe from Training
+						</button>
+						<input type="hidden" name="_csrf" value="{{token}}" />
+					</form>
+					{{/subscribed}}
+
+					{{^subscribed}}
+					<form
+						action="/subscribeTraining/{{training.id}}"
+						method="post"
+						class="d-inline"
+					>
+						<button type="submit" class="btn btn-primary">
+							Subscribe to Training
+						</button>
+						<input type="hidden" name="_csrf" value="{{token}}" />
+					</form>
+					{{/subscribed}}
+				{{/logged}}
 				<a href="/trainings" class="btn btn-primary">Return</a>
 			</div>
 		</div>
