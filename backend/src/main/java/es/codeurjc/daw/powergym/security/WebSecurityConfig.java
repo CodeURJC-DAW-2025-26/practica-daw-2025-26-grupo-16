@@ -53,11 +53,11 @@ public class WebSecurityConfig {
 						.requestMatchers("/favicon.ico").permitAll()
 						.requestMatchers("/register").permitAll()
 						// PRIVATE PAGES
-						.requestMatchers("/createTraining").hasAnyRole("USER")
+						.requestMatchers("/createTraining/**").hasAnyRole("USER")
 						.requestMatchers("/editTraining").hasAnyRole("ADMIN")
 						.requestMatchers("/editTraining/**").hasAnyRole("ADMIN")
 						.requestMatchers("/deleteTraining/**").hasAnyRole("ADMIN")
-						.requestMatchers("/createNutrition").hasAnyRole("USER")
+						.requestMatchers("/createNutrition/**").hasAnyRole("USER")
 						.requestMatchers("/editNutrition").hasAnyRole("ADMIN")
 						.requestMatchers("/editNutrition/**").hasAnyRole("ADMIN")
 						.requestMatchers("/deleteNutrition/**").hasAnyRole("ADMIN")
