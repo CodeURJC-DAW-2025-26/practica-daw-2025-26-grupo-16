@@ -2,6 +2,7 @@ package es.codeurjc.daw.powergym.service;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import jakarta.annotation.PostConstruct;
 
@@ -109,8 +110,8 @@ public class DatabaseInitializer {
 				"Strength gain", 2800);
 		nutritionRepository.save(nutrition4);
 
-		userRepository.save(new User("user", passwordEncoder.encode("user"), "USER"));
-		userRepository.save(new User("admin", passwordEncoder.encode("admin"), "USER", "ADMIN"));
+		userRepository.save(new User("user", passwordEncoder.encode("user"), List.of("ROLE_USER")));
+		userRepository.save(new User("admin", passwordEncoder.encode("admin"), List.of("ROLE_USER", "ROLE_ADMIN")));
 	}
 
 	private void setTrainingImage(Training training, String classpathResource) throws IOException {
