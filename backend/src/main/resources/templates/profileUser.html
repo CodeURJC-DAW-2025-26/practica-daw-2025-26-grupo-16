@@ -1,0 +1,68 @@
+{{>header}}
+
+<main class="container mt-5">
+
+  <h2 class="text-center mt-5 mb-4">Profile User</h2>
+
+  <div class="diet-container">
+
+    <div class="diet-info">
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Name</label>
+          <p class="form-control">{{name}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Email</label>
+          <p class="form-control">{{email}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Trainings Subscribed</label>
+          <div class="form-control text-muted text-center">
+
+            {{#trainings}}
+              <div class="mb-1">{{name}}</div>
+            {{/trainings}}
+
+            {{^trainings}}
+              There are no training plans added to the profile
+            {{/trainings}}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Nutrition Subscribed</label>
+          <div class="form-control text-muted text-center">
+
+            {{#nutritions}}
+              <div class="mb-1">{{name}}</div>
+            {{/nutritions}}
+
+            {{^nutritions}}
+              There are no nutrition plans added to the profile
+            {{/nutritions}}
+
+          </div>
+        </div>
+      </div>
+
+      <div class="btn-row text-center mt-3">
+        <button class="btn btn-primary">Save</button>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+{{>footer}}

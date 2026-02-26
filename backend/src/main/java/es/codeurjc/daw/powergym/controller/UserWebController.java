@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import java.security.Principal;
+import java.util.Collections;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,5 +69,29 @@ public class UserWebController {
 		userRepository.save(user);
 
 		return "redirect:/login";
+	}
+
+	@GetMapping("/profileUser")
+	public String profileUser(Model model, Principal principal) {
+		if (principal == null) {
+			return "redirect:/login";
+		}
+
+		// valores por defecto para evitar errores en la vista Mustache
+		model.addAttribute("name", principal.getName());
+		model.addAttribute("email", "");
+
+		userRepository.findByName(principal.getName()).ifPresent(user -> {
+			String displayName = user.getFullName() != null && !user.getFullName().isBlank()
+					? user.getFullName()
+					: user.getName();
+			model.addAttribute("name", displayName);
+			model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
+		});
+
+		model.addAttribute("trainings", Collections.emptyList());
+		model.addAttribute("nutritions", Collections.emptyList());
+
+		return "profileUser";
 	}
 }

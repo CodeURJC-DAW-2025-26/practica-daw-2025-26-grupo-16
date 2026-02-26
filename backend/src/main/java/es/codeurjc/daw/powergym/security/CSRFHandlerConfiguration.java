@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.web.csrf.CsrfToken;
+import java.security.Principal;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -31,6 +32,9 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
 			if (token != null) {
 				modelAndView.addObject("token", token.getToken());
 			}
+
+			Principal principal = request.getUserPrincipal();
+			modelAndView.addObject("logged", principal != null);
 		}
 	}
 }

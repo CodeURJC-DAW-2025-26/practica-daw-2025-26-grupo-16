@@ -65,6 +65,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/deleteNutrition/**").hasAnyRole("ADMIN")
 						.requestMatchers("/subscribeNutrition/**").hasAnyRole("USER")
 						.requestMatchers("/unsubscribeNutrition/**").hasAnyRole("USER")
+						.requestMatchers("/profileUser").hasAnyRole("USER")
 						.requestMatchers("/newbook").hasAnyRole("USER")
 						.requestMatchers("/editbook").hasAnyRole("USER")
 						.requestMatchers("/editbook/**").hasAnyRole("USER")
