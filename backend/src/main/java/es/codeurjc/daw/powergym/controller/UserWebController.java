@@ -12,8 +12,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import es.codeurjc.daw.powergym.security.RepositoryUserDetailsService;
 
 
 @Controller
@@ -24,9 +31,15 @@ public class UserWebController {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+    
+	@Autowired
+	private RepositoryUserDetailsService userDetailsService;
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@RequestParam(required = false) String updated, Model model) {
+		if (updated != null) {
+			model.addAttribute("updated", true);
+		}
 		return "login";
 	}
 
@@ -72,9 +85,13 @@ public class UserWebController {
 	}
 
 	@GetMapping("/profileUser")
-	public String profileUser(Model model, Principal principal) {
+	public String profileUser(Model model, Principal principal, @RequestParam(required = false) String saved) {
 		if (principal == null) {
 			return "redirect:/login";
+		}
+
+		if (saved != null) {
+			model.addAttribute("saved", true);
 		}
 
 		// valores por defecto para evitar errores en la vista Mustache
@@ -93,5 +110,60 @@ public class UserWebController {
 		model.addAttribute("nutritions", Collections.emptyList());
 
 		return "profileUser";
+	}
+
+	@PostMapping("/profileUser")
+	public String updateProfile(
+		@RequestParam String name,
+		@RequestParam String email,
+		Principal principal,
+		HttpServletRequest request,
+		Model model) throws ServletException {
+
+		if (principal == null) {
+			return "redirect:/login";
+		}
+
+		// find the current user
+		var optUser = userRepository.findByName(principal.getName());
+		if (optUser.isEmpty()) {
+			return "redirect:/login";
+		}
+
+		User user = optUser.get();
+		user.setFullName(name);
+
+		// handle potential email change
+		boolean nameChanged = false;
+		if (email != null && !email.isBlank() && !email.equals(user.getEmail())) {
+			String loginName = email;
+			int at = loginName.indexOf('@');
+			if (at > 0) {
+				loginName = loginName.substring(0, at);
+			}
+
+			// check if another user already has that name
+			if (!loginName.equals(principal.getName()) && userRepository.findByName(loginName).isPresent()) {
+				model.addAttribute("error", "The username derived from the new email is already in use");
+				// re-display profile page with current values
+				return profileUser(model, principal, null);
+			}
+
+			user.setEmail(email);
+			user.setName(loginName);
+			nameChanged = !loginName.equals(principal.getName());
+		}
+
+		userRepository.save(user);
+
+		// if username changed, update SecurityContext so the session continues
+		if (nameChanged) {
+			UserDetails userDetails = userDetailsService.loadUserByUsername(user.getName());
+			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+					userDetails, userDetails.getPassword(), userDetails.getAuthorities());
+			SecurityContextHolder.getContext().setAuthentication(auth);
+		}
+
+		return "redirect:/profileUser?saved";
 	}
 }

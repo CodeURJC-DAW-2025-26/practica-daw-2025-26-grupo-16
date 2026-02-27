@@ -4,64 +4,88 @@
 
   <h2 class="text-center mt-5 mb-4">Profile User</h2>
 
-  <div class="diet-container">
+  {{#error}}
+  <div class="alert alert-danger">{{error}}</div>
+  {{/error}}
 
-    <div class="diet-info">
+  {{#saved}}
+  <div class="alert alert-success">Profile saved.</div>
+  {{/saved}}
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <label class="form-label fw-bold">Name</label>
-          <p class="form-control">{{name}}</p>
-        </div>
-      </div>
+  <form action="/profileUser" method="post">
+    {{#token}}
+    <input type="hidden" name="_csrf" value="{{token}}" />
+    {{/token}}
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <label class="form-label fw-bold">Email</label>
-          <p class="form-control">{{email}}</p>
-        </div>
-      </div>
+    <div class="diet-container">
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <label class="form-label fw-bold">Trainings Subscribed</label>
-          <div class="form-control text-muted text-center">
+      <div class="diet-info">
 
-            {{#trainings}}
-              <div class="mb-1">{{name}}</div>
-            {{/trainings}}
-
-            {{^trainings}}
-              There are no training plans added to the profile
-            {{/trainings}}
-
+        <div class="card mb-3">
+          <div class="card-body">
+            <label class="form-label fw-bold">Name</label>
+              <input 
+              type="text" 
+              class="form-control" 
+              name="name" 
+              value="{{name}}" 
+              required>
           </div>
         </div>
-      </div>
 
-      <div class="card mb-3">
-        <div class="card-body">
-          <label class="form-label fw-bold">Nutrition Subscribed</label>
-          <div class="form-control text-muted text-center">
-
-            {{#nutritions}}
-              <div class="mb-1">{{name}}</div>
-            {{/nutritions}}
-
-            {{^nutritions}}
-              There are no nutrition plans added to the profile
-            {{/nutritions}}
-
+        <div class="card mb-3">
+          <div class="card-body">
+            <label class="form-label fw-bold">Email</label>
+              <input 
+              type="email" 
+              class="form-control" 
+              name="email" 
+              value="{{email}}" 
+              required>
           </div>
         </div>
-      </div>
 
-      <div class="btn-row text-center mt-3">
-        <button class="btn btn-primary">Save</button>
-      </div>
+        <div class="card mb-3">
+          <div class="card-body">
+            <label class="form-label fw-bold">Trainings Subscribed</label>
+            <div class="form-control text-muted text-center">
 
+              {{#trainings}}
+                <div class="mb-1">{{name}}</div>
+              {{/trainings}}
+
+              {{^trainings}}
+                There are no training plans added to the profile
+              {{/trainings}}
+
+            </div>
+          </div>
+        </div>
+
+        <div class="card mb-3">
+          <div class="card-body">
+            <label class="form-label fw-bold">Nutrition Subscribed</label>
+            <div class="form-control text-muted text-center">
+
+              {{#nutritions}}
+                <div class="mb-1">{{name}}</div>
+              {{/nutritions}}
+
+              {{^nutritions}}
+                There are no nutrition plans added to the profile
+              {{/nutritions}}
+
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-row text-center mt-3">
+          <button class="btn btn-primary" type="submit">Save</button>
+        </div>
+
+      </div>
     </div>
-  </div>
+  </form>
 
 </main>
 
