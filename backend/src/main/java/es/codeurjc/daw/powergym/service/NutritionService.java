@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
+import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.NutritionRepository;
 
 @Service
@@ -33,5 +34,9 @@ public class NutritionService {
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+
+	public List<Nutrition> findBySubscriber(User user) {
+		return repository.findBySubscribersContains(user);
 	}
 }

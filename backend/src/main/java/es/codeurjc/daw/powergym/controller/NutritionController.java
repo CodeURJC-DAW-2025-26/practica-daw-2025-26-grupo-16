@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
@@ -191,7 +192,8 @@ public class NutritionController {
 	}
 
 	@PostMapping("/unsubscribeNutrition/{id}")
-	public String unsubscribeNutrition(Model model, @PathVariable long id, HttpServletRequest request) {
+	public String unsubscribeNutrition(Model model, @PathVariable long id, HttpServletRequest request,
+			@RequestParam(required = false) String from) {
 
 		Optional<Nutrition> nutrition = nutritionService.findById(id);
 		Principal principal = request.getUserPrincipal();
@@ -204,7 +206,11 @@ public class NutritionController {
 			}
 		}
 
-		return "redirect:/nutritions/" + id;
+		if ("profile".equals(from)) {
+			return "redirect:/profileUser";
+		} else {
+			return "redirect:/nutritions/" + id;
+		}
 	}
 
 }

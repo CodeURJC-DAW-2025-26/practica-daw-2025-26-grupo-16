@@ -1,30 +1,28 @@
 {{>header}}
 
 <main class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
 
-  <h2 class="text-center mt-5 mb-4">Profile User</h2>
+      <h2 class="text-center mt-5 mb-4">Profile User</h2>
 
-  {{#error}}
-  <div class="alert alert-danger">{{error}}</div>
-  {{/error}}
+      {{#error}}
+      <div class="alert alert-danger">{{error}}</div>
+      {{/error}}
 
-  {{#saved}}
-  <div class="alert alert-success">Profile saved.</div>
-  {{/saved}}
+      {{#saved}}
+      <div class="alert alert-success">Profile saved.</div>
+      {{/saved}}
 
-  <form action="/profileUser" method="post">
-    {{#token}}
-    <input type="hidden" name="_csrf" value="{{token}}" />
-    {{/token}}
-
-    <div class="diet-container">
-
-      <div class="diet-info">
+      <form action="/profileUser" method="post">
+        {{#token}}
+        <input type="hidden" name="_csrf" value="{{token}}" />
+        {{/token}}
 
         <div class="card mb-3">
           <div class="card-body">
             <label class="form-label fw-bold">Name</label>
-              <input 
+            <input 
               type="text" 
               class="form-control" 
               name="name" 
@@ -36,7 +34,7 @@
         <div class="card mb-3">
           <div class="card-body">
             <label class="form-label fw-bold">Email</label>
-              <input 
+            <input 
               type="email" 
               class="form-control" 
               name="email" 
@@ -45,48 +43,96 @@
           </div>
         </div>
 
-        <div class="card mb-3">
-          <div class="card-body">
-            <label class="form-label fw-bold">Trainings Subscribed</label>
-            <div class="form-control text-muted text-center">
-
-              {{#trainings}}
-                <div class="mb-1">{{name}}</div>
-              {{/trainings}}
-
-              {{^trainings}}
-                There are no training plans added to the profile
-              {{/trainings}}
-
-            </div>
-          </div>
-        </div>
-
-        <div class="card mb-3">
-          <div class="card-body">
-            <label class="form-label fw-bold">Nutrition Subscribed</label>
-            <div class="form-control text-muted text-center">
-
-              {{#nutritions}}
-                <div class="mb-1">{{name}}</div>
-              {{/nutritions}}
-
-              {{^nutritions}}
-                There are no nutrition plans added to the profile
-              {{/nutritions}}
-
-            </div>
-          </div>
-        </div>
-
-        <div class="btn-row text-center mt-3">
+        <div class="text-center mt-3">
           <button class="btn btn-primary" type="submit">Save</button>
         </div>
+      </form>
 
+
+      <div class="card mb-3 mt-4">
+        <div class="card-body">
+          <label class="form-label fw-bold">Trainings Subscribed</label>
+
+      {{#subscribedTrainings}}
+      <div class="card mb-2">
+        <div class="row g-0 align-items-center">
+          <div class="col-auto">
+            {{#image}}
+            <img src="/images/{{id}}" class="img-thumbnail" style="width:100px; height:100px;" />
+            {{/image}}
+            {{^image}}
+            <img src="/assets/images/no_image.png" class="img-thumbnail" style="width:100px; height:100px;" />
+            {{/image}}
+          </div>
+          <div class="col">
+            <div class="card-body py-2">
+              <h6 class="card-title mb-1 text-white">{{name}}</h6>
+
+              <form action="/unsubscribeTraining/{{id}}?from=profile" method="post" class="d-inline">
+                {{#token}}
+                <input type="hidden" name="_csrf" value="{{token}}" />
+                {{/token}}
+                <button class="btn btn-sm btn-primary">Unsubscribe</button>
+              </form>
+
+              <a href="/trainings/{{id}}" class="btn btn-sm btn-primary">More info</a>
+
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </form>
+      {{/subscribedTrainings}}
 
+      {{^subscribedTrainings}}
+      <p class="text-white">There are no training plans added to the profile</p>
+      {{/subscribedTrainings}}
+        </div>
+      </div>
+
+
+      <div class="card mb-3 mt-4">
+        <div class="card-body">
+          <label class="form-label fw-bold">Nutrition Subscribed</label>
+
+
+      {{#subscribedNutritions}}
+      <div class="card mb-2">
+        <div class="row g-0 align-items-center">
+          <div class="col-auto">
+            {{#image}}
+            <img src="/images/{{id}}" class="img-thumbnail" style="width:100px; height:100px;" />
+            {{/image}}
+            {{^image}}
+            <img src="/assets/images/no_image.png" class="img-thumbnail" style="width:100px; height:100px;" />
+            {{/image}}
+          </div>
+          <div class="col">
+            <div class="card-body py-2">
+              <h6 class="card-title mb-1 text-white">{{name}}</h6>
+
+              <form action="/unsubscribeNutrition/{{id}}?from=profile" method="post" class="d-inline">
+                {{#token}}
+                <input type="hidden" name="_csrf" value="{{token}}" />
+                {{/token}}
+                <button class="btn btn-sm btn-primary">Unsubscribe</button>
+              </form>
+
+              <a href="/nutritions/{{id}}" class="btn btn-sm btn-primary">More info</a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+      {{/subscribedNutritions}}
+
+      {{^subscribedNutritions}}
+      <p class="text-white">There are no nutrition plans added to the profile</p>
+      {{/subscribedNutritions}}
+        </div>
+      </div>
+
+    </div>
+  </div>
 </main>
 
 {{>footer}}

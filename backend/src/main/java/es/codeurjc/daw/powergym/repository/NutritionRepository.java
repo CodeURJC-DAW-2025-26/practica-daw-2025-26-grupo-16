@@ -16,6 +16,9 @@ public interface NutritionRepository extends JpaRepository<Nutrition, Long> {
     List<Nutrition> findByName(String name);
     Page<Nutrition> findById(Long id, Pageable pageable);
 
+    // find all nutritions where the given user is subscribed
+    List<Nutrition> findBySubscribersContains(es.codeurjc.daw.powergym.model.User user);
+
     /*@EntityGraph(attributePaths = "user")
     Optional<Nutrition> findByWithUserById(Long id);*/
 

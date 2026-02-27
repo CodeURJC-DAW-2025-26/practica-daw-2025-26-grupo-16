@@ -34,6 +34,12 @@ public class UserWebController {
     
 	@Autowired
 	private RepositoryUserDetailsService userDetailsService;
+
+	@Autowired
+	private es.codeurjc.daw.powergym.service.TrainingService trainingService;
+
+	@Autowired
+	private es.codeurjc.daw.powergym.service.NutritionService nutritionService;
 	
 	@GetMapping("/login")
 	public String login(@RequestParam(required = false) String updated, Model model) {
@@ -104,10 +110,11 @@ public class UserWebController {
 					: user.getName();
 			model.addAttribute("name", displayName);
 			model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
-		});
 
-		model.addAttribute("trainings", Collections.emptyList());
-		model.addAttribute("nutritions", Collections.emptyList());
+			// subscriptions
+			model.addAttribute("subscribedTrainings", trainingService.findBySubscriber(user));
+			model.addAttribute("subscribedNutritions", nutritionService.findBySubscriber(user));
+		});
 
 		return "profileUser";
 	}

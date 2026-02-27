@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.model.Training;
+import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;
 
 @Service
@@ -33,5 +34,9 @@ public class TrainingService {
 
 	public void delete(long id) {
 		repository.deleteById(id);
+	}
+
+	public List<Training> findBySubscriber(User user) {
+		return repository.findBySubscribersContains(user);
 	}
 }
