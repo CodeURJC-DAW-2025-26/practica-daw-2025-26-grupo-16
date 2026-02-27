@@ -19,6 +19,9 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     // find all trainings where the given user is in the subscribers set
     List<Training> findBySubscribersContains(es.codeurjc.daw.powergym.model.User user);
 
+    // Find trainings owned by a specific user
+    List<Training> findByUser(es.codeurjc.daw.powergym.model.User user);
+
     /*@EntityGraph(attributePaths = "user")
     Optional<Training> findByWithUserById(Long id);*/
 

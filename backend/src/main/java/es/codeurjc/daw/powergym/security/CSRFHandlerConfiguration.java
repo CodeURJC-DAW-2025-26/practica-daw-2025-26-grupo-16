@@ -35,6 +35,7 @@ class CSRFHandlerInterceptor implements HandlerInterceptor {
 
 			Principal principal = request.getUserPrincipal();
 			modelAndView.addObject("logged", principal != null);
+			modelAndView.addObject("admin", request.isUserInRole("ADMIN"));
 		}
 	}
 }

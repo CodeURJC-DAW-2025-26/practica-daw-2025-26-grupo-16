@@ -24,19 +24,24 @@ public class TrainingService {
 		return repository.existsById(id);
 	}
 
-	public List<Training> findAll() {
-		return repository.findAll();
-	}
+    public List<Training> findAll() {
+        return repository.findAll();
+    }
 
-	public void save(Training training) {
-		repository.save(training);
-	}
+    public void save(Training training) {
+        repository.save(training);
+    }
 
-	public void delete(long id) {
-		repository.deleteById(id);
-	}
+    public void delete(long id) {
+        repository.deleteById(id);
+    }
 
-	public List<Training> findBySubscriber(User user) {
-		return repository.findBySubscribersContains(user);
-	}
+    public List<Training> findBySubscriber(User user) {
+        return repository.findBySubscribersContains(user);
+    }
+
+    // Owner-based retrieval: trainings owned by a user
+    public List<Training> findByOwner(User user) {
+        return repository.findByUser(user);
+    }
 }

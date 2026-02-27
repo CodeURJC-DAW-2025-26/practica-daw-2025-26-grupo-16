@@ -1,0 +1,107 @@
+{{>header}}
+
+<main class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <h2 class="text-center mt-5 mb-4">User Profile</h2>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Name</label>
+          <p class="mb-0">{{#profile.fullName}}{{profile.fullName}}{{/profile.fullName}}{{^profile.fullName}}{{profile.name}}{{/profile.fullName}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Username</label>
+          <p class="mb-0">{{profile.name}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Email</label>
+          <p class="mb-0">{{profile.email}}</p>
+        </div>
+      </div>
+
+      <div class="card mb-3">
+        <div class="card-body">
+          <label class="form-label fw-bold">Roles</label>
+          {{#profile.roles}}
+          <span class="badge text-bg-primary me-1">{{.}}</span>
+          {{/profile.roles}}
+        </div>
+      </div>
+
+      <div class="card mb-3 mt-4">
+        <div class="card-body">
+          <label class="form-label fw-bold">Trainings Subscribed</label>
+
+          {{#subscribedTrainings}}
+          <div class="card mb-2">
+            <div class="row g-0 align-items-center">
+              <div class="col-auto">
+                {{#image}}
+                <img src="/images/{{id}}" class="img-thumbnail" style="width:100px; height:100px;" />
+                {{/image}}
+                {{^image}}
+                <img src="/assets/images/no_image.png" class="img-thumbnail" style="width:100px; height:100px;" />
+                {{/image}}
+              </div>
+              <div class="col">
+                <div class="card-body py-2">
+                  <h6 class="card-title mb-1 text-white">{{name}}</h6>
+                  <a href="/trainings/{{id}}" class="btn btn-sm btn-primary">More info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/subscribedTrainings}}
+
+          {{^subscribedTrainings}}
+          <p class="text-white mb-0">There are no training plans added to the profile</p>
+          {{/subscribedTrainings}}
+        </div>
+      </div>
+
+      <div class="card mb-3 mt-4">
+        <div class="card-body">
+          <label class="form-label fw-bold">Nutrition Subscribed</label>
+
+          {{#subscribedNutritions}}
+          <div class="card mb-2">
+            <div class="row g-0 align-items-center">
+              <div class="col-auto">
+                {{#image}}
+                <img src="/images/{{id}}" class="img-thumbnail" style="width:100px; height:100px;" />
+                {{/image}}
+                {{^image}}
+                <img src="/assets/images/no_image.png" class="img-thumbnail" style="width:100px; height:100px;" />
+                {{/image}}
+              </div>
+              <div class="col">
+                <div class="card-body py-2">
+                  <h6 class="card-title mb-1 text-white">{{name}}</h6>
+                  <a href="/nutritions/{{id}}" class="btn btn-sm btn-primary">More info</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {{/subscribedNutritions}}
+
+          {{^subscribedNutritions}}
+          <p class="text-white mb-0">There are no nutrition plans added to the profile</p>
+          {{/subscribedNutritions}}
+        </div>
+      </div>
+
+      <div class="text-center mt-3 mb-4">
+        <a href="/admin/users" class="btn btn-primary">Back to users</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+{{>footer}}

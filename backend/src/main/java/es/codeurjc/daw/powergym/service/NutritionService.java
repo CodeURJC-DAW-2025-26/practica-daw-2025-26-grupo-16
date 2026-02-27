@@ -36,7 +36,12 @@ public class NutritionService {
 		repository.deleteById(id);
 	}
 
-	public List<Nutrition> findBySubscriber(User user) {
-		return repository.findBySubscribersContains(user);
-	}
+    public List<Nutrition> findBySubscriber(User user) {
+        return repository.findBySubscribersContains(user);
+    }
+
+    // Owner-based retrieval: nutritions owned by a user
+    public List<Nutrition> findByOwner(User user) {
+        return repository.findByUser(user);
+    }
 }
