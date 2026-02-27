@@ -8,6 +8,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity(name = "UserTable")
 public class User {
@@ -23,6 +24,9 @@ public class User {
 	private String fullName;
 
 	private String encodedPassword;
+
+	@OneToOne
+	private Image image;
 
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
@@ -74,6 +78,14 @@ public class User {
 
 	public void setEncodedPassword(String encodedPassword) {
 		this.encodedPassword = encodedPassword;
+	}
+	
+	public Image getImage() {
+		return image;
+	}
+
+	public void setImage(Image image) {
+		this.image = image;
 	}
 
 	public List<String> getRoles() {

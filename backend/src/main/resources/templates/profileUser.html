@@ -14,10 +14,40 @@
       <div class="alert alert-success">Profile saved.</div>
       {{/saved}}
 
-      <form action="/profileUser" method="post">
+      <form action="/profileUser" method="post" enctype="multipart/form-data">
         {{#token}}
         <input type="hidden" name="_csrf" value="{{token}}" />
         {{/token}}
+
+        <div class="card mb-3">
+          <div class="card-body text-center">
+
+            <label class="form-label fw-bold d-block mb-3">
+            Profile Image
+            </label>
+
+            <div class="d-flex justify-content-center mb-3">
+            {{#profileImage}}
+            <img src="/images/{{id}}" 
+                class="diet-image card mb-4"
+                style="width:150px; height:150px; object-fit:contain; background-color:#f0f0f0; padding:5px;">
+            {{/profileImage}}
+
+            {{^profileImage}}
+            <img src="/assets/images/default_user.png" 
+                class="diet-image card mb-4"
+                style="width:150px; height:150px; object-fit:contain; background-color:#f0f0f0; padding:5px;">
+            {{/profileImage}}
+            </div>
+
+            <input 
+            type="file" 
+            name="imageFiled" 
+            class="form-control"
+            accept="image/*">
+
+          </div>
+        </div>
 
         <div class="card mb-3">
           <div class="card-body">

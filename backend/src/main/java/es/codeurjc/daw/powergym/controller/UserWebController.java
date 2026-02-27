@@ -6,24 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import java.io.IOException;
 import java.security.Principal;
+import java.sql.SQLException;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
-
+import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.UserRepository;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import es.codeurjc.daw.powergym.security.RepositoryUserDetailsService;
+import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.NutritionService;
+import es.codeurjc.daw.powergym.service.TrainingService;
+import es.codeurjc.daw.powergym.service.UserService;
 
 
 @Controller
 public class UserWebController {
+
+	@Autowired
+	private UserService userService;
+
+	@Autowired
+	private ImageService imageService;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -35,10 +50,10 @@ public class UserWebController {
 	private RepositoryUserDetailsService userDetailsService;
 
 	@Autowired
-	private es.codeurjc.daw.powergym.service.TrainingService trainingService;
+	private TrainingService trainingService;
 
 	@Autowired
-	private es.codeurjc.daw.powergym.service.NutritionService nutritionService;
+	private NutritionService nutritionService;
 	
 	@GetMapping("/login")
 	public String login(@RequestParam(required = false) String updated, Model model) {
@@ -109,6 +124,8 @@ public class UserWebController {
 			model.addAttribute("name", displayName);
 			model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
 
+			model.addAttribute("profileImage", user.getImage());
+
 			model.addAttribute("subscribedTrainings", trainingService.findBySubscriber(user));
 			model.addAttribute("subscribedNutritions", nutritionService.findBySubscriber(user));
 		});
@@ -120,9 +137,11 @@ public class UserWebController {
 	public String updateProfile(
 		@RequestParam String name,
 		@RequestParam String email,
-		Principal principal,
-		HttpServletRequest request,
-		Model model) throws ServletException {
+		@RequestParam(required = false) MultipartFile imageFiled,
+        @RequestParam(required = false) boolean removeImage,
+        Principal principal,
+        HttpServletRequest request,
+        Model model) throws IOException, ServletException, SQLException {
 
 		if (principal == null) {
 			return "redirect:/login";
@@ -154,6 +173,8 @@ public class UserWebController {
 			nameChanged = !loginName.equals(principal.getName());
 		}
 
+		updateImage(user, removeImage, imageFiled);
+
 		userRepository.save(user);
 
 		if (nameChanged) {
@@ -164,5 +185,26 @@ public class UserWebController {
 		}
 
 		return "redirect:/profileUser?saved";
+	}
+
+	private void updateImage(User user, boolean removeImage, MultipartFile imageFiled)
+			throws IOException, SQLException {
+
+		if (imageFiled != null && !imageFiled.isEmpty()) {
+			User dbUser = userService.findById(user.getId()).orElseThrow();
+
+			if (dbUser.getImage() == null) {
+				Image image = imageService.createImage(imageFiled.getInputStream());
+				user.setImage(image);
+			} else {
+				Image image = imageService.replaceImageFile(dbUser.getImage().getId(), imageFiled.getInputStream());
+				user.setImage(image);
+			}
+		} else if (removeImage) {
+			if (user.getImage() != null) {
+				imageService.deleteImage(user.getImage().getId());
+				user.setImage(null);
+			}
+		}
 	}
 }
