@@ -19,6 +19,9 @@ public interface NutritionRepository extends JpaRepository<Nutrition, Long> {
     // find all nutritions where the given user is subscribed
     List<Nutrition> findBySubscribersContains(es.codeurjc.daw.powergym.model.User user);
 
+    // Find nutritions owned by a specific user
+    List<Nutrition> findByUser(es.codeurjc.daw.powergym.model.User user);
+
     /*@EntityGraph(attributePaths = "user")
     Optional<Nutrition> findByWithUserById(Long id);*/
 

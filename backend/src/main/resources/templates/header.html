@@ -40,8 +40,11 @@
 							<a href="/login" class="btn btn-primary">Log In</a>
 							<a href="/register" class="btn btn-primary">Register</a>
 							{{/logged}} {{#logged}}
-							<a href="/progress" class="btn btn-primary">Progress</a>
-							<a href="/profileUser" class="btn btn-primary">Profile</a>
+							{{#admin}}
+							<a href="/admin/users" class="btn btn-primary">Users</a>
+							{{/admin}}
+                            <a href="/progress" class="btn btn-primary">Progress</a>
+                            <a href="/profile" class="btn btn-primary">Profile</a>
 
 							<form action="/logout" method="post" class="d-inline">
 								<input type="hidden" name="_csrf" value="{{token}}" />

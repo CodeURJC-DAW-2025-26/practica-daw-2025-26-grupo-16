@@ -1,6 +1,10 @@
 package es.codeurjc.daw.powergym.controller;
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -131,6 +135,61 @@ public class UserWebController {
 		});
 
 		return "profileUser";
+	}
+
+    @GetMapping("/profile")
+    public String profile(Model model, Principal principal) {
+        if (principal == null) {
+            return "redirect:/login";
+        }
+
+        Optional<User> optUser = userRepository.findByName(principal.getName());
+        if (optUser.isEmpty()) {
+            return "redirect:/login";
+        }
+        User user = optUser.get();
+
+        // Load owned items using new owner-based service methods
+        String displayName = user.getFullName() != null && !user.getFullName().isBlank()
+                ? user.getFullName()
+                : user.getName();
+        model.addAttribute("name", displayName);
+        model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
+        model.addAttribute("roles", user.getRoles());
+        // Use existing profileUser template with owned items treated as subscriptions for now
+        model.addAttribute("subscribedTrainings", trainingService.findByOwner(user));
+        model.addAttribute("subscribedNutritions", nutritionService.findByOwner(user));
+        return "profileUser";    }
+
+	@GetMapping("/admin/users")
+	public String adminUsers(Model model) {
+		List<Map<String, Object>> usersView = new ArrayList<>();
+		for (User user : userRepository.findAll()) {
+			Map<String, Object> userView = new HashMap<>();
+			userView.put("id", user.getId());
+			userView.put("displayName", (user.getFullName() != null && !user.getFullName().isBlank()) ? user.getFullName() : user.getName());
+			userView.put("email", user.getEmail() != null ? user.getEmail() : "");
+			usersView.add(userView);
+		}
+
+		model.addAttribute("users", usersView);
+		return "adminUsers";
+	}
+
+	@GetMapping("/admin/users/{id}")
+	public String adminUserProfile(@org.springframework.web.bind.annotation.PathVariable long id, Model model) {
+		Optional<User> user = userRepository.findById(id);
+
+		if (user.isEmpty()) {
+			return "redirect:/admin/users";
+		}
+
+		User selectedUser = user.get();
+		model.addAttribute("profile", selectedUser);
+		model.addAttribute("subscribedTrainings", trainingService.findBySubscriber(selectedUser));
+		model.addAttribute("subscribedNutritions", nutritionService.findBySubscriber(selectedUser));
+
+		return "adminUserProfile";
 	}
 
 	@PostMapping("/profileUser")
