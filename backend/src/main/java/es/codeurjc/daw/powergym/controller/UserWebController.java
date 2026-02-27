@@ -7,7 +7,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import java.security.Principal;
-import java.util.Collections;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,7 +99,6 @@ public class UserWebController {
 			model.addAttribute("saved", true);
 		}
 
-		// valores por defecto para evitar errores en la vista Mustache
 		model.addAttribute("name", principal.getName());
 		model.addAttribute("email", "");
 
@@ -111,7 +109,6 @@ public class UserWebController {
 			model.addAttribute("name", displayName);
 			model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
 
-			// subscriptions
 			model.addAttribute("subscribedTrainings", trainingService.findBySubscriber(user));
 			model.addAttribute("subscribedNutritions", nutritionService.findBySubscriber(user));
 		});
@@ -131,7 +128,6 @@ public class UserWebController {
 			return "redirect:/login";
 		}
 
-		// find the current user
 		var optUser = userRepository.findByName(principal.getName());
 		if (optUser.isEmpty()) {
 			return "redirect:/login";
@@ -140,7 +136,6 @@ public class UserWebController {
 		User user = optUser.get();
 		user.setFullName(name);
 
-		// handle potential email change
 		boolean nameChanged = false;
 		if (email != null && !email.isBlank() && !email.equals(user.getEmail())) {
 			String loginName = email;
@@ -149,10 +144,8 @@ public class UserWebController {
 				loginName = loginName.substring(0, at);
 			}
 
-			// check if another user already has that name
 			if (!loginName.equals(principal.getName()) && userRepository.findByName(loginName).isPresent()) {
 				model.addAttribute("error", "The username derived from the new email is already in use");
-				// re-display profile page with current values
 				return profileUser(model, principal, null);
 			}
 
@@ -163,7 +156,6 @@ public class UserWebController {
 
 		userRepository.save(user);
 
-		// if username changed, update SecurityContext so the session continues
 		if (nameChanged) {
 			UserDetails userDetails = userDetailsService.loadUserByUsername(user.getName());
 			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
