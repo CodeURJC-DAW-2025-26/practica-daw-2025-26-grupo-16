@@ -137,7 +137,7 @@ public class UserWebController {
 		return "profileUser";
 	}
 
-    @GetMapping("/profile")
+    /*@GetMapping("/profile")
     public String profile(Model model, Principal principal) {
         if (principal == null) {
             return "redirect:/login";
@@ -159,7 +159,7 @@ public class UserWebController {
         // Use existing profileUser template with owned items treated as subscriptions for now
         model.addAttribute("subscribedTrainings", trainingService.findByOwner(user));
         model.addAttribute("subscribedNutritions", nutritionService.findByOwner(user));
-        return "profileUser";    }
+        return "profileUser";    }*/
 
 	@GetMapping("/admin/users")
 	public String adminUsers(Model model) {
