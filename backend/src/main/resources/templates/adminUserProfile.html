@@ -22,7 +22,14 @@
       <div class="card mb-3">
         <div class="card-body">
           <label class="form-label fw-bold">Email</label>
-          <p class="mb-0">{{profile.email}}</p>
+          <p class="mb-0">
+            {{#profile.email}}
+              {{profile.email}}
+            {{/profile.email}}
+            {{^profile.email}}
+              No email
+            {{/profile.email}}
+          </p>
         </div>
       </div>
 
