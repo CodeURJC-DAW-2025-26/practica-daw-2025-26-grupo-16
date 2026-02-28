@@ -16,6 +16,7 @@ import java.security.Principal;
 import java.sql.SQLException;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -58,6 +59,20 @@ public class UserWebController {
 
 	@Autowired
 	private NutritionService nutritionService;
+
+	@ModelAttribute
+	public void addAttributes(Model model, HttpServletRequest request) {
+
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+			model.addAttribute("logged", true);
+			model.addAttribute("userName", principal.getName());
+			model.addAttribute("admin", request.isUserInRole("ADMIN"));
+		} else {
+			model.addAttribute("logged", false);
+		}
+	}
 	
 	@GetMapping("/login")
 	public String login(@RequestParam(required = false) String updated, Model model) {
@@ -135,6 +150,62 @@ public class UserWebController {
 		});
 
 		return "profileUser";
+	}
+
+	@GetMapping("/progress")
+	public String progress(Model model, Principal principal) {
+		if (principal == null) {
+			return "redirect:/login";
+		}
+
+		Optional<User> optUser = userRepository.findByName(principal.getName());
+		if (optUser.isEmpty()) {
+			return "redirect:/login";
+		}
+
+		User user = optUser.get();
+
+		List<es.codeurjc.daw.powergym.model.Training> trainings = trainingService.findByOwner(user);
+		List<es.codeurjc.daw.powergym.model.Nutrition> nutritions = nutritionService.findByOwner(user);
+
+		int trainingsCount = trainings.size();
+		int nutritionsCount = nutritions.size();
+
+		int totalTrainingMinutes = trainings.stream()
+				.mapToInt(training -> Math.max(training.getTime(), 0))
+				.sum();
+
+		int totalNutritionCalories = nutritions.stream()
+				.mapToInt(nutrition -> Math.max(nutrition.getCalories(), 0))
+				.sum();
+
+		int averageTrainingMinutes = trainingsCount > 0
+				? Math.round((float) totalTrainingMinutes / trainingsCount)
+				: 0;
+
+		int averageCalories = nutritionsCount > 0
+				? Math.round((float) totalNutritionCalories / nutritionsCount)
+				: 0;
+
+		int consistency = Math.min((trainingsCount + nutritionsCount) * 12, 100);
+
+		String level;
+		if (consistency < 35) {
+			level = "Beginner";
+		} else if (consistency < 70) {
+			level = "Intermediate";
+		} else {
+			level = "Advanced";
+		}
+
+		model.addAttribute("trainingsCount", trainingsCount);
+		model.addAttribute("nutritionsCount", nutritionsCount);
+		model.addAttribute("averageTrainingMinutes", averageTrainingMinutes);
+		model.addAttribute("averageCalories", averageCalories);
+		model.addAttribute("consistency", consistency);
+		model.addAttribute("level", level);
+
+		return "progress";
 	}
 
     /*@GetMapping("/profile")

@@ -1,0 +1,86 @@
+{{>header}}
+
+<main class="pg-container mt-5 mb-5">
+	<h2 class="text-center mt-5 mb-4">My Progress</h2>
+
+	<div class="grid grid-4 mb-4">
+		<div class="stat-card">
+			<div class="stat-value">{{trainingsCount}}</div>
+			<div class="stat-label">Trainings Created</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{{nutritionsCount}}</div>
+			<div class="stat-label">Nutritions Created</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{{averageTrainingMinutes}} min</div>
+			<div class="stat-label">Avg Training Time</div>
+		</div>
+		<div class="stat-card">
+			<div class="stat-value">{{averageCalories}} kcal</div>
+			<div class="stat-label">Avg Nutrition Calories</div>
+		</div>
+	</div>
+
+	<div class="card mb-4">
+		<div class="card-header">Consistency</div>
+		<div class="card-body">
+			<div class="d-flex justify-content-between mb-2">
+				<span>Current level: {{level}}</span>
+				<span>{{consistency}}%</span>
+			</div>
+			<div class="progress">
+				<div class="progress-bar" role="progressbar" style="width: {{consistency}}%" aria-valuenow="{{consistency}}"
+					aria-valuemin="0" aria-valuemax="100">{{consistency}}%</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="card mb-4">
+		<div class="card-header">Progress Chart</div>
+		<div class="card-body">
+			<canvas id="progressChart" height="120"></canvas>
+		</div>
+	</div>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+	const trainingsCount = Number("{{trainingsCount}}");
+	const nutritionsCount = Number("{{nutritionsCount}}");
+
+	const ctx = document.getElementById('progressChart');
+	if (ctx) {
+		new Chart(ctx, {
+			type: 'bar',
+			data: {
+				labels: ['Trainings', 'Nutritions'],
+				datasets: [{
+					label: 'Created plans',
+					data: [trainingsCount, nutritionsCount],
+					backgroundColor: ['rgba(220, 38, 38, 0.8)', 'rgba(249, 115, 22, 0.8)'],
+					borderColor: ['rgba(220, 38, 38, 1)', 'rgba(249, 115, 22, 1)'],
+					borderWidth: 1
+				}]
+			},
+			options: {
+				responsive: true,
+				plugins: {
+					legend: {
+						display: false
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true,
+						ticks: {
+							precision: 0
+						}
+					}
+				}
+			}
+		});
+	}
+</script>
+
+{{>footer}}
