@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;
@@ -44,4 +45,8 @@ public class TrainingService {
     public List<Training> findByOwner(User user) {
         return repository.findByUser(user);
     }
+
+    public Optional<Training> findByIdWithUser(long id) {
+		return repository.findWithUserById(id);
+	}
 }

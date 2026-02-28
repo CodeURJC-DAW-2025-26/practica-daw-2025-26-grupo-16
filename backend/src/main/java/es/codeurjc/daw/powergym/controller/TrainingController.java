@@ -21,6 +21,7 @@ import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.repository.UserRepository;
+import es.codeurjc.daw.powergym.repository.TrainingRepository;
 import es.codeurjc.daw.powergym.service.TrainingService;
 import es.codeurjc.daw.powergym.service.ImageService;
 
@@ -35,6 +36,9 @@ public class TrainingController {
 
 	@Autowired
 	private UserRepository userRepository;
+
+	@Autowired
+	private TrainingRepository trainingRepository;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -72,6 +76,9 @@ public class TrainingController {
 				Optional<User> user = userRepository.findByName(principal.getName());
 				if (user.isPresent()) {
 					model.addAttribute("subscribed", training.get().getSubscribers().contains(user.get()));
+					boolean isOwner = training.get().getUser() != null &&
+                                	  training.get().getUser().getId().equals(user.get().getId());
+                	model.addAttribute("owner", isOwner);
 				}
 			}
 			
@@ -83,14 +90,29 @@ public class TrainingController {
 	}
 
 	@PostMapping("/deleteTraining/{id}")
-	public String deleteTraining(Model model, @PathVariable long id) {
+	public String deleteTraining(@PathVariable long id, HttpServletRequest request) {
 
-		Optional<Training> training = trainingService.findById(id);
-		if (training.isPresent()) {
-			trainingService.delete(id);
-			model.addAttribute("training", training.get());
+		Optional<Training> trainingOpt = trainingService.findById(id);
+		if (trainingOpt.isEmpty()) return "redirect:/trainings";
+
+		Training training = trainingOpt.get();
+
+		Principal principal = request.getUserPrincipal();
+		if (principal == null) return "redirect:/login";
+
+		User currentUser = userRepository.findByName(principal.getName()).orElseThrow();
+
+		boolean isAdmin = request.isUserInRole("ADMIN");
+		boolean isOwner = training.getUser() != null &&
+						training.getUser().getId().equals(currentUser.getId());
+
+		if (!isAdmin && !isOwner) {
+			return "error"; 
 		}
-		return "deletedtraining";
+
+		trainingService.delete(id);
+
+		return "redirect:/trainings";
 	}
 
 	@GetMapping("/createTraining")
@@ -102,8 +124,16 @@ public class TrainingController {
 	}
 
 	@PostMapping("/createTraining")
-	public String createTrainingProcess(Model model, Training training, MultipartFile imageField
-			) throws IOException {
+	public String createTrainingProcess(Model model, Training training,
+			MultipartFile imageField,
+			HttpServletRequest request) throws IOException {
+
+		Principal principal = request.getUserPrincipal();
+
+		if (principal != null) {
+			User user = userRepository.findByName(principal.getName()).orElseThrow();
+			training.setUser(user);
+		}
 
 		if (!imageField.isEmpty()) {
 			Image image = imageService.createImage(imageField.getInputStream());
@@ -112,32 +142,86 @@ public class TrainingController {
 
 		trainingService.save(training);
 
-		model.addAttribute("trainingId", training.getId());
-
 		return "redirect:/trainings/" + training.getId();
 	}
 
 	@GetMapping("/editTraining/{id}")
-	public String editTraining(Model model, @PathVariable long id) {
+	public String editTraining(Model model, 
+								@PathVariable long id, 
+								HttpServletRequest request) {
 
-		Optional<Training> training = trainingService.findById(id);
-		if (training.isPresent()) {
-			model.addAttribute("training", training.get());
-			return "editTrainingPage";
-		} else {
-			return "trainings";
+		Optional<Training> trainingOpt = trainingRepository.findById(id);
+
+		if (trainingOpt.isEmpty()) {
+			return "redirect:/trainings";
 		}
+
+		Training training = trainingOpt.get();
+
+		Principal principal = request.getUserPrincipal();
+		if (principal == null) {
+			return "redirect:/login";
+		}
+
+		User currentUser = userRepository
+				.findByName(principal.getName())
+				.orElseThrow();
+
+		boolean isAdmin = request.isUserInRole("ADMIN");
+		boolean isOwner = training.getUser() != null &&
+				training.getUser().getId().equals(currentUser.getId());
+
+		if (!isAdmin && !isOwner) {
+			return "error";
+		}
+
+		model.addAttribute("training", training);
+
+		model.addAttribute("goalIsIncrease", "Increase weight".equals(training.getGoal()));
+		model.addAttribute("goalIsMaintain", "Maintain weight".equals(training.getGoal()));
+		model.addAttribute("goalIsLose", "Lose weight".equals(training.getGoal()));
+
+		return "editTrainingPage";
 	}
 
 	@PostMapping("/editTraining")
-	public String editTrainingProcess(Model model, Training training, boolean removeImage, MultipartFile imageField)
+	public String editTrainingProcess(Model model,
+									Training training,
+									boolean removeImage,
+									MultipartFile imageField,
+									HttpServletRequest request)
 			throws IOException, SQLException {
+
+		Optional<Training> trainingOpt = trainingService.findById(training.getId());
+
+		if (trainingOpt.isEmpty()) {
+			return "redirect:/trainings";
+		}
+
+		Training dbTraining = trainingOpt.get();
+
+		Principal principal = request.getUserPrincipal();
+		if (principal == null) {
+			return "redirect:/login";
+		}
+
+		User currentUser = userRepository
+				.findByName(principal.getName())
+				.orElseThrow();
+
+		boolean isAdmin = request.isUserInRole("ADMIN");
+		boolean isOwner = dbTraining.getUser() != null &&
+				dbTraining.getUser().getId().equals(currentUser.getId());
+
+		if (!isAdmin && !isOwner) {
+			return "error";
+		}
+
+		training.setUser(dbTraining.getUser());
 
 		updateImage(training, removeImage, imageField);
 
 		trainingService.save(training);
-
-		model.addAttribute("trainingId", training.getId());
 
 		return "redirect:/trainings/" + training.getId();
 	}

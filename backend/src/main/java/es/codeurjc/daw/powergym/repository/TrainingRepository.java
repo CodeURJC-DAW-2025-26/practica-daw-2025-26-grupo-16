@@ -22,8 +22,8 @@ public interface TrainingRepository extends JpaRepository<Training, Long> {
     // Find trainings owned by a specific user
     List<Training> findByUser(es.codeurjc.daw.powergym.model.User user);
 
-    /*@EntityGraph(attributePaths = "user")
-    Optional<Training> findByWithUserById(Long id);*/
+    @EntityGraph(attributePaths = "user")
+    Optional<Training> findWithUserById(Long id);
 
 }
 

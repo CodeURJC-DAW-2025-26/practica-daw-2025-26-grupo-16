@@ -44,4 +44,8 @@ public class NutritionService {
     public List<Nutrition> findByOwner(User user) {
         return repository.findByUser(user);
     }
+
+	public Optional<Nutrition> findByIdWithUser(long id) {
+		return repository.findWithUserById(id);
+	}
 }

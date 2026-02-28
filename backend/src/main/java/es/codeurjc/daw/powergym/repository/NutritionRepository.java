@@ -22,7 +22,7 @@ public interface NutritionRepository extends JpaRepository<Nutrition, Long> {
     // Find nutritions owned by a specific user
     List<Nutrition> findByUser(es.codeurjc.daw.powergym.model.User user);
 
-    /*@EntityGraph(attributePaths = "user")
-    Optional<Nutrition> findByWithUserById(Long id);*/
+    @EntityGraph(attributePaths = "user")
+    Optional<Nutrition> findWithUserById(Long id);
 
 }

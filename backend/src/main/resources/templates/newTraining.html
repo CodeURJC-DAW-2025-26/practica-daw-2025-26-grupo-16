@@ -54,18 +54,16 @@
 			</div>
 
 			<div class="card mb-3">
-				<div class="card-body">
-					<label class="form-label fw-bold" for="goal">Training Goal</label>
-					<input
-						id="goal"
-						type="text"
-						name="goal"
-						class="form-control"
-						placeholder="Example: Build strength"
-						required
-					/>
+					<div class="card-body">
+						<label class="form-label fw-bold">Training Goal</label>
+						<select name="goal" class="form-control" required>
+							<option value="">Select an option…</option>
+							<option value="Increase weight">Increase weight</option>
+							<option value="Maintain weight">Maintain weight</option>
+							<option value="Lose weight">Lose weight</option>
+						</select>
+					</div>
 				</div>
-			</div>
 
 			<div class="card mb-3">
 				<div class="card-body">
