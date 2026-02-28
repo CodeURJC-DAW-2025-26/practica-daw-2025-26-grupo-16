@@ -6,11 +6,11 @@
 	<div class="grid grid-4 mb-4">
 		<div class="stat-card">
 			<div class="stat-value">{{trainingsCount}}</div>
-			<div class="stat-label">Trainings Created</div>
+			<div class="stat-label">Trainings Subscribed</div>
 		</div>
 		<div class="stat-card">
 			<div class="stat-value">{{nutritionsCount}}</div>
-			<div class="stat-label">Nutritions Created</div>
+			<div class="stat-label">Nutritions Subscribed</div>
 		</div>
 		<div class="stat-card">
 			<div class="stat-value">{{averageTrainingMinutes}} min</div>
@@ -30,8 +30,18 @@
 				<span>{{consistency}}%</span>
 			</div>
 			<div class="progress">
-				<div class="progress-bar" role="progressbar" style="width: {{consistency}}%" aria-valuenow="{{consistency}}"
-					aria-valuemin="0" aria-valuemax="100">{{consistency}}%</div>
+				<div
+					id="consistencyBar"
+					class="progress-bar"
+					role="progressbar"
+					style="width: 0%"
+					data-consistency="{{consistency}}"
+					aria-valuenow="{{consistency}}"
+					aria-valuemin="0"
+					aria-valuemax="100"
+				>
+					{{consistency}}%
+				</div>
 			</div>
 		</div>
 	</div>
@@ -46,8 +56,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-	const trainingsCount = Number("{{trainingsCount}}");
-	const nutritionsCount = Number("{{nutritionsCount}}");
+	const trainingsCount = parseInt('{{trainingsCount}}', 10) || 0;
+	const nutritionsCount = parseInt('{{nutritionsCount}}', 10) || 0;
+	const consistencyBar = document.getElementById('consistencyBar');
+
+	if (consistencyBar) {
+		const consistency = Number(consistencyBar.dataset.consistency);
+		if (!Number.isNaN(consistency)) {
+			consistencyBar.style.width = `${consistency}%`;
+		}
+	}
 
 	const ctx = document.getElementById('progressChart');
 	if (ctx) {
@@ -55,30 +73,35 @@
 			type: 'bar',
 			data: {
 				labels: ['Trainings', 'Nutritions'],
-				datasets: [{
-					label: 'Created plans',
-					data: [trainingsCount, nutritionsCount],
-					backgroundColor: ['rgba(220, 38, 38, 0.8)', 'rgba(249, 115, 22, 0.8)'],
-					borderColor: ['rgba(220, 38, 38, 1)', 'rgba(249, 115, 22, 1)'],
-					borderWidth: 1
-				}]
+				datasets: [
+					{
+						label: 'Subscribed plans',
+						data: [trainingsCount, nutritionsCount],
+						backgroundColor: [
+							'rgba(220, 38, 38, 0.8)',
+							'rgba(249, 115, 22, 0.8)',
+						],
+						borderColor: ['rgba(220, 38, 38, 1)', 'rgba(249, 115, 22, 1)'],
+						borderWidth: 1,
+					},
+				],
 			},
 			options: {
 				responsive: true,
 				plugins: {
 					legend: {
-						display: false
-					}
+						display: false,
+					},
 				},
 				scales: {
 					y: {
 						beginAtZero: true,
 						ticks: {
-							precision: 0
-						}
-					}
-				}
-			}
+							precision: 0,
+						},
+					},
+				},
+			},
 		});
 	}
 </script>

@@ -165,8 +165,8 @@ public class UserWebController {
 
 		User user = optUser.get();
 
-		List<es.codeurjc.daw.powergym.model.Training> trainings = trainingService.findByOwner(user);
-		List<es.codeurjc.daw.powergym.model.Nutrition> nutritions = nutritionService.findByOwner(user);
+		List<es.codeurjc.daw.powergym.model.Training> trainings = trainingService.findBySubscriber(user);
+		List<es.codeurjc.daw.powergym.model.Nutrition> nutritions = nutritionService.findBySubscriber(user);
 
 		int trainingsCount = trainings.size();
 		int nutritionsCount = nutritions.size();
