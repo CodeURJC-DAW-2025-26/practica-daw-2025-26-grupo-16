@@ -84,7 +84,7 @@ public class TrainingController {
 			
 			return "training";
 		} else {
-			return "trainings";
+			return "error";
 		}
 
 	}

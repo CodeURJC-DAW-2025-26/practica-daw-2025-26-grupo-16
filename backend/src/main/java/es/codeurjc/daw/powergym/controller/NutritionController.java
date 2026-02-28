@@ -84,7 +84,7 @@ public class NutritionController {
 			
 			return "nutrition";
 		} else {
-			return "nutritions";
+			return "error";
 		}
 
 	}
