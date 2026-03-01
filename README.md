@@ -1,12 +1,10 @@
-# [Nombre de la Aplicación]
+# [PowerGym]
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
 |:--- |:--- |:--- |
 | **Adrián Esteban Martín** | a.estebanm.2021@alumnos.urjc.es | [aadri-2003](https://github.com/aadri-2003) |
 | **Laura Pineda Ballesteros**  | l.pineda.2022@alumnos.urjc.es | [lauraxpb](https://github.com/lauraxpb) |
-| [Nombre 3] | [email3]@alumnos.urjc.es | [User3] |
-| [Nombre 4] | [email4]@alumnos.urjc.es | [User4] |
 
 ---
 
@@ -21,8 +19,6 @@ Las principales entidades de la aplicación son:
 1. **Usuario**: Clientes del gimnasio que pueden acceder a entrenamientos y planes de nutrición.
 2. **Nutrición**: Planes alimenticios personalizados según los objetivos del usuario.
 3. **Entrenamiento**: Rutinas de ejercicios personalizadas para cada usuario.
-4. **Comentario Entrenamiento**: Los usuarios pueden publicar comentarios sobre los entrenamientos.
-5. **Comentario Nutrición**: Los usuarios pueden publicar comentarios sobre la nutrición.
 
 **Relaciones entre entidades:**
 La relación entre las diferentes entidades la representamos con el siguiente diagrama
