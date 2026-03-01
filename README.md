@@ -204,9 +204,9 @@ Esta página corresponde a la pantalla de error del sistema de PowerGym. Muestra
 
 Diagrama mostrando las entidades, sus campos y relaciones:
 
-![Diagrama Entidad-Relación](images/database-diagram.png)
+<img width="955" height="1259" alt="DiagramaBBDD-DAW2026" src="https://github.com/user-attachments/assets/2dd0f3c9-c757-4e9a-bcf9-5b89e9214cfd" />
 
-> [Descripción opcional: Ej: "El diagrama muestra las 4 entidades principales: Usuario, Producto, Pedido y Categoría, con sus respectivos atributos y relaciones 1:N y N:M."]
+> [Descripción opcional: Ej: "El diagrama muestra las 3 entidades principales: Usuario, Nutrición y Entrenamiento, con sus respectivos atributos y relaciones 1:N y N:M."]
 
 ### **Diagrama de Clases y Templates**
 
