@@ -12,6 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ import es.codeurjc.daw.powergym.repository.UserRepository;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;
 import es.codeurjc.daw.powergym.service.TrainingService;
 import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.PdfExportService;
 
 @Controller
 public class TrainingController {
@@ -46,6 +50,9 @@ public class TrainingController {
 
 	@Autowired
 	private TrainingRepository trainingRepository;
+
+	@Autowired
+	private PdfExportService pdfExportService;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -108,6 +115,23 @@ public class TrainingController {
 				: "/assets/images/no_image.png");
 		item.put("detailsUrl", "/trainings/" + training.getId());
 		return item;
+	}
+
+	@GetMapping("/trainings/{id}/pdf")
+	public ResponseEntity<byte[]> downloadTrainingPdf(@PathVariable long id) {
+
+		Optional<Training> training = trainingService.findById(id);
+		if (training.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		byte[] pdf = pdfExportService.buildTrainingPdf(training.get());
+		String fileName = "training-" + id + ".pdf";
+
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_PDF)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.body(pdf);
 	}
 
 	@GetMapping("/trainings/{id}")

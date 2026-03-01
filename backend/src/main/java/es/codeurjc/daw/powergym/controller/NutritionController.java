@@ -12,6 +12,9 @@ import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ import es.codeurjc.daw.powergym.repository.UserRepository;
 import es.codeurjc.daw.powergym.repository.NutritionRepository;
 import es.codeurjc.daw.powergym.service.NutritionService;
 import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.PdfExportService;
 
 @Controller
 public class NutritionController {
@@ -46,6 +50,9 @@ public class NutritionController {
 
 	@Autowired
 	private NutritionRepository nutritionRepository;
+
+	@Autowired
+	private PdfExportService pdfExportService;
 
 	@ModelAttribute
 	public void addAttributes(Model model, HttpServletRequest request) {
@@ -108,6 +115,23 @@ public class NutritionController {
 				: "/assets/images/no_image.png");
 		item.put("detailsUrl", "/nutritions/" + nutrition.getId());
 		return item;
+	}
+
+	@GetMapping("/nutritions/{id}/pdf")
+	public ResponseEntity<byte[]> downloadNutritionPdf(@PathVariable long id) {
+
+		Optional<Nutrition> nutrition = nutritionService.findById(id);
+		if (nutrition.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
+
+		byte[] pdf = pdfExportService.buildNutritionPdf(nutrition.get());
+		String fileName = "nutrition-" + id + ".pdf";
+
+		return ResponseEntity.ok()
+				.contentType(MediaType.APPLICATION_PDF)
+				.header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"")
+				.body(pdf);
 	}
 
 	@GetMapping("/nutritions/{id}")
