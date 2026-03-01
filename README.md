@@ -1,4 +1,4 @@
-# [PowerGym]
+# PowerGym
 
 ## 👥 Miembros del Equipo
 | Nombre y Apellidos | Correo URJC | Usuario GitHub |
@@ -64,51 +64,109 @@ Añadiremos las siguientes tecnologías complementarias:
 
 ---
 
-## 🛠 **Preparación 2: Maquetación de páginas con HTML y CSS**
-
-### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
-> Vídeo mostrando las principales funcionalidades de la aplicación web.
-
-### **Diagrama de Navegación**
-Diagrama que muestra cómo se navega entre las diferentes páginas de la aplicación:
-
-![Diagrama de Navegación](images/navigation-diagram.png)
-
-> [Descripción opcional del flujo de navegación: Ej: "El usuario puede acceder desde la página principal a todas las secciones mediante el menú de navegación. Los usuarios anónimos solo tienen acceso a las páginas públicas, mientras que los registrados pueden acceder a su perfil y panel de usuario."]
-
-### **Capturas de Pantalla y Descripción de Páginas**
-
-#### **1. Página Principal / Home**
-![Página Principal](images/home-page.png)
-
-> [Descripción breve: Ej: "Página de inicio que muestra los productos destacados, categorías principales y un banner promocional. Incluye barra de navegación y acceso a registro/login para usuarios no autenticados."]
-
-#### **AQUÍ AÑADIR EL RESTO DE PÁGINAS**
-
----
-
 ## 🛠 **Práctica 1: Web con HTML generado en servidor y AJAX**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://www.youtube.com/watch?v=x91MPoITQ3I)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/CbPh8-VOIcY)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Navegación y Capturas de Pantalla**
+## 💻 Pantallas
+
+## Pantalla de Inicio:
+Esta es la página de inicio de nuestra aplicación web, con un diseño moderno y atractivo. En el centro vemos información clave sobre el gimnasio, como su dirección, datos de contacto y horario de apertura. Incluye un menú de navegación para acceder a las opciones de entrenamiento, nutrición, registro e inicio de sesión.
+
+<img width="1606" height="879" alt="localhost_8443_ (1)" src="https://github.com/user-attachments/assets/fd5c8e3e-d9ad-45b9-81fd-0fc2588c3da3" />
+
+## Pantalla de Registro: 
+Esta página corresponde al registro de usuarios de PowerGym. Cuenta con un sencillo formulario para crear una cuenta, en el que se solicita el nombre, la dirección de correo electrónico y la contraseña.
+
+<img width="1606" height="879" alt="localhost_8443_register" src="https://github.com/user-attachments/assets/6f3faf1e-c0e0-4968-82c9-d563a1844e5a" />
+
+## Pantalla de Inicio de Sesión: 
+Esta página corresponde a la pantalla de inicio de sesión de PowerGym. Cuenta con un formulario en el que los usuarios pueden introducir su nombre de usuario (prefijo de correo electrónico) y contraseña para acceder a su cuenta.
+
+<img width="1606" height="879" alt="localhost_8443_login" src="https://github.com/user-attachments/assets/d086c8dc-22fa-4e65-977e-a807d23f400b" />
+
+## Pantalla de Perfil: 
+Esta página corresponde a la sección del perfil de usuario de PowerGym. Permite a los usuarios ver y actualizar su información personal, incluyendo la posibilidad de subir una imagen de perfil y editar datos como su nombre y correo electrónico.
+
+<img width="1606" height="879" alt="localhost_8443_profileUser" src="https://github.com/user-attachments/assets/f44080b0-5770-4223-87a1-01c51f8b99e8" />
+
+## Pantalla de Progreso: 
+Esta página corresponde a la sección My Progress de PowerGym. En ella, el usuario puede visualizar un resumen de su actividad, incluyendo entrenamientos y planes de nutrición suscritos, tiempo promedio de entrenamiento y calorías promedio consumidas. Además, muestra un indicador de consistencia con nivel actual y porcentaje de avance, junto con un gráfico que permite visualizar el progreso general.
+
+<img width="1606" height="879" alt="localhost_8443_progress" src="https://github.com/user-attachments/assets/68d2d8c1-c04d-4d2d-8e47-5046c9dcb815" />
+
+## Pantalla de Nutriciones: 
+Esta página corresponde a la pantalla Planes de nutrición de PowerGym. Muestra diferentes opciones de dieta, cada una presentada en formato de tarjeta con una imagen y una breve descripción de las comidas incluidas. Los usuarios pueden ver los detalles clave de las comidas y hacer clic en el botón «Más información» para obtener más detalles sobre cada plan de nutrición.
+
+<img width="1606" height="879" alt="localhost_8443_nutritions" src="https://github.com/user-attachments/assets/948f9e5a-1623-4da6-8a10-841d2c14e16b" />
+
+## Pantalla de Detalles de Nutrición: 
+Esta página corresponde a la pantalla Detalles nutricionales de PowerGym. Proporciona información detallada sobre un plan de dieta seleccionado, incluyendo su nombre, el total de calorías diarias y el objetivo principal. La página también muestra una imagen representativa y un desglose de las comidas del día, lo que permite a los usuarios revisar el plan nutricional completo.
+
+<img width="1606" height="879" alt="localhost_8443_nutritions_1" src="https://github.com/user-attachments/assets/6037d1f1-cfd0-4051-94ef-10a9b268c375" />
+
+## Pantalla de Creación de Nutrición:
+Esta página corresponde a la pantalla Crear nueva nutrición en PowerGym. Proporciona un formulario en el que los usuarios pueden cargar una imagen de nutrición e introducir datos clave como el nombre de la nutrición, las calorías totales (kcal), el objetivo y una descripción de las comidas incluidas en el plan.
+
+<img width="1606" height="879" alt="localhost_8443_createNutrition" src="https://github.com/user-attachments/assets/7331967a-0f61-4938-8756-8ee3d05002b6" />
+
+## Pantalla de Edición de Nutrición:
+Esta página corresponde a la pantalla de edición de una nutrición en PowerGym. Incluye un formulario donde se pueden modificar el nombre del plan, las calorías, el objetivo nutricional y las comidas que lo componen. A la izquierda se muestra una imagen representativa del plan alimenticio que también se puede editar.
+
+<img width="1606" height="879" alt="localhost_8443_editNutrition_1" src="https://github.com/user-attachments/assets/632e0131-a6bc-4f50-bb25-27dbd7bdcaa2" />
+
+## Pantalla de Entrenamientos: 
+Esta página corresponde a la sección Training Plans de PowerGym. En ella se muestran distintos planes de entrenamiento organizados en tarjetas, cada uno con una breve descripción de los ejercicios incluidos. Cada plan cuenta con una imagen representativa y un botón de “More info” para consultar más detalles.
+
+<img width="1606" height="879" alt="localhost_8443_trainings" src="https://github.com/user-attachments/assets/4026f55e-815a-442c-a03c-fd313a5a91a3" />
+
+## Pantalla de Detalles de Entrenamiento:
+Esta página corresponde a la sección Training Details de PowerGym. En ella se muestran los detalles específicos de un plan de entrenamiento seleccionado, incluyendo su imagen representativa, nombre, duración y objetivo. También se presenta la lista de ejercicios que componen la rutina.
+
+<img width="1606" height="879" alt="localhost_8443_trainings_1" src="https://github.com/user-attachments/assets/9229d8bf-a05c-419c-b7ce-fb75cfd69b4b" />
+
+## Pantalla de Creación de Entrenamiento:
+Esta página corresponde a la pantalla de creación de un nuevo entrenamiento de PowerGym. Presenta un formulario donde el usuario puede introducir el nombre del entrenamiento, la duración en minutos y el objetivo, además de describir los ejercicios que lo componen. También permite adjuntar una imagen representativa del entrenamiento.
+
+<img width="1606" height="879" alt="localhost_8443_createTraining" src="https://github.com/user-attachments/assets/95cb25fe-438e-445e-ae3a-aff35b89e217" />
+
+## Pantalla de Edición de Entrenamiento: 
+Esta página corresponde a la pantalla de edición de un entrenamiento en PowerGym. Permite modificar el nombre del entrenamiento, la duración en minutos, el objetivo y los ejercicios que lo componen. A la izquierda se muestra una imagen representativa del entrenamiento seleccionado que también se puede editar.
+
+<img width="1606" height="879" alt="localhost_8443_editTraining_1" src="https://github.com/user-attachments/assets/a7d6e3e0-f96a-4bd0-b88c-87795c6a9416" />
+
+## Pantalla de Listado de Usuarios: 
+Esta página corresponde a la sección de Gestión de Usuarios de PowerGym. Muestra un listado de usuarios registrados en el sistema, donde cada administrador dispone de un botón para acceder a los perfiles. Desde esta pantalla, el administrador puede consultar la información individual de cada usuario de forma rápida y sencilla. 
+
+<img width="1606" height="879" alt="localhost_8443_admin_users" src="https://github.com/user-attachments/assets/18c08c61-d875-426c-b7c9-cd9d54e09f04" />
+
+## Pantalla de Información de Usuarios:
+Esta página corresponde a la pantalla de Información Usuario de PowerGym. Muestra la información detallada del usuario seleccionado, incluyendo nombre, nombre de usuario, correo electrónico y rol asignado dentro del sistema. Los datos se presentan en tarjetas informativas organizadas de forma clara para facilitar su consulta. Desde aquí el admin puede visualizar la información personal y los permisos asociados a cada usuario.
+
+<img width="1606" height="879" alt="localhost_8443_admin_users_1" src="https://github.com/user-attachments/assets/0e5a99a2-115e-4b55-9ef9-733798e56663" />
+
+## Pantalla de Error: 
+Esta página corresponde a la pantalla de error del sistema de PowerGym. Muestra un mensaje indicando un error, junto con una breve descripción técnica del problema ocurrido. Además, incluye un botón para regresar a la página principal y continuar navegando por la aplicación. Su objetivo es informar al usuario de que se ha producido un fallo interno en el servidor.
+
+<img width="1606" height="879" alt="localhost_8443_nutritions_10" src="https://github.com/user-attachments/assets/84eb1a77-355d-4263-8798-7f582c5271f1" />
 
 #### **Diagrama de Navegación**
+- **Azul**: Todos los usuarios.
+- **Verde**: Usuario registrado y admin.
+- **Rojo**: Solo admin.
+- **Nota**: Desde todas las páginas se puede acceder a la pantalla de error.
 
-Solo si ha cambiado.
+<img width="1164" height="811" alt="image" src="https://github.com/user-attachments/assets/8e4fd618-c950-49c7-8973-940a2790201c" />
 
-#### **Capturas de Pantalla Actualizadas**
-
-Solo si han cambiado.
 
 ### **Instrucciones de Ejecución**
 
 #### **Requisitos Previos**
 - **Java**: versión 21 o superior
-- **Maven**: versión 3.8 o superior
+- **Maven**: versión 3.9 o superior
 - **MySQL**: versión 8.0 o superior
 - **Git**: para clonar el repositorio
 
@@ -116,11 +174,27 @@ Solo si han cambiado.
 
 1. **Clonar el repositorio**
    ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16.git
+   cd practica-daw-2025-26-grupo-16/backend
    ```
 
-2. **AQUÍ INDICAR LO SIGUIENTES PASOS**
+2. **Configurar la Base de Datos**
+   La aplicación está configurada para conectarse con la siguiente información:
+   - Base de datos: DAW16
+   - Usuario: root
+   - Contraseña: Daw2026
+   - Puerto: 3306
+     
+3. **Construir el proyecto**
+   Desde la carpeta backend se debe ejecutar:
+   mvn clean install
+   
+4. **Ejecutar la aplicación**
+   En el IDE ejecutar la clase Application
+
+5. **Acceder a la aplicación**
+   Desde el navegador buscar:
+   https://localhost:8443
 
 #### **Credenciales de prueba**
 - **Usuario Admin**: usuario: `admin`, contraseña: `admin`
