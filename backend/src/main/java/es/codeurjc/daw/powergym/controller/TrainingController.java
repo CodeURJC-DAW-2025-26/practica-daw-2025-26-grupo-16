@@ -3,11 +3,15 @@ package es.codeurjc.daw.powergym.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.model.Training;
@@ -27,6 +32,8 @@ import es.codeurjc.daw.powergym.service.ImageService;
 
 @Controller
 public class TrainingController {
+
+	private static final int TRAININGS_PAGE_SIZE = 6;
 
 	@Autowired
 	private TrainingService trainingService;
@@ -58,10 +65,49 @@ public class TrainingController {
 
 	@GetMapping("/trainings")
 	public String showTrainings(Model model) {
+		Page<Training> firstPage = trainingService.findPage(0, TRAININGS_PAGE_SIZE);
 
-		model.addAttribute("trainings", trainingService.findAll());
+		model.addAttribute("trainings", firstPage.getContent());
+		model.addAttribute("trainingsPageSize", TRAININGS_PAGE_SIZE);
+		model.addAttribute("hasMoreTrainings", firstPage.hasNext());
 
 		return "trainings";
+	}
+
+	@GetMapping("/trainings/page")
+	@ResponseBody
+	public Map<String, Object> getTrainingsPage(
+			@RequestParam(defaultValue = "1") int page,
+			@RequestParam(defaultValue = "6") int size) {
+
+		int safePage = Math.max(page, 0);
+		int safeSize = Math.max(size, 1);
+		Page<Training> trainingsPage = trainingService.findPage(safePage, safeSize);
+
+		List<Map<String, Object>> items = trainingsPage
+				.getContent()
+				.stream()
+				.map(this::toTrainingCardData)
+				.toList();
+
+		Map<String, Object> response = new HashMap<>();
+		response.put("items", items);
+		response.put("hasMore", trainingsPage.hasNext());
+		response.put("nextPage", safePage + 1);
+
+		return response;
+	}
+
+	private Map<String, Object> toTrainingCardData(Training training) {
+		Map<String, Object> item = new HashMap<>();
+		item.put("id", training.getId());
+		item.put("name", training.getName());
+		item.put("description", training.getDescription());
+		item.put("imageUrl", training.getImage() != null
+				? "/images/" + training.getId()
+				: "/assets/images/no_image.png");
+		item.put("detailsUrl", "/trainings/" + training.getId());
+		return item;
 	}
 
 	@GetMapping("/trainings/{id}")

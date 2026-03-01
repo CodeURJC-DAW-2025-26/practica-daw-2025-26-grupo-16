@@ -3,7 +3,7 @@
 <main class="container nutrition-page">
 	<h2 class="text-center mt-5 mb-4">Nutrition Plans</h2>
 	<br />
-	<div class="grid grid-3">
+	<div id="nutritionsGrid" class="grid grid-3">
 		{{#nutritions}}
 		<div class="card">
 			<div class="card-header">{{name}}</div>
@@ -28,7 +28,16 @@
 
 	<div class="btn-row" style="justify-content: center; margin-top: 2rem;">
 		<div class="btn-btn primary">
-			<button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+			<button
+				id="loadMoreBtn"
+				class="btn btn-primary"
+				data-endpoint="/nutritions/page"
+				data-page-size="{{nutritionsPageSize}}"
+				data-next-page="1"
+				{{^hasMoreNutritions}}style="display: none;"{{/hasMoreNutritions}}
+			>
+				Load More
+			</button>
 		</div>
 
 		{{#logged}}
@@ -38,5 +47,7 @@
 		{{/logged}}
 	</div>
 </main>
+
+<script src="/js/load-more.js"></script>
 
 {{>footer}}

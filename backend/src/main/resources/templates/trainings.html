@@ -3,7 +3,7 @@
 <div class="container mt-4 mb-5 nutrition-page">
 	<h2 class="text-center mt-5 mb-4">Training Plans</h2>
 
-	<div class="grid grid-3">
+	<div id="trainingsGrid" class="grid grid-3">
 		{{#trainings}}
 		<div class="card">
 			<div class="card-header">{{name}}</div>
@@ -27,7 +27,16 @@
 
 	<div class="btn-row" style="justify-content: center; margin-top: 2rem;">
 		<div class="btn-btn primary">
-			<button id="loadMoreBtn" class="btn btn-primary">Load More</button>
+			<button
+				id="loadMoreBtn"
+				class="btn btn-primary"
+				data-endpoint="/trainings/page"
+				data-page-size="{{trainingsPageSize}}"
+				data-next-page="1"
+				{{^hasMoreTrainings}}style="display: none;"{{/hasMoreTrainings}}
+			>
+				Load More
+			</button>
 		</div>
 
 		{{#logged}}
@@ -37,5 +46,7 @@
 		{{/logged}}
 	</div>
 </div>
+
+<script src="/js/load-more.js"></script>
 
 {{>footer}}

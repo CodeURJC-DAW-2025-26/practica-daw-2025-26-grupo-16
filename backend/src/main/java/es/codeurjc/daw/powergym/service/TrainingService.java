@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
@@ -27,6 +31,11 @@ public class TrainingService {
 
     public List<Training> findAll() {
         return repository.findAll();
+    }
+
+    public Page<Training> findPage(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+        return repository.findAll(pageable);
     }
 
     public void save(Training training) {

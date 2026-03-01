@@ -50,6 +50,7 @@ public class WebSecurityConfig {
 						.requestMatchers("/nutritions/**").permitAll()
 						.requestMatchers("/assets/**").permitAll() // Allow access to static resources
 						.requestMatchers("/css/**").permitAll()
+						.requestMatchers("/js/**").permitAll()
 						.requestMatchers("/favicon.ico").permitAll()
 						.requestMatchers("/register").permitAll()
 						// PRIVATE PAGES
