@@ -230,17 +230,16 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Laura Pineda Ballesteros**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Add nutrition related pages + mustache](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/0db6bfb33fd49f9575d2f67c4d4b024a300929d7)   | [NutritionWebController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/NutritionWebController.java)   |
+|2| [Add nutrition and dating CRUD + logging in](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/31db6f46b3b36485b996a5841ac7d54d7d49efe5)  | [TrainingWebController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingWebController.java)   |
+|3| [Add load more ajax logic](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/237238d10b8689429f3130c1dea0586bd5e4b5d0)  | [TrainingWebController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingWebController.java)   |
+|4| [Add admin list of users](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/e5f59ca635cc31460400b459900054973f542e09)  | [UserWebController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/UserWebController.java)   |
+|5| [Add generate pdf](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/22e8eff7a0d643af7c92e0ea913b4770a17e0b50)  | [TrainingController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingController.java)   |
 
 ---
 
