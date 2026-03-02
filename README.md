@@ -212,9 +212,8 @@ Diagrama mostrando las entidades, sus campos y relaciones:
 
 Diagrama de clases de la aplicación con diferenciación por colores o secciones:
 
-![Diagrama de Clases](images/classes-diagram.png)
+<img width="1235" height="640" alt="image" src="https://github.com/user-attachments/assets/ab85297d-927b-456a-8469-92ed87fed977" />
 
-> [Descripción opcional del diagrama y relaciones principales]
 
 ### **Participación de Miembros en la Práctica 1**
 
