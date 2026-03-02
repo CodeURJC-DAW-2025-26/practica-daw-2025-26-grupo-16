@@ -217,17 +217,16 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 ### **Participación de Miembros en la Práctica 1**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Adrián Esteban Martín**
 
-[Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Add subscription implementation](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/e905d1528ca89a22db8ea9d862194ddd0c11c337)  | [UserWebController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/UserWebController.java)   |
+|2| [Implementation of the registration function](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/990c5d5b24efa51192de4c70577cc4cdaa2afdfe)  | [NutritionController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/NutritionController.java)   |
+|3| [Fix generation pdf](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/d7ebaee900f6ef4bb0f662ed0c583bdb085755af)  | [TrainingController](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingController.java)   |
+|4| [Implement object owner based acces control](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/a04599c896b3af1493e158131e6b836a76eb6da6)  | [Nutrition](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/model/Nutrition.java)   |
+|5| [Ability to edit profile](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/b209f38e64ae900d0cd1236aaea4db550b6bed98)  | [Training](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/model/Training.java)   |
 
 ---
 
