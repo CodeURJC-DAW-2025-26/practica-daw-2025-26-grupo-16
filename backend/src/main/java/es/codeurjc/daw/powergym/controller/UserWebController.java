@@ -208,30 +208,6 @@ public class UserWebController {
 		return "progress";
 	}
 
-    /*@GetMapping("/profile")
-    public String profile(Model model, Principal principal) {
-        if (principal == null) {
-            return "redirect:/login";
-        }
-
-        Optional<User> optUser = userRepository.findByName(principal.getName());
-        if (optUser.isEmpty()) {
-            return "redirect:/login";
-        }
-        User user = optUser.get();
-
-        // Load owned items using new owner-based service methods
-        String displayName = user.getFullName() != null && !user.getFullName().isBlank()
-                ? user.getFullName()
-                : user.getName();
-        model.addAttribute("name", displayName);
-        model.addAttribute("email", user.getEmail() != null ? user.getEmail() : "");
-        model.addAttribute("roles", user.getRoles());
-        // Use existing profileUser template with owned items treated as subscriptions for now
-        model.addAttribute("subscribedTrainings", trainingService.findByOwner(user));
-        model.addAttribute("subscribedNutritions", nutritionService.findByOwner(user));
-        return "profileUser";    }*/
-
 	@GetMapping("/admin/users")
 	public String adminUsers(Model model) {
 		List<Map<String, Object>> usersView = new ArrayList<>();
