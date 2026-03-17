@@ -10,7 +10,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;
@@ -19,43 +18,43 @@ import es.codeurjc.daw.powergym.repository.TrainingRepository;
 public class TrainingService {
 
 	@Autowired
-	private TrainingRepository repository;
+	private TrainingRepository trainingRepository;
 
 	public Optional<Training> findById(long id) {
-		return repository.findById(id);
+		return trainingRepository.findById(id);
 	}
 	
 	public boolean exist(long id) {
-		return repository.existsById(id);
+		return trainingRepository.existsById(id);
 	}
 
     public List<Training> findAll() {
-        return repository.findAll();
+        return trainingRepository.findAll();
     }
 
     public Page<Training> findPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
-        return repository.findAll(pageable);
+        return trainingRepository.findAll(pageable);
     }
 
     public void save(Training training) {
-        repository.save(training);
+        trainingRepository.save(training);
     }
 
     public void delete(long id) {
-        repository.deleteById(id);
+        trainingRepository.deleteById(id);
     }
 
     public List<Training> findBySubscriber(User user) {
-        return repository.findBySubscribersContains(user);
+        return trainingRepository.findBySubscribersContains(user);
     }
 
     // Owner-based retrieval: trainings owned by a user
     public List<Training> findByOwner(User user) {
-        return repository.findByUser(user);
+        return trainingRepository.findByUser(user);
     }
 
     public Optional<Training> findByIdWithUser(long id) {
-		return repository.findWithUserById(id);
+		return trainingRepository.findWithUserById(id);
 	}
 }

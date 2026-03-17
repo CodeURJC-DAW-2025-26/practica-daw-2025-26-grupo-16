@@ -35,8 +35,13 @@ public class WebSecurityConfig {
 
 		http.authenticationProvider(authenticationProvider());
 
+		http.csrf(csrf -> csrf.disable());
+
 		http
 				.authorizeHttpRequests(authorize -> authorize
+
+						.requestMatchers("/api/**").permitAll()
+
 						// PUBLIC PAGES
 						.requestMatchers("/").permitAll()
 						.requestMatchers("/login").permitAll()

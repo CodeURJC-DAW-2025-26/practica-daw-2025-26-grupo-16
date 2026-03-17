@@ -8,5 +8,7 @@ import es.codeurjc.daw.powergym.model.User;
 public interface UserMapper {
 
     UserDTO toDTO(User user);
+
+    User toEntity(UserDTO userDTO);
     
 }

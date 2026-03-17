@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.UserRepository;
 
