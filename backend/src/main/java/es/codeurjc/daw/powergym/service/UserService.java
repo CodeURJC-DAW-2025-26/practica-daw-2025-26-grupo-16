@@ -34,4 +34,9 @@ public class UserService {
 	public void delete(long id) {
 		repository.deleteById(id);
 	}
+
+	public User findByName(String name) {
+		return repository.findByName(name)
+			.orElseThrow(() -> new RuntimeException("User not found"));
+	}
 }

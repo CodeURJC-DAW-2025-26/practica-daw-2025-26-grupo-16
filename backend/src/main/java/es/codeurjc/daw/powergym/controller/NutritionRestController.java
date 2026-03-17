@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,8 +25,10 @@ import es.codeurjc.daw.powergym.dto.NutritionMapper;
 import es.codeurjc.daw.powergym.dto.ImageDTO;
 import es.codeurjc.daw.powergym.dto.ImageMapper;
 import es.codeurjc.daw.powergym.model.Nutrition;
+import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.service.NutritionService;
+import es.codeurjc.daw.powergym.service.UserService;
 import es.codeurjc.daw.powergym.service.ImageService;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
@@ -36,6 +40,9 @@ public class NutritionRestController {
 
 	@Autowired
 	private NutritionService nutritionService;
+
+	@Autowired
+	private UserService userRepository;
 
 	@Autowired
 	private ImageService imageService;
@@ -62,12 +69,22 @@ public class NutritionRestController {
 	public ResponseEntity<NutritionDTO> createNutrition(@RequestBody NutritionDTO nutritionDTO) {
 
 		Nutrition nutrition = nutritionMapper.toDomain(nutritionDTO);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userRepository.findByName(username);
+
+		nutrition.setUser(user);
+
 		nutrition = nutritionService.createNutrition(nutrition);
-		nutritionDTO = nutritionMapper.toDTO(nutrition);
 
-		URI location = fromCurrentRequest().path("/{id}").buildAndExpand(nutritionDTO.id()).toUri();
+		NutritionDTO dto = nutritionMapper.toDTO(nutrition);
 
-		return ResponseEntity.created(location).body(nutritionDTO);
+		URI location = fromCurrentRequest().path("/{id}")
+			.buildAndExpand(dto.id()).toUri();
+
+		return ResponseEntity.created(location).body(dto);
 	}
 
 	@PutMapping("/{id}")

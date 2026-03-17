@@ -3,93 +3,127 @@ package es.codeurjc.daw.powergym.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import es.codeurjc.daw.powergym.security.jwt.JwtTokenProvider;
+import es.codeurjc.daw.powergym.security.jwt.UnauthorizedHandlerJwt;
+import es.codeurjc.daw.powergym.security.jwt.JwtRequestFilter;
 
 @Configuration
-@EnableWebSecurity
 public class WebSecurityConfig {
 
-	@Autowired
-	RepositoryUserDetailsService userDetailsService;
+    @Autowired
+    public RepositoryUserDetailsService userDetailsService;
 
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
+    @Autowired
+    private JwtTokenProvider jwtTokenProvider;
 
-	@Bean
-	public DaoAuthenticationProvider authenticationProvider() {
-		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
-		authProvider.setPasswordEncoder(passwordEncoder());
+    @Autowired
+    private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
 
 		return authProvider;
-	}
+    }
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+        return authConfig.getAuthenticationManager();
+    }
 
-		http.authenticationProvider(authenticationProvider());
+    @Bean
+    @Order(1)
+    public SecurityFilterChain apiFilterChain(HttpSecurity http) throws Exception {
 
-		http.csrf(csrf -> csrf.disable());
+        http.authenticationProvider(authenticationProvider());
 
-		http
-				.authorizeHttpRequests(authorize -> authorize
+        http
+            .securityMatcher("/api/**")
+            .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
 
-						.requestMatchers("/api/**").permitAll()
+        http.authorizeHttpRequests(authorize -> authorize
+            .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasRole("USER")
+            .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasRole("ADMIN")
+            .anyRequest().permitAll()
+        );
 
-						// PUBLIC PAGES
-						.requestMatchers("/").permitAll()
-						.requestMatchers("/login").permitAll()
-						.requestMatchers("/loginerror").permitAll()
-						.requestMatchers("/error").permitAll()
-						.requestMatchers("/images/**").permitAll()
-						.requestMatchers("/books/**").permitAll()
-						.requestMatchers("/trainings").permitAll()
-						.requestMatchers("/trainings/**").permitAll()
-						.requestMatchers("/nutritions").permitAll()
-						.requestMatchers("/nutritions/**").permitAll()
-						.requestMatchers("/assets/**").permitAll() // Allow access to static resources
-						.requestMatchers("/css/**").permitAll()
-						.requestMatchers("/js/**").permitAll()
-						.requestMatchers("/favicon.ico").permitAll()
-						.requestMatchers("/register").permitAll()
-						// PRIVATE PAGES
-						.requestMatchers("/createTraining/**").hasAnyRole("USER")
-						.requestMatchers("/editTraining").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/editTraining/**").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/deleteTraining/**").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/subscribeTraining/**").hasAnyRole("USER")
-						.requestMatchers("/unsubscribeTraining/**").hasAnyRole("USER")
-						.requestMatchers("/createNutrition/**").hasAnyRole("USER")
-						.requestMatchers("/editNutrition").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/editNutrition/**").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/deleteNutrition/**").hasAnyRole("ADMIN", "USER")
-						.requestMatchers("/subscribeNutrition/**").hasAnyRole("USER")
-						.requestMatchers("/unsubscribeNutrition/**").hasAnyRole("USER")
-						.requestMatchers("/progress").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/profileUser").hasAnyRole("USER")
-                        .requestMatchers("/profile").hasAnyRole("USER","ADMIN")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-						.requestMatchers("/admin/users/**").hasAnyRole("ADMIN")
-						.requestMatchers("/newbook").hasAnyRole("USER")
-						.requestMatchers("/editbook").hasAnyRole("USER")
-						.requestMatchers("/editbook/**").hasAnyRole("USER")
-						.requestMatchers("/removebook/**").hasAnyRole("ADMIN"))
-				.formLogin(formLogin -> formLogin
-						.loginPage("/login")
-						.failureUrl("/loginerror")
-						.defaultSuccessUrl("/")
-						.permitAll())
-				.logout(logout -> logout
-						.logoutUrl("/logout")
-						.logoutSuccessUrl("/")
-						.permitAll());
+        http.formLogin(form -> form.disable());
+        http.httpBasic(httpBasic -> httpBasic.disable());
 
-		return http.build();
-	}
+        http.csrf(csrf -> csrf.disable());
+
+        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+
+        http.addFilterBefore(new JwtRequestFilter(userDetailsService, jwtTokenProvider),
+                UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
+
+
+    @Bean
+    @Order(2)
+    public SecurityFilterChain webFilterChain(HttpSecurity http) throws Exception {
+
+        http.authenticationProvider(authenticationProvider());
+
+        http.authorizeHttpRequests(authorize -> authorize
+            // PUBLIC PAGES
+            .requestMatchers("/", "/login", "/loginerror", "/register").permitAll()
+            .requestMatchers("/images/**", "/books/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
+            // PRIVATE PAGES
+            .requestMatchers("/createTraining/**").hasAnyRole("USER")
+            .requestMatchers("/editTraining").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/editTraining/**").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/deleteTraining/**").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/subscribeTraining/**").hasAnyRole("USER")
+            .requestMatchers("/unsubscribeTraining/**").hasAnyRole("USER")
+            .requestMatchers("/createNutrition/**").hasAnyRole("USER")
+            .requestMatchers("/editNutrition").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/editNutrition/**").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/deleteNutrition/**").hasAnyRole("ADMIN", "USER")
+            .requestMatchers("/subscribeNutrition/**").hasAnyRole("USER")
+            .requestMatchers("/unsubscribeNutrition/**").hasAnyRole("USER")
+            .requestMatchers("/progress").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/profileUser").hasAnyRole("USER")
+            .requestMatchers("/profile").hasAnyRole("USER","ADMIN")
+            .requestMatchers("/admin/**").hasRole("ADMIN")
+            .requestMatchers("/admin/users/**").hasAnyRole("ADMIN")
+            .requestMatchers("/newbook").hasAnyRole("USER")
+            .requestMatchers("/editbook").hasAnyRole("USER")
+            .requestMatchers("/editbook/**").hasAnyRole("USER")
+            .requestMatchers("/removebook/**").hasAnyRole("ADMIN")
+            .anyRequest().authenticated()
+        )
+        .formLogin(form -> form
+            .loginPage("/login")
+            .failureUrl("/loginerror")
+            .defaultSuccessUrl("/")
+            .permitAll())
+        .logout(logout -> logout
+            .logoutUrl("/logout")
+            .logoutSuccessUrl("/")
+            .permitAll());
+
+        return http.build();
+    }
 }

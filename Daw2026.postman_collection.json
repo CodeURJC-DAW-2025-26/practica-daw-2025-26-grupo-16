@@ -1,0 +1,57 @@
+{
+  "info": {
+    "_postman_id": "cd0e99cf-f87e-4eaf-bb30-c77602b5b4cf",
+    "name": "Daw2026",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "43131633"
+  },
+  "item": [
+    {
+      "name": "Images",
+      "item": [
+        {
+          "name": "Get Image",
+          "request": {
+            "method": "GET",
+            "header": []
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Nutritions",
+      "item": [
+        {
+          "name": "Get Nutritions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://localhost:8443/api/nutritions/",
+              "protocol": "https",
+              "host": [
+                "localhost"
+              ],
+              "port": "8443",
+              "path": [
+                "api",
+                "nutritions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Trainings",
+      "item": []
+    },
+    {
+      "name": "Users",
+      "item": []
+    }
+  ]
+}

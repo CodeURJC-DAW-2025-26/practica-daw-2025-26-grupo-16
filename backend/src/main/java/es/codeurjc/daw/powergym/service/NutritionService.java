@@ -23,6 +23,9 @@ public class NutritionService {
 	@Autowired
 	private NutritionRepository nutritionRepository;
 
+	@Autowired
+	private UserService userRepository;
+
 	public Optional<Nutrition> findById(long id) {
 		return nutritionRepository.findById(id);
 	}
@@ -77,9 +80,14 @@ public class NutritionService {
 			throw new IllegalArgumentException();
 		}
 
-		nutritionRepository.save(nutrition);
+		Long userId = nutrition.getUser().getId();
 
-		return nutrition;
+		User user = userRepository.findById(userId)
+			.orElseThrow(() -> new RuntimeException("User not found"));
+
+		nutrition.setUser(user);
+
+		return nutritionRepository.save(nutrition);
 	}
 
 	public Nutrition replaceNutrition(long id, Nutrition updatedNutrition) throws SQLException {
