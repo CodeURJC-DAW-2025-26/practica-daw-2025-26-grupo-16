@@ -1,7 +1,10 @@
 package es.codeurjc.daw.powergym.security.jwt;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
+import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -11,16 +14,29 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.springframework.http.MediaType;
+
 @Component
 public class UnauthorizedHandlerJwt implements AuthenticationEntryPoint {
 
   private static final Logger logger = LoggerFactory.getLogger(UnauthorizedHandlerJwt.class);
 
-  @Override
-  public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
-      throws IOException {
-    logger.info("Unauthorized error: {}", authException.getMessage());
+  @Override  
+  public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {    
+    logger.error("Unauthorized error: {}", authException.getMessage());  
 
-    response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "message: %s, path: %s".formatted(authException.getMessage(), request.getServletPath()));
+    response.setContentType(MediaType.APPLICATION_JSON_VALUE);    
+    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);    
+
+    final Map<String, Object> body = new HashMap<>();    
+    body.put("status", HttpServletResponse.SC_UNAUTHORIZED);    
+    body.put("error", "Unauthorized");    
+    body.put("message", authException.getMessage());    
+    body.put("path", request.getServletPath());    
+    
+    final ObjectMapper mapper = new ObjectMapper();    
+    mapper.writeValue(response.getOutputStream(), body);  
   }
 }

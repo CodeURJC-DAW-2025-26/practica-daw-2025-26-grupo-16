@@ -112,6 +112,11 @@ public class WebSecurityConfig {
             .requestMatchers("/editbook").hasAnyRole("USER")
             .requestMatchers("/editbook/**").hasAnyRole("USER")
             .requestMatchers("/removebook/**").hasAnyRole("ADMIN")
+            .requestMatchers(
+                "/v3/api-docs/**",
+                "/swagger-ui/**",
+                "/swagger-ui.html"
+            ).permitAll()
             .anyRequest().authenticated()
         )
         .formLogin(form -> form

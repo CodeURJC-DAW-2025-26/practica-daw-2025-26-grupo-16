@@ -19,6 +19,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import es.codeurjc.daw.powergym.dto.NutritionDTO;
 import es.codeurjc.daw.powergym.dto.NutritionMapper;
@@ -53,11 +59,33 @@ public class NutritionRestController {
 	@Autowired
 	private ImageMapper imageMapper;
 
+	@Operation(summary = "Get all nutritions")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Found all nutritions", content = {
+                @Content(mediaType = "application/json", schema = @Schema(implementation = Nutrition.class))}),
+            @ApiResponse(responseCode = "400", description = "Bad request - Invalid parametes", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized access - Authentication is required", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Forbidden - You don't have permission to access", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Nutritions not found", content = @Content),
+            @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
+
 	@GetMapping("/")
 	public Collection<NutritionDTO> getNutritions() {
 
 		return nutritionMapper.toDTOs(nutritionService.getNutritions());
 	}
+
+	@Operation(summary = "Get a nutrition by ID")
+    @ApiResponses(value = {
+        @ApiResponse(responseCode = "200", description = "Nutrition found", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = NutritionDTO.class))}),
+        @ApiResponse(responseCode = "400", description = "Bad request - Invalid parameters", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized access - Authentication is required", content = @Content),
+        @ApiResponse(responseCode = "403", description = "Forbidden - You don't have permission to access", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Nutrition not found", content = @Content),
+        @ApiResponse(responseCode = "500", description = "Internal server error", content = @Content)
+    })
 
 	@GetMapping("/{id}")
 	public NutritionDTO getNutrition(@PathVariable long id) {
@@ -66,7 +94,7 @@ public class NutritionRestController {
 	}
 
 	@PostMapping("/")
-	public ResponseEntity<NutritionDTO> createNutrition(@RequestBody NutritionDTO nutritionDTO) {
+	public ResponseEntity<NutritionDTO> createNutrition(@Valid @RequestBody NutritionDTO nutritionDTO) {
 
 		Nutrition nutrition = nutritionMapper.toDomain(nutritionDTO);
 
@@ -91,6 +119,14 @@ public class NutritionRestController {
 	public NutritionDTO replaceNutrition(@PathVariable long id, @RequestBody NutritionDTO updatedNutritionDTO) throws SQLException {
 
 		Nutrition updatedNutrition = nutritionMapper.toDomain(updatedNutritionDTO);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userRepository.findByName(username);
+
+		updatedNutrition.setUser(user);
+
 		updatedNutrition = nutritionService.replaceNutrition(id, updatedNutrition);
 		return nutritionMapper.toDTO(updatedNutrition);
 	}
