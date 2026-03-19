@@ -5,7 +5,10 @@ import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
 import java.util.Collection;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.Authentication;
@@ -71,9 +74,12 @@ public class NutritionRestController {
     })
 
 	@GetMapping("/")
-	public Collection<NutritionDTO> getNutritions() {
+	public List<NutritionDTO> getNutritions(
+			@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "6") int size) {
 
-		return nutritionMapper.toDTOs(nutritionService.getNutritions());
+		Page<Nutrition> nutritionsPage = nutritionService.findPage(page, size);
+		return nutritionsPage.stream().map(nutritionMapper::toDTO).toList();
 	}
 
 	@Operation(summary = "Get a nutrition by ID")

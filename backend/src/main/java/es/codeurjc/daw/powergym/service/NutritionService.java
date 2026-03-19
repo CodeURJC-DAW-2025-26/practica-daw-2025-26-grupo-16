@@ -40,7 +40,7 @@ public class NutritionService {
 	}
 
 	public Page<Nutrition> findPage(int page, int size) {
-		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+		Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
 		return nutritionRepository.findAll(pageable);
 	}
 

@@ -33,7 +33,7 @@ public class TrainingService {
     }
 
     public Page<Training> findPage(int page, int size) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "id"));
+        Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.ASC, "id"));
         return trainingRepository.findAll(pageable);
     }
 
