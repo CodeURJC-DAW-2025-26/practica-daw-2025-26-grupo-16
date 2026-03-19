@@ -10,7 +10,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 
-@Entity(name = "UserTable")
+@Entity(name = "User")
 public class User {
 
 	@Id

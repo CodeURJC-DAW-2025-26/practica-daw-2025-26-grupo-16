@@ -1,11 +1,12 @@
 package es.codeurjc.daw.powergym.controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import es.codeurjc.daw.powergym.dto.ImageDTO;
 import es.codeurjc.daw.powergym.dto.UserDTO;
 import es.codeurjc.daw.powergym.dto.UserMapper;
 import es.codeurjc.daw.powergym.model.User;
@@ -17,35 +18,48 @@ public class UserRestController {
 
     private final UserService userService;
     private final UserMapper userMapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserRestController(UserService userService, UserMapper userMapper) {
+    public UserRestController(UserService userService, UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.userMapper = userMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    @GetMapping
+    @GetMapping("/")
     public List<UserDTO> getUsers() {
         return userService.findAll()
                 .stream()
-                .map(userMapper::toDTO)
-                .collect(Collectors.toList());
+                .map(userMapper::toDTOWithoutPassword)
+                .toList();
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> getUser(@PathVariable long id) {
         return userService.findById(id)
-                .map(user -> ResponseEntity.ok(userMapper.toDTO(user)))
+                .map(user -> ResponseEntity.ok(userMapper.toDTOWithoutPassword(user)))
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<UserDTO> createUser(@RequestBody UserDTO dto) {
 
+        
         User user = userMapper.toEntity(dto);
+        user.setEncodedPassword(passwordEncoder.encode(user.getEncodedPassword()));
 
-        userService.save(user);
+        User saved = userService.save(user);
 
-        return ResponseEntity.ok(userMapper.toDTO(user));
+        UserDTO responseDto = new UserDTO(
+            saved.getId(),
+            saved.getName(),
+            saved.getEmail(),
+            dto.password(), 
+            saved.getRoles(),
+            saved.getImage() != null ? new ImageDTO(saved.getImage().getId()) : null
+        );
+
+        return ResponseEntity.ok(responseDto);
     }
 
     @PutMapping("/{id}")
@@ -54,7 +68,7 @@ public class UserRestController {
         return userService.findById(id).map(user -> {
 
             user.setName(dto.name());
-            user.setRoles(dto.roles());
+            user.setEmail(dto.email());
 
             userService.save(user);
 
@@ -64,13 +78,16 @@ public class UserRestController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable long id) {
+    public ResponseEntity<UserDTO> deleteUser(@PathVariable long id) {
 
-        if (!userService.exist(id)) {
-            return ResponseEntity.notFound().build();
-        }
+        return userService.findById(id).map(user -> {
 
-        userService.delete(id);
-        return ResponseEntity.noContent().build();
+            UserDTO userDTO = userMapper.toDTOWithoutPassword(user);
+
+            userService.delete(id);
+
+            return ResponseEntity.ok(userDTO); 
+
+        }).orElse(ResponseEntity.notFound().build());
     }
 }

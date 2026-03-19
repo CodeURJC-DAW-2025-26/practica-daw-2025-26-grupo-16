@@ -106,10 +106,10 @@ public class UserWebController {
 		}
 
 		String loginName = username;
-		int at = loginName.indexOf('@');
+		/*int at = loginName.indexOf('@');
 		if (at > 0) {
 			loginName = loginName.substring(0, at);
-		}
+		}*/
 
 		if (userRepository.findByName(loginName).isPresent()) {
 			model.addAttribute("error", "User already exists");

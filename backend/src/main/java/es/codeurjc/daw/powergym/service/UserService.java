@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.model.User;
@@ -13,30 +14,36 @@ import es.codeurjc.daw.powergym.repository.UserRepository;
 public class UserService {
 
 	@Autowired
-	private UserRepository repository;
+	private UserRepository userRepository;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public Optional<User> findById(long id) {
-		return repository.findById(id);
+		return userRepository.findById(id);
 	}
 	
 	public boolean exist(long id) {
-		return repository.existsById(id);
+		return userRepository.existsById(id);
 	}
 
 	public List<User> findAll() {
-		return repository.findAll();
+		return userRepository.findAll();
 	}
 
-	public void save(User user) {
-		repository.save(user);
+	public User save(User user) {
+
+		return userRepository.save(user);
 	}
 
 	public void delete(long id) {
-		repository.deleteById(id);
+		userRepository.deleteById(id);
 	}
 
 	public User findByName(String name) {
-		return repository.findByName(name)
+		return userRepository.findByName(name)
 			.orElseThrow(() -> new RuntimeException("User not found"));
 	}
+
+
 }
