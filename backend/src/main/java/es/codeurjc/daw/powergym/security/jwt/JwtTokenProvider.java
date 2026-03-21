@@ -26,19 +26,12 @@ public class JwtTokenProvider {
 		if (bearerToken == null || !bearerToken.startsWith("Bearer ")) {
             return null;
         }
-		// if (bearerToken == null) {
-		// 	throw new IllegalArgumentException("Missing Authorization header");
-		// }
-		// if(!bearerToken.startsWith("Bearer ")){
-		// 	throw new IllegalArgumentException("Authorization header does not start with Bearer: " + bearerToken);
-		// }
 		return bearerToken.substring(7);
 	}
 
 	private String tokenStringFromCookies(HttpServletRequest request) {
 		var cookies = request.getCookies();
 		if (cookies == null) {
-			// throw new IllegalArgumentException("No cookies found in request");
 			return null;
 		}
 
@@ -53,7 +46,6 @@ public class JwtTokenProvider {
 			}
 		}
 		return null;
-		// throw new IllegalArgumentException("No access token cookie found in request");
 	}
 
 	public Claims validateToken(HttpServletRequest req, boolean fromCookie){

@@ -56,8 +56,7 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http
-            // .securityMatcher("/api/**")
-            .securityMatcher("/api/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html")
+        .securityMatcher("/api/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html")
         .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
         
         http.authorizeHttpRequests(authorize -> authorize
@@ -100,11 +99,7 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests(authorize -> authorize
-            // .requestMatchers(
-            //     "/v3/api-docs/**",
-            //     "/swagger-ui/**",
-            //     "/swagger-ui.html"
-            // ).permitAll()            // PUBLIC PAGES
+            // PUBLIC PAGES
             .requestMatchers("/", "/login", "/loginerror", "/register").permitAll()
             .requestMatchers("/images/**", "/books/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
             // PRIVATE PAGES
