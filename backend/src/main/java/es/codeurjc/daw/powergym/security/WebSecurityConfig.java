@@ -17,6 +17,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import es.codeurjc.daw.powergym.security.jwt.JwtTokenProvider;
 import es.codeurjc.daw.powergym.security.jwt.UnauthorizedHandlerJwt;
+import es.codeurjc.daw.powergym.security.jwt.ForbiddenHandlerJwt;
 import es.codeurjc.daw.powergym.security.jwt.JwtRequestFilter;
 
 @Configuration
@@ -30,6 +31,10 @@ public class WebSecurityConfig {
 
     @Autowired
     private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
+
+    @Autowired
+    private ForbiddenHandlerJwt forbiddenHandlerJwt;
+    
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,21 +62,24 @@ public class WebSecurityConfig {
 
         http
         .securityMatcher("/api/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html")
-        .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+        .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt).accessDeniedHandler(forbiddenHandlerJwt));
         
         http.authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
             .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/users/").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
 
             .requestMatchers(HttpMethod.GET, "/api/nutritions/**").permitAll()
-
-            .requestMatchers(HttpMethod.POST, "/api/nutritions/**").hasRole("USER")
+            .requestMatchers(HttpMethod.POST, "/api/nutritions/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.PUT, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
 
-            .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasRole("USER")
+            .requestMatchers(HttpMethod.GET, "/api/trainings/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasAnyRole("USER","ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasAnyRole("USER","ADMIN")
 

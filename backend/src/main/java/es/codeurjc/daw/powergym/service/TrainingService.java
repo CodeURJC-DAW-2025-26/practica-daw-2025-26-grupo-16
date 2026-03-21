@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.exception.NotFoundException;
 import es.codeurjc.daw.powergym.model.Image;
-import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;

@@ -4,7 +4,6 @@ package es.codeurjc.daw.powergym.controller;
 import java.io.IOException;
 import java.net.URI;
 import java.sql.SQLException;
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

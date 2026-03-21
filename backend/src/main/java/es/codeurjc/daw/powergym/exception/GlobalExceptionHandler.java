@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Map<String,Object>> handleValidation(MethodArgumentNotValidException ex) {
         Map<String,Object> errors = new HashMap<>();
         errors.put("status", 400);
-        errors.put("error", "Bad Request");
+        errors.put("error", "Bad Request - Invalid parameters");
         errors.put("messages", ex.getBindingResult()
             .getFieldErrors()
             .stream()
