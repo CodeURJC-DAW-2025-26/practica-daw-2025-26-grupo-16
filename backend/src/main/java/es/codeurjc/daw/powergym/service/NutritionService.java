@@ -12,7 +12,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import es.codeurjc.daw.powergym.exception.NutritionNotFoundException;
+import es.codeurjc.daw.powergym.exception.NotFoundException;
 import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.User;
@@ -72,7 +72,7 @@ public class NutritionService {
 
 	public Nutrition getNutrition(long id) {
 
-		return nutritionRepository.findById(id).orElseThrow(NutritionNotFoundException::new);
+		return nutritionRepository.findById(id).orElseThrow(NotFoundException::new);
 	}
 
 	public Nutrition createNutrition(Nutrition nutrition) {

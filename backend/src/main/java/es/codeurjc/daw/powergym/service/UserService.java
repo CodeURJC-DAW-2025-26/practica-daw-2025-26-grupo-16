@@ -40,8 +40,8 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 
-	public User findByName(String name) {
-		return userRepository.findByName(name)
+	public User findByEmail(String name) {
+		return userRepository.findByEmail(name)
 			.orElseThrow(() -> new RuntimeException("User not found"));
 	}
 

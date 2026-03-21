@@ -56,14 +56,27 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http
-            .securityMatcher("/api/**")
-            .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
-
+            // .securityMatcher("/api/**")
+            .securityMatcher("/api/**", "/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html")
+        .exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+        
         http.authorizeHttpRequests(authorize -> authorize
+            .requestMatchers("/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html").permitAll()
+
+            .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/users").permitAll()
+
+            .requestMatchers(HttpMethod.GET, "/api/nutritions/**").permitAll()
+
+            .requestMatchers(HttpMethod.POST, "/api/nutritions/**").hasRole("USER")
+            .requestMatchers(HttpMethod.PUT, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
+
             .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasRole("USER")
-            .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasRole("ADMIN")
-            .anyRequest().permitAll()
+            .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasAnyRole("USER","ADMIN")
+
+            .anyRequest().authenticated()
         );
 
         http.formLogin(form -> form.disable());
@@ -87,7 +100,11 @@ public class WebSecurityConfig {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests(authorize -> authorize
-            // PUBLIC PAGES
+            // .requestMatchers(
+            //     "/v3/api-docs/**",
+            //     "/swagger-ui/**",
+            //     "/swagger-ui.html"
+            // ).permitAll()            // PUBLIC PAGES
             .requestMatchers("/", "/login", "/loginerror", "/register").permitAll()
             .requestMatchers("/images/**", "/books/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
             // PRIVATE PAGES

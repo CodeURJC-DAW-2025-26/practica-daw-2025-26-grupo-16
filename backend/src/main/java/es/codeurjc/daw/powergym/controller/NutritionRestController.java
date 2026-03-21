@@ -51,7 +51,7 @@ public class NutritionRestController {
 	private NutritionService nutritionService;
 
 	@Autowired
-	private UserService userRepository;
+	private UserService userService;
 
 	@Autowired
 	private ImageService imageService;
@@ -106,8 +106,9 @@ public class NutritionRestController {
 
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
+		System.out.println("Authenticated username: " + username);
 
-		User user = userRepository.findByName(username);
+		User user = userService.findByEmail(username);
 
 		nutrition.setUser(user);
 
@@ -129,7 +130,7 @@ public class NutritionRestController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String username = auth.getName();
 
-		User user = userRepository.findByName(username);
+		User user = userService.findByEmail(username);
 
 		updatedNutrition.setUser(user);
 

@@ -14,8 +14,8 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(NutritionNotFoundException.class)
-    public ResponseEntity<Object> handleNotFound(NutritionNotFoundException ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Object> handleNotFound(NotFoundException ex) {
 
         Map<String, Object> body = new HashMap<>();
         body.put("status", 404);
