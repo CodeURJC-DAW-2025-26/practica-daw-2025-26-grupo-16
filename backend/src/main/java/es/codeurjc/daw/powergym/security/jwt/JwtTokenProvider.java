@@ -23,19 +23,23 @@ public class JwtTokenProvider {
 
 	public String tokenStringFromHeaders(HttpServletRequest req){
 		String bearerToken = req.getHeader(HttpHeaders.AUTHORIZATION);
-		if (bearerToken == null) {
-			throw new IllegalArgumentException("Missing Authorization header");
-		}
-		if(!bearerToken.startsWith("Bearer ")){
-			throw new IllegalArgumentException("Authorization header does not start with Bearer: " + bearerToken);
-		}
+		if (bearerToken == null || !bearerToken.startsWith("Bearer ")) {
+            return null;
+        }
+		// if (bearerToken == null) {
+		// 	throw new IllegalArgumentException("Missing Authorization header");
+		// }
+		// if(!bearerToken.startsWith("Bearer ")){
+		// 	throw new IllegalArgumentException("Authorization header does not start with Bearer: " + bearerToken);
+		// }
 		return bearerToken.substring(7);
 	}
 
 	private String tokenStringFromCookies(HttpServletRequest request) {
 		var cookies = request.getCookies();
 		if (cookies == null) {
-			throw new IllegalArgumentException("No cookies found in request");
+			// throw new IllegalArgumentException("No cookies found in request");
+			return null;
 		}
 
 		for (Cookie cookie : cookies) {
@@ -48,17 +52,26 @@ public class JwtTokenProvider {
 				return accessToken;
 			}
 		}
-		throw new IllegalArgumentException("No access token cookie found in request");
+		return null;
+		// throw new IllegalArgumentException("No access token cookie found in request");
 	}
 
 	public Claims validateToken(HttpServletRequest req, boolean fromCookie){
 		var token = fromCookie?
 				tokenStringFromCookies(req):
 				tokenStringFromHeaders(req);
+
+		if (token == null) {
+            return null;
+        }
+				
 		return validateToken(token);
 	}
 
 	public Claims validateToken(String token) {
+		if (token == null || token.isBlank()) {
+            return null;
+        }
 		return jwtParser.parseSignedClaims(token).getPayload();
 	}
 

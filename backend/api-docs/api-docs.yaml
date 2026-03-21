@@ -1,0 +1,761 @@
+openapi: 3.1.0
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: https://localhost:8443
+  description: Generated server url
+paths:
+  /api/users/{id}:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+    put:
+      tags:
+      - user-rest-controller
+      operationId: updateUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+    delete:
+      tags:
+      - user-rest-controller
+      operationId: deleteUser
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/trainings/{id}:
+    get:
+      tags:
+      - training-rest-controller
+      operationId: getTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+    put:
+      tags:
+      - training-rest-controller
+      operationId: replaceTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+    delete:
+      tags:
+      - training-rest-controller
+      operationId: deleteTraining
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+  /api/nutritions/{id}:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get a nutrition by ID
+      operationId: getNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: Nutrition found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+        "400":
+          description: Bad request - Invalid parameters
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Nutrition not found
+        "500":
+          description: Internal server error
+    put:
+      tags:
+      - nutrition-rest-controller
+      operationId: replaceNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+    delete:
+      tags:
+      - nutrition-rest-controller
+      operationId: deleteNutrition
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+  /api/images/{id}/media:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImageFile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+    put:
+      tags:
+      - image-rest-controller
+      operationId: replaceImageFile
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+  /api/users/:
+    get:
+      tags:
+      - user-rest-controller
+      operationId: getUsers
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/UserDTO"
+    post:
+      tags:
+      - user-rest-controller
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/UserDTO"
+  /api/trainings/{id}/images/:
+    post:
+      tags:
+      - training-rest-controller
+      operationId: createTrainingImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/trainings/:
+    get:
+      tags:
+      - training-rest-controller
+      operationId: getTrainings
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 6
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TrainingDTO"
+    post:
+      tags:
+      - training-rest-controller
+      operationId: createTraining
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TrainingDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/TrainingDTO"
+  /api/nutritions/{id}/images/:
+    post:
+      tags:
+      - nutrition-rest-controller
+      operationId: createNutritionImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                imageFile:
+                  type: string
+                  format: binary
+              required:
+              - imageFile
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/nutritions/:
+    get:
+      tags:
+      - nutrition-rest-controller
+      summary: Get all nutritions
+      operationId: getNutritions
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 0
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 6
+      responses:
+        "200":
+          description: Found all nutritions
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Nutrition"
+        "400":
+          description: Bad request - Invalid parametes
+        "401":
+          description: Unauthorized access - Authentication is required
+        "403":
+          description: Forbidden - You don't have permission to access
+        "404":
+          description: Nutritions not found
+        "500":
+          description: Internal server error
+    post:
+      tags:
+      - nutrition-rest-controller
+      operationId: createNutrition
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/NutritionDTO"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/NutritionDTO"
+  /api/auth/refresh:
+    post:
+      tags:
+      - login-controller
+      operationId: refreshToken
+      parameters:
+      - name: RefreshToken
+        in: cookie
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/logout:
+    post:
+      tags:
+      - login-controller
+      operationId: logOut
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /api/auth/login:
+    post:
+      tags:
+      - login-controller
+      operationId: login
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginRequest"
+        required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /trainings/page:
+    get:
+      tags:
+      - training-controller
+      operationId: getTrainingsPage
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 6
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /nutritions/page:
+    get:
+      tags:
+      - nutrition-controller
+      operationId: getNutritionsPage
+      parameters:
+      - name: page
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 1
+      - name: size
+        in: query
+        required: false
+        schema:
+          type: integer
+          format: int32
+          default: 6
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: object
+                additionalProperties:
+                  type: object
+  /api/images/{id}:
+    get:
+      tags:
+      - image-rest-controller
+      operationId: getImage
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/trainings/{trainingId}/images/{imageId}:
+    delete:
+      tags:
+      - training-rest-controller
+      operationId: deleteTrainingImage
+      parameters:
+      - name: trainingId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+  /api/nutritions/{nutritionId}/images/{imageId}:
+    delete:
+      tags:
+      - nutrition-rest-controller
+      operationId: deleteNutritionImage
+      parameters:
+      - name: nutritionId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      - name: imageId
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int64
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ImageDTO"
+components:
+  schemas:
+    ImageDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+    UserDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+        image:
+          $ref: "#/components/schemas/ImageDTO"
+    TrainingDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        goal:
+          type: string
+        time:
+          type: integer
+          format: int32
+        image:
+          $ref: "#/components/schemas/ImageDTO"
+        userId:
+          type: integer
+          format: int64
+      required:
+      - name
+    NutritionDTO:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        goal:
+          type: string
+        calories:
+          type: integer
+          format: int32
+        image:
+          $ref: "#/components/schemas/ImageDTO"
+        userId:
+          type: integer
+          format: int64
+      required:
+      - name
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          enum:
+          - SUCCESS
+          - FAILURE
+        message:
+          type: string
+        error:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    Image:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        imageFile:
+          type: object
+          properties:
+            binaryStream:
+              type: object
+    Nutrition:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        description:
+          type: string
+        goal:
+          type: string
+        calories:
+          type: integer
+          format: int32
+        image:
+          $ref: "#/components/schemas/Image"
+        user:
+          $ref: "#/components/schemas/User"
+        subscribers:
+          type: array
+          items:
+            $ref: "#/components/schemas/User"
+          uniqueItems: true
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+        name:
+          type: string
+        email:
+          type: string
+        fullName:
+          type: string
+        encodedPassword:
+          type: string
+        image:
+          $ref: "#/components/schemas/Image"
+        roles:
+          type: array
+          items:
+            type: string
