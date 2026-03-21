@@ -7,6 +7,7 @@ import java.util.List;
 import jakarta.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ import es.codeurjc.daw.powergym.repository.TrainingRepository;
 import es.codeurjc.daw.powergym.repository.UserRepository;
 
 @Service
+@ConditionalOnProperty(name = "app.seed.enabled", havingValue = "true", matchIfMissing = true)
 public class DatabaseInitializer {
 
 	@Autowired
