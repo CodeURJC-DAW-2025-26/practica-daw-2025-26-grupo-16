@@ -13,7 +13,7 @@ import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.service.UserService;
 
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping("/api/v1/users")
 public class UserRestController {
 
     private final UserService userService;

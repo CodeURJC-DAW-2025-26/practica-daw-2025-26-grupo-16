@@ -30,7 +30,7 @@ import es.codeurjc.daw.powergym.service.UserService;
 import jakarta.validation.Valid;
 
 @RestController
-@RequestMapping("/api/trainings")
+@RequestMapping("/api/v1/trainings")
 public class TrainingRestController {
 
     @Autowired

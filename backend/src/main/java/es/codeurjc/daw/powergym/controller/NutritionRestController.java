@@ -44,7 +44,7 @@ import static org.springframework.web.servlet.support.ServletUriComponentsBuilde
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
 
 @RestController
-@RequestMapping("/api/nutritions")
+@RequestMapping("/api/v1/nutritions")
 public class NutritionRestController {
 
 	@Autowired

@@ -21,7 +21,7 @@ import es.codeurjc.daw.powergym.dto.ImageMapper;
 import es.codeurjc.daw.powergym.service.ImageService;
 
 @RestController
-@RequestMapping("/api/images")
+@RequestMapping("/api/v1/images")
 public class ImageRestController {
 
     @Autowired
