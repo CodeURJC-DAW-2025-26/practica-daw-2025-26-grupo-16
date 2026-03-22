@@ -10,6 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.exception.NotFoundException;
@@ -93,7 +96,10 @@ public class NutritionService {
 
 	public Nutrition replaceNutrition(long id, Nutrition updatedNutrition) throws SQLException {
 
-		Nutrition oldNutrition = nutritionRepository.findById(id).orElseThrow();
+		Nutrition oldNutrition = nutritionRepository.findById(id).orElseThrow(NotFoundException::new);
+
+		checkOwnerOrAdmin(oldNutrition);
+
 		updatedNutrition.setId(id);
 
 		if (oldNutrition.getImage() != null) {
@@ -108,7 +114,9 @@ public class NutritionService {
 
 	public Nutrition deleteNutrition(long id) {
 
-		Nutrition nutrition = nutritionRepository.findById(id).orElseThrow();
+		Nutrition nutrition = nutritionRepository.findById(id).orElseThrow(NotFoundException::new);
+
+		checkOwnerOrAdmin(nutrition);
 
 		nutritionRepository.deleteById(id);
 
@@ -130,4 +138,17 @@ public class NutritionService {
 
 		return nutrition;
 	}
+
+	private void checkOwnerOrAdmin(Nutrition nutrition) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!isAdmin && !nutrition.getUser().getEmail().equals(username)) {
+            throw new AccessDeniedException("You are not the owner of this nutrition plan or an administrator.");
+        }
+    }
 }

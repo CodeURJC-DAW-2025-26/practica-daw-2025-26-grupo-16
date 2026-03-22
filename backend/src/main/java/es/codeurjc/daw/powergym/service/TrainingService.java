@@ -10,10 +10,14 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import es.codeurjc.daw.powergym.exception.NotFoundException;
 import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.repository.TrainingRepository;
@@ -93,7 +97,10 @@ public class TrainingService {
 
 	public Training replaceTraining(long id, Training updatedTraining) throws SQLException {
 
-		Training oldTraining = trainingRepository.findById(id).orElseThrow();
+		Training oldTraining = trainingRepository.findById(id).orElseThrow(NotFoundException::new);
+
+		checkOwnerOrAdmin(oldTraining);
+
 		updatedTraining.setId(id);
 
 		if (oldTraining.getImage() != null) {
@@ -108,7 +115,9 @@ public class TrainingService {
 
 	public Training deleteTraining(long id) {
 
-		Training training = trainingRepository.findById(id).orElseThrow();
+		Training training = trainingRepository.findById(id).orElseThrow(NotFoundException::new);
+
+		checkOwnerOrAdmin(training);
 
 		trainingRepository.deleteById(id);
 
@@ -130,4 +139,17 @@ public class TrainingService {
 
 		return training;
 	}
+
+	private void checkOwnerOrAdmin(Training training) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+
+        boolean isAdmin = auth.getAuthorities().stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (!isAdmin && !training.getUser().getEmail().equals(username)) {
+            throw new AccessDeniedException("You are not the owner of this training plan or an administrator.");
+        }
+    }
 }
