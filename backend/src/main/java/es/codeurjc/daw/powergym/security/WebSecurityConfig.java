@@ -77,11 +77,13 @@ public class WebSecurityConfig {
             .requestMatchers(HttpMethod.POST, "/api/nutritions/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.PUT, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/nutritions/*/pdf").hasAnyRole("USER","ADMIN")
 
             .requestMatchers(HttpMethod.GET, "/api/trainings/**").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasAnyRole("USER","ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/trainings/*/pdf").hasAnyRole("USER","ADMIN")
 
             .anyRequest().authenticated()
         );

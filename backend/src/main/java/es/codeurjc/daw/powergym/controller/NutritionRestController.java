@@ -38,6 +38,7 @@ import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.service.NutritionService;
 import es.codeurjc.daw.powergym.service.UserService;
 import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.PdfExportService;
 
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentContextPath;
 import static org.springframework.web.servlet.support.ServletUriComponentsBuilder.fromCurrentRequest;
@@ -60,6 +61,9 @@ public class NutritionRestController {
 
 	@Autowired
 	private ImageMapper imageMapper;
+
+	@Autowired
+	private PdfExportService pdfExportService;
 
 	@Operation(summary = "Get all nutritions")
     @ApiResponses(value = {
@@ -171,5 +175,21 @@ public class NutritionRestController {
 		imageService.deleteImage(imageId);
 
 		return imageMapper.toDTO(image);
+	}
+
+	@GetMapping("/{id}/pdf")
+	public ResponseEntity<byte[]> downloadNutritionPdf(@PathVariable long id) {
+
+		Nutrition nutrition = nutritionService.getNutrition(id); 
+
+		byte[] pdf = pdfExportService.buildNutritionPdf(nutrition);
+
+		String fileName = "nutrition-" + id + ".pdf";
+
+		return ResponseEntity.ok()
+				.contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + fileName + "\"")
+				.body(pdf);
 	}
 }

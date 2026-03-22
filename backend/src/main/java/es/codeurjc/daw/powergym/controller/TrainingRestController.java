@@ -24,6 +24,7 @@ import es.codeurjc.daw.powergym.model.Image;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.service.ImageService;
+import es.codeurjc.daw.powergym.service.PdfExportService;
 import es.codeurjc.daw.powergym.service.TrainingService;
 import es.codeurjc.daw.powergym.service.UserService;
 import jakarta.validation.Valid;
@@ -46,6 +47,9 @@ public class TrainingRestController {
 
 	@Autowired
 	private ImageMapper imageMapper;
+
+	@Autowired
+	private PdfExportService pdfExportService;
 
     @GetMapping("/")
 	public List<TrainingDTO> getTrainings(
@@ -134,5 +138,21 @@ public class TrainingRestController {
 		imageService.deleteImage(imageId);
 
 		return imageMapper.toDTO(image);
+	}
+
+	@GetMapping("/{id}/pdf")
+	public ResponseEntity<byte[]> downloadTrainingPdf(@PathVariable long id) {
+
+		Training training = trainingService.getTraining(id);
+
+		byte[] pdf = pdfExportService.buildTrainingPdf(training);
+
+		String fileName = "training-" + id + ".pdf";
+
+		return ResponseEntity.ok()
+				.contentType(org.springframework.http.MediaType.APPLICATION_PDF)
+				.header(org.springframework.http.HttpHeaders.CONTENT_DISPOSITION,
+						"attachment; filename=\"" + fileName + "\"")
+				.body(pdf);
 	}
 }
