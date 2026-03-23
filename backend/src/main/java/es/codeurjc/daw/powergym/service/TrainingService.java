@@ -140,7 +140,7 @@ public class TrainingService {
 		return training;
 	}
 
-	private void checkOwnerOrAdmin(Training training) {
+	public void checkOwnerOrAdmin(Training training) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();

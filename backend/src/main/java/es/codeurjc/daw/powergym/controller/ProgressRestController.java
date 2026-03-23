@@ -17,7 +17,7 @@ import es.codeurjc.daw.powergym.service.TrainingService;
 import es.codeurjc.daw.powergym.service.UserService;
 
 @RestController
-@RequestMapping("/api/progress")
+@RequestMapping("/api/v1/progress")
 public class ProgressRestController {
 
     private final TrainingService trainingService;

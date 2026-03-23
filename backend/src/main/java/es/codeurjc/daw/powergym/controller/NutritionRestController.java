@@ -151,6 +151,10 @@ public class NutritionRestController {
 	public ResponseEntity<ImageDTO> createNutritionImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
 			throws IOException {
 
+		Nutrition nutrition = nutritionService.getNutrition(id);
+
+		nutritionService.checkOwnerOrAdmin(nutrition);
+
 		if (imageFile.isEmpty()) {
 			throw new IllegalArgumentException("Image file cannot be empty");
 		}
@@ -166,15 +170,41 @@ public class NutritionRestController {
 		return ResponseEntity.created(location).body(imageMapper.toDTO(image));
 	}
 
-	@DeleteMapping("/{nutritionId}/images/{imageId}")
-	public ImageDTO deleteNutritionImage(@PathVariable long nutritionId, @PathVariable long imageId)
-			throws IOException {
+	@DeleteMapping("/{nutritionId}/images/")
+	public ImageDTO deleteNutritionImage(@PathVariable long nutritionId) throws IOException {
 
-		Image image = imageService.getImage(imageId);
+		Nutrition nutrition = nutritionService.getNutrition(nutritionId);
+
+		nutritionService.checkOwnerOrAdmin(nutrition);
+
+		Image image = nutrition.getImage();
+
+		if(image == null){
+			throw new IllegalArgumentException("No image associated with this nutrition");
+		}
+
 		nutritionService.removeImageFromNutrition(nutritionId);
-		imageService.deleteImage(imageId);
+
+		imageService.deleteImage(image.getId());
 
 		return imageMapper.toDTO(image);
+	}
+
+	@PutMapping("/{id}/images")
+	public ResponseEntity<ImageDTO> replaceNutritionImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+
+		Nutrition nutrition = nutritionService.getNutrition(id);
+
+		nutritionService.checkOwnerOrAdmin(nutrition);
+
+		if (nutrition.getImage() != null) {
+			imageService.replaceImageFile(nutrition.getImage().getId(), imageFile.getInputStream());
+			return ResponseEntity.ok(imageMapper.toDTO(nutrition.getImage()));
+		} else {
+			Image newImage = imageService.createImage(imageFile.getInputStream());
+			nutritionService.addImageToNutrition(id, newImage);
+			return ResponseEntity.ok(imageMapper.toDTO(newImage));
+		}
 	}
 
 	@GetMapping("/{id}/pdf")
