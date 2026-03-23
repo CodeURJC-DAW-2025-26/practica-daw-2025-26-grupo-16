@@ -110,6 +110,38 @@ public class TrainingRestController {
 		return trainingMapper.toDTO(trainingService.deleteTraining(id));
 	}
 
+	@PostMapping("/{id}/subscribe")
+	public TrainingDTO subscribeTraining(@PathVariable long id) {
+
+		Training training = trainingService.getTraining(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userService.findByEmail(username);
+
+		training.getSubscribers().add(user);
+		trainingService.save(training);
+
+		return trainingMapper.toDTO(training);
+	}
+
+	@DeleteMapping("/{id}/subscribe")
+	public TrainingDTO unsubscribeTraining(@PathVariable long id) {
+
+		Training training = trainingService.getTraining(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userService.findByEmail(username);
+
+		training.getSubscribers().remove(user);
+		trainingService.save(training);
+
+		return trainingMapper.toDTO(training);
+	}
+
 	@PostMapping("/{id}/images/")
 	public ResponseEntity<ImageDTO> createTrainingImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
 			throws IOException {

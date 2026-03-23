@@ -147,6 +147,38 @@ public class NutritionRestController {
 		return nutritionMapper.toDTO(nutritionService.deleteNutrition(id));
 	}
 
+	@PostMapping("/{id}/subscribe")
+	public NutritionDTO subscribeNutrition(@PathVariable long id) {
+
+		Nutrition nutrition = nutritionService.getNutrition(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userService.findByEmail(username);
+
+		nutrition.getSubscribers().add(user);
+		nutritionService.save(nutrition);
+
+		return nutritionMapper.toDTO(nutrition);
+	}
+
+	@DeleteMapping("/{id}/subscribe")
+	public NutritionDTO unsubscribeNutrition(@PathVariable long id) {
+
+		Nutrition nutrition = nutritionService.getNutrition(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String username = auth.getName();
+
+		User user = userService.findByEmail(username);
+
+		nutrition.getSubscribers().remove(user);
+		nutritionService.save(nutrition);
+
+		return nutritionMapper.toDTO(nutrition);
+	}
+
 	@PostMapping("/{id}/images/")
 	public ResponseEntity<ImageDTO> createNutritionImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
 			throws IOException {
