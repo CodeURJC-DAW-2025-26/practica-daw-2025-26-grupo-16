@@ -111,7 +111,7 @@ public class UserWebController {
 			loginName = loginName.substring(0, at);
 		}*/
 
-		if (userRepository.findByName(loginName).isPresent()) {
+		if (userRepository.findByEmail(loginName).isPresent()) {
 			model.addAttribute("error", "User already exists");
 			return "register";
 		}
@@ -136,7 +136,7 @@ public class UserWebController {
 		model.addAttribute("name", principal.getName());
 		model.addAttribute("email", "");
 
-		userRepository.findByName(principal.getName()).ifPresent(user -> {
+		userRepository.findByEmail(principal.getName()).ifPresent(user -> {
 			String displayName = user.getFullName() != null && !user.getFullName().isBlank()
 					? user.getFullName()
 					: user.getName();
@@ -158,7 +158,7 @@ public class UserWebController {
 			return "redirect:/login";
 		}
 
-		Optional<User> optUser = userRepository.findByName(principal.getName());
+		Optional<User> optUser = userRepository.findByEmail(principal.getName());
 		if (optUser.isEmpty()) {
 			return "redirect:/login";
 		}
@@ -253,7 +253,7 @@ public class UserWebController {
 			return "redirect:/login";
 		}
 
-		var optUser = userRepository.findByName(principal.getName());
+		var optUser = userRepository.findByEmail(principal.getName());
 		if (optUser.isEmpty()) {
 			return "redirect:/login";
 		}
@@ -269,7 +269,7 @@ public class UserWebController {
 				loginName = loginName.substring(0, at);
 			}
 
-			if (!loginName.equals(principal.getName()) && userRepository.findByName(loginName).isPresent()) {
+			if (!loginName.equals(principal.getName()) && userRepository.findByEmail(loginName).isPresent()) {
 				model.addAttribute("error", "The username derived from the new email is already in use");
 				return profileUser(model, principal, null);
 			}
