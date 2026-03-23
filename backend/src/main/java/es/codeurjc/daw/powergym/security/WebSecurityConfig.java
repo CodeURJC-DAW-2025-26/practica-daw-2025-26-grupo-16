@@ -110,8 +110,9 @@ public class WebSecurityConfig {
 
         http.authorizeHttpRequests(authorize -> authorize
             // PUBLIC PAGES
-            .requestMatchers("/", "/login", "/loginerror", "/register").permitAll()
-            .requestMatchers("/images/**", "/books/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
+            .requestMatchers("/", "/login", "/loginerror", "/register", "/error").permitAll()
+            .requestMatchers("/trainings", "/trainings/**", "/nutritions", "/nutritions/**").permitAll()
+            .requestMatchers("/images/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
             // PRIVATE PAGES
             .requestMatchers("/createTraining/**").hasAnyRole("USER")
             .requestMatchers("/editTraining").hasAnyRole("ADMIN", "USER")
@@ -130,10 +131,6 @@ public class WebSecurityConfig {
             .requestMatchers("/profile").hasAnyRole("USER","ADMIN")
             .requestMatchers("/admin/**").hasRole("ADMIN")
             .requestMatchers("/admin/users/**").hasAnyRole("ADMIN")
-            .requestMatchers("/newbook").hasAnyRole("USER")
-            .requestMatchers("/editbook").hasAnyRole("USER")
-            .requestMatchers("/editbook/**").hasAnyRole("USER")
-            .requestMatchers("/removebook/**").hasAnyRole("ADMIN")
             .anyRequest().authenticated()
         )
         .formLogin(form -> form
