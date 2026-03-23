@@ -13,7 +13,20 @@
           "name": "Get Image",
           "request": {
             "method": "GET",
-            "header": []
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/images/4/media",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "images",
+                "4",
+                "media"
+              ]
+            }
           },
           "response": []
         }
@@ -28,16 +41,264 @@
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "https://localhost:8443/api/nutritions/",
-              "protocol": "https",
+              "raw": "{{baseURL}}/api/v1/nutritions/",
               "host": [
-                "localhost"
+                "{{baseURL}}"
               ],
-              "port": "8443",
               "path": [
                 "api",
+                "v1",
                 "nutritions",
                 ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Nutrition",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Nutrition",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Dieta de volumen para flacos\",\r\n  \"description\": \"Dieta para ganar peso a base de carbohidratos\",\r\n  \"goal\": \"Ganar peso\",\r\n  \"calories\": 900\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Nutrition",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Nutrition",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Dieta de régimen\",\r\n  \"description\": \"Dieta para perder peso basandose en vegetales\",\r\n  \"goal\": \"Perder peso\",\r\n  \"calories\": 250\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "5"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Nutrition PDF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/1/pdf",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "1",
+                "pdf"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Nutrition Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageFile",
+                  "type": "file",
+                  "uuid": "773102ab-e57d-4b63-9776-42f6722b2cfb",
+                  "src": "/C:/Users/Adrián/Pictures/No permisos.JPG"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/5/images/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "5",
+                "images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Nutrition Image",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/5/images/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "5",
+                "images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Nutrition Image",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageFile",
+                  "type": "file",
+                  "uuid": "00f091b6-7440-4da1-9bdb-1d2d33483976",
+                  "src": "/C:/Users/Adrián/Pictures/No permisos.JPG"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/1/images/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "1",
+                "images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subscribe Nutrition",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/1/subscribe",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "1",
+                "subscribe"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unsubscribe Nutrition",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/nutritions/1/subscribe",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "nutritions",
+                "1",
+                "subscribe"
               ]
             }
           },
@@ -47,11 +308,502 @@
     },
     {
       "name": "Trainings",
-      "item": []
+      "item": [
+        {
+          "name": "Get Trainings",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Training",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/1",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Training",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Brazo al fallo\",\r\n  \"description\": \"Absolutamente 4 series de todas las maquinas de brazo que te encuentres en el gimnasio\",\r\n  \"goal\": \"Increase volume\",\r\n  \"time\":90\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Training",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/6",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Training",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Espalda a fuego\",\r\n  \"description\": \"Absolutamente 4 series de todas las maquinas de espalda que te encuentres en el gimnasio\",\r\n  \"goal\": \"Increase volume\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/6",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "6"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Training PDF",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/1/pdf",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "1",
+                "pdf"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create Training Image",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageFile",
+                  "type": "file",
+                  "uuid": "f6267f1d-c781-45a8-9209-89f3ca894b5a",
+                  "src": "/C:/Users/Adrián/Pictures/No permisos.JPG"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/5/images/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "5",
+                "images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Training Image",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/6/images/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "6",
+                "images",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit Training Image",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "imageFile",
+                  "type": "file",
+                  "uuid": "a8122f99-efb7-459e-a530-93904c4251a7",
+                  "src": "/C:/Users/Adrián/Pictures/No permisos.JPG"
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/1/images",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "1",
+                "images"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Subscribe Training",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/1/subscribe",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "1",
+                "subscribe"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Unsubcribe Training",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/trainings/1/subscribe",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "trainings",
+                "1",
+                "subscribe"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     },
     {
       "name": "Users",
-      "item": []
+      "item": [
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"username\": \"user@user.com\",\r\n  \"password\": \"user\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/auth/login",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Refresh",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/auth/refresh",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "refresh"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Logout",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/auth/logout",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "auth",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by Id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/3",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create User",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Adrian\",\r\n    \"email\": \"adri@gmail.com\",\r\n    \"roles\": [\"USER\"],\r\n    \"password\": \"asd\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete User",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/api/v1/users/3",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "users",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Edit User",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"Adrian2\",\r\n    \"email\": \"adri2@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/v1/api/users/3",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "v1",
+                "api",
+                "users",
+                "3"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Profile",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"name\": \"Dieta de volumen para flacos\",\r\n  \"description\": \"Dieta para ganar peso a base de carbohidratos\",\r\n  \"goal\": \"Ganar peso\",\r\n  \"calories\": 900\r\n}"
+            },
+            "url": {
+              "raw": "{{baseURL}}/api/v1/progress/chart",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "api",
+                "v1",
+                "progress",
+                "chart"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
     }
   ]
 }
