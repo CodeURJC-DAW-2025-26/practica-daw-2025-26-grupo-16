@@ -146,6 +146,10 @@ public class TrainingRestController {
 	public ResponseEntity<ImageDTO> createTrainingImage(@PathVariable long id, @RequestParam MultipartFile imageFile)
 			throws IOException {
 
+		Training training = trainingService.getTraining(id);
+
+		trainingService.checkOwnerOrAdmin(training);
+
 		if (imageFile.isEmpty()) {
 			throw new IllegalArgumentException("Image file cannot be empty");
 		}
@@ -161,15 +165,41 @@ public class TrainingRestController {
 		return ResponseEntity.created(location).body(imageMapper.toDTO(image));
 	}
 
-	@DeleteMapping("/{trainingId}/images/{imageId}")
-	public ImageDTO deleteTrainingImage(@PathVariable long trainingId, @PathVariable long imageId)
-			throws IOException {
+	@DeleteMapping("/{trainingId}/images/")
+	public ImageDTO deleteTrainingImage(@PathVariable long trainingId) throws IOException {
 
-		Image image = imageService.getImage(imageId);
+		Training training = trainingService.getTraining(trainingId);
+
+		trainingService.checkOwnerOrAdmin(training);
+
+		Image image = training.getImage();
+
+		if(image == null){
+			throw new IllegalArgumentException("No image associated with this training");
+		}
+
 		trainingService.removeImageFromTraining(trainingId);
-		imageService.deleteImage(imageId);
+
+		imageService.deleteImage(image.getId());
 
 		return imageMapper.toDTO(image);
+	}
+
+	@PutMapping("/{id}/images")
+	public ResponseEntity<ImageDTO> replaceTrainingImage(@PathVariable long id, @RequestParam MultipartFile imageFile) throws IOException {
+
+		Training training = trainingService.getTraining(id);
+
+		trainingService.checkOwnerOrAdmin(training);
+
+		if (training.getImage() != null) {
+			imageService.replaceImageFile(training.getImage().getId(), imageFile.getInputStream());
+			return ResponseEntity.ok(imageMapper.toDTO(training.getImage()));
+		} else {
+			Image newImage = imageService.createImage(imageFile.getInputStream());
+			trainingService.addImageToTraining(id, newImage);
+			return ResponseEntity.ok(imageMapper.toDTO(newImage));
+		}
 	}
 
 	@GetMapping("/{id}/pdf")

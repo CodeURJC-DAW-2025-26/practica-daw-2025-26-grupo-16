@@ -139,7 +139,7 @@ public class NutritionService {
 		return nutrition;
 	}
 
-	private void checkOwnerOrAdmin(Nutrition nutrition) {
+	public void checkOwnerOrAdmin(Nutrition nutrition) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = auth.getName();
