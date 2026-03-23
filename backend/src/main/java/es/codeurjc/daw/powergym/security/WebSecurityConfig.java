@@ -67,23 +67,23 @@ public class WebSecurityConfig {
         http.authorizeHttpRequests(authorize -> authorize
             .requestMatchers("/v3/api-docs/**", "/v3/api-docs.yaml", "/swagger-ui/**", "/swagger-ui.html").permitAll()
 
-            .requestMatchers(HttpMethod.POST, "/api/auth/login").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/users/").permitAll()
-            .requestMatchers(HttpMethod.GET, "/api/users/**").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.PUT, "/api/users/**").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "/api/users/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.POST, "/api/v1/auth/login").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/v1/users/").permitAll()
+            .requestMatchers(HttpMethod.GET, "/api/v1/users/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/api/v1/users/**").hasRole("ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/v1/users/**").hasRole("ADMIN")
 
-            .requestMatchers(HttpMethod.GET, "/api/nutritions/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/nutritions/**").hasAnyRole("USER", "ADMIN")
-            .requestMatchers(HttpMethod.PUT, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "/api/nutritions/**").hasAnyRole("USER","ADMIN")
-            .requestMatchers(HttpMethod.GET, "/api/nutritions/*/pdf").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/v1/nutritions/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/v1/nutritions/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/api/v1/nutritions/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/v1/nutritions/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/v1/nutritions/*/pdf").hasAnyRole("USER","ADMIN")
 
-            .requestMatchers(HttpMethod.GET, "/api/trainings/**").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/trainings/**").hasAnyRole("USER", "ADMIN")
-            .requestMatchers(HttpMethod.PUT, "/api/trainings/**").hasAnyRole("USER","ADMIN")
-            .requestMatchers(HttpMethod.DELETE, "/api/trainings/**").hasAnyRole("USER","ADMIN")
-            .requestMatchers(HttpMethod.GET, "/api/trainings/*/pdf").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/v1/trainings/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/v1/trainings/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.PUT, "/api/v1/trainings/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.DELETE, "/api/v1/trainings/**").hasAnyRole("USER","ADMIN")
+            .requestMatchers(HttpMethod.GET, "/api/v1/trainings/*/pdf").hasAnyRole("USER","ADMIN")
 
             .anyRequest().authenticated()
         );
