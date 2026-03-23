@@ -1,15 +1,12 @@
 services:
   mysql:
     image: mysql:9.2
-    container_name: powergym-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Daw2026}
-      MYSQL_DATABASE: ${MYSQL_DATABASE:-DAW16}
+      MYSQL_ROOT_PASSWORD: Daw2026
+      MYSQL_DATABASE: DAW16
     ports:
-      - target: 3306
-        published: ${MYSQL_HOST_PORT:-3306}
-        protocol: tcp
+      - 3306:3306
     volumes:
       - mysql_data:/var/lib/mysql
     healthcheck:
@@ -23,25 +20,18 @@ services:
       retries: 12
 
   app:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
     image: ${DOCKERHUB_USER:-yourdockerhubuser}/powergym:${APP_IMAGE_TAG:-latest}
-    container_name: powergym-app
     restart: unless-stopped
     depends_on:
       mysql:
         condition: service_healthy
     environment:
-      DB_URL: jdbc:mysql://mysql:3306/${MYSQL_DATABASE:-DAW16}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      DB_URL: jdbc:mysql://mysql:3306/DAW16?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
       DB_USER: root
-      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:-Daw2026}
-      DDL_AUTO: ${DDL_AUTO:-create}
-      APP_SEED_ENABLED: ${APP_SEED_ENABLED:-true}
+      DB_PASSWORD: Daw2026
+      DDL_AUTO: ${DDL_AUTO:-none}
     ports:
-      - target: 8443
-        published: 8443
-        protocol: tcp
+      - 8443:8443
 
 volumes:
   mysql_data:
