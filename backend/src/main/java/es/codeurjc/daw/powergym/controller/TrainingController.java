@@ -143,7 +143,7 @@ public class TrainingController {
 
 			Principal principal = request.getUserPrincipal();
 			if (principal != null) {
-				Optional<User> user = userRepository.findByName(principal.getName());
+				Optional<User> user = userRepository.findByEmail(principal.getName());
 				if (user.isPresent()) {
 					model.addAttribute("subscribed", training.get().getSubscribers().contains(user.get()));
 					boolean isOwner = training.get().getUser() != null &&
@@ -170,7 +170,7 @@ public class TrainingController {
 		Principal principal = request.getUserPrincipal();
 		if (principal == null) return "redirect:/login";
 
-		User currentUser = userRepository.findByName(principal.getName()).orElseThrow();
+		User currentUser = userRepository.findByEmail(principal.getName()).orElseThrow();
 
 		boolean isAdmin = request.isUserInRole("ADMIN");
 		boolean isOwner = training.getUser() != null &&
@@ -201,7 +201,7 @@ public class TrainingController {
 		Principal principal = request.getUserPrincipal();
 
 		if (principal != null) {
-			User user = userRepository.findByName(principal.getName()).orElseThrow();
+			User user = userRepository.findByEmail(principal.getName()).orElseThrow();
 			training.setUser(user);
 		}
 
@@ -234,7 +234,7 @@ public class TrainingController {
 		}
 
 		User currentUser = userRepository
-				.findByName(principal.getName())
+				.findByEmail(principal.getName())
 				.orElseThrow();
 
 		boolean isAdmin = request.isUserInRole("ADMIN");
@@ -276,7 +276,7 @@ public class TrainingController {
 		}
 
 		User currentUser = userRepository
-				.findByName(principal.getName())
+				.findByEmail(principal.getName())
 				.orElseThrow();
 
 		boolean isAdmin = request.isUserInRole("ADMIN");
@@ -329,7 +329,7 @@ public class TrainingController {
 		Principal principal = request.getUserPrincipal();
 
 		if (training.isPresent() && principal != null) {
-			Optional<User> user = userRepository.findByName(principal.getName());
+			Optional<User> user = userRepository.findByEmail(principal.getName());
 			if (user.isPresent()) {
 				training.get().getSubscribers().add(user.get());
 				trainingService.save(training.get());
@@ -347,7 +347,7 @@ public class TrainingController {
 		Principal principal = request.getUserPrincipal();
 
 		if (training.isPresent() && principal != null) {
-			Optional<User> user = userRepository.findByName(principal.getName());
+			Optional<User> user = userRepository.findByEmail(principal.getName());
 			if (user.isPresent()) {
 				training.get().getSubscribers().remove(user.get());
 				trainingService.save(training.get());
