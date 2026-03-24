@@ -280,10 +280,10 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ### **Documentación de la API REST**
 
 #### **Especificación OpenAPI**
-📄 **[Especificación OpenAPI (YAML)](/api-docs/api-docs.yaml)**
+📄 **[Especificación OpenAPI (YAML)](backend\api-docs\api-docs.yaml)**
 
 #### **Documentación HTML**
-📖 **[Documentación API REST (HTML)](https://raw.githack.com/[usuario]/[repositorio]/main/api-docs/api-docs.html)**
+📖 **[Documentación API REST (HTML)](backend\api-docs\api-docs.html)**
 
 > La documentación de la API REST se encuentra en la carpeta `/api-docs` del repositorio. Se ha generado automáticamente con SpringDoc a partir de las anotaciones en el código Java.
 
@@ -291,7 +291,8 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 
 Diagrama actualizado incluyendo los @RestController y su relación con los @Service compartidos:
 
-![Diagrama de Clases Actualizado](images/complete-classes-diagram.png)
+<img width="1229" height="711" alt="image" src="https://github.com/user-attachments/assets/d56b3e6c-241b-47e5-b82f-95e4b024894e" />
+
 
 ### **Instrucciones de Ejecución con Docker**
 
@@ -303,11 +304,24 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 1. **Clonar el repositorio** (si no lo has hecho ya):
    ```bash
-   git clone https://github.com/[usuario]/[repositorio].git
-   cd [repositorio]
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16.git
+   cd practica-daw-2025-26-grupo-16/docker
    ```
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Iniciar sesión en docker**:
+  docker login
+
+3. **Levantar la aplicación con Docker Compose**:
+  docker compose up -d
+
+4. **Comprobar el funcionamiento de los contenedores**:
+  docker ps
+
+5. **Acceder a la aplicación desde el navegador**:
+  https://localhost:8443
+
+6. **Acceder API REST en local** 
+   https://localhost:8443/api/v1
 
 ### **Construcción de la Imagen Docker**
 
@@ -317,11 +331,15 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 #### **Pasos para construir y publicar la imagen:**
 
 1. **Navegar al directorio de Docker**:
-   ```bash
-   cd docker
-   ```
+   cd practica-daw-2025-26-grupo-16
 
-2. **AQUÍ LOS SIGUIENTES PASOS**
+2. **Construir la imagen Docker en local**:
+  
+
+3. **Publicar la imagen en DockerHub**:
+
+
+4. **Imagen publicada**: 
 
 ### **Despliegue en Máquina Virtual**
 
@@ -333,28 +351,32 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 #### **Pasos para desplegar:**
 
 1. **Conectar a la máquina virtual**:
-   ```bash
-   ssh -i [ruta/a/clave.key] [usuario]@[IP-o-dominio-VM]
-   ```
-   
-   Ejemplo:
-   ```bash
-   ssh -i ssh-keys/app.key vmuser@10.100.139.XXX
-   ```
+   ssh -i ssh-keys/appWeb07.key vmuser@appweb07.dawgis.etsii.urjc.es
 
-2. **AQUÍ LOS SIGUIENTES PASOS**:
+2. **Ir al directorio de despliegue remoto**:
+
+
+3. **Iniciar sesión en Docker dentro de la máquina virtual**:
+  sudo docker login
+
+4. **Levantar la aplicación utilizando el OCI Artifact publicado en Docker Hub**:
+
+
+5. **Comprobar los contenedores**:
+  sudo docker ps
+
+6. 
 
 ### **URL de la Aplicación Desplegada**
 
-🌐 **URL de acceso**: `https://[nombre-app].etsii.urjc.es:8443`
+🌐 **URL de acceso**: `https://appweb16.dawgis.etsii.urjc.es:8443`
 
 #### **Credenciales de Usuarios de Ejemplo**
 
 | Rol | Usuario | Contraseña |
 |:---|:---|:---|
-| Administrador | admin | admin123 |
-| Usuario Registrado | user1 | user123 |
-| Usuario Registrado | user2 | user123 |
+| Administrador | admin | admin |
+| Usuario Registrado | user | user|
 
 ### **Participación de Miembros en la Práctica 2**
 
