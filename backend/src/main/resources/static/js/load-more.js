@@ -7,6 +7,7 @@ const escapeHtml = (value) => {
 const initLoadMore = ({ buttonId, gridId, renderCard, errorLabel }) => {
     const button = document.getElementById(buttonId);
     const grid = document.getElementById(gridId);
+    const spinner = document.getElementById(`${buttonId}Spinner`);
 
     if (!button || !grid) return;
     if (button.dataset.initialized === 'true') return;
@@ -16,9 +17,18 @@ const initLoadMore = ({ buttonId, gridId, renderCard, errorLabel }) => {
     const endpoint = button.dataset.endpoint;
     const pageSize = Number(button.dataset.pageSize || 6);
 
+    const setLoading = (isLoading) => {
+        button.disabled = isLoading;
+        button.setAttribute('aria-busy', String(isLoading));
+
+        if (spinner) {
+            spinner.style.display = isLoading ? 'inline-block' : 'none';
+        }
+    };
+
     button.addEventListener('click', async () => {
         const nextPage = Number(button.dataset.nextPage || 1);
-        button.disabled = true;
+        setLoading(true);
 
         try {
             const response = await fetch(`${endpoint}?page=${nextPage}&size=${pageSize}`, {
@@ -36,13 +46,14 @@ const initLoadMore = ({ buttonId, gridId, renderCard, errorLabel }) => {
 
             if (data.hasMore) {
                 button.dataset.nextPage = String(data.nextPage);
-                button.disabled = false;
+                setLoading(false);
             } else {
+                setLoading(false);
                 button.style.display = 'none';
             }
         } catch (error) {
             console.error(`Error loading ${errorLabel} page`, error);
-            button.disabled = false;
+            setLoading(false);
         }
     });
 };

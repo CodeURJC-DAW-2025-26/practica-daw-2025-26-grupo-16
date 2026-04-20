@@ -37,7 +37,7 @@ import es.codeurjc.daw.powergym.service.PdfExportService;
 @Controller
 public class TrainingController {
 
-	private static final int TRAININGS_PAGE_SIZE = 6;
+	private static final int TRAININGS_PAGE_SIZE = 10;
 
 	@Autowired
 	private TrainingService trainingService;
@@ -85,7 +85,7 @@ public class TrainingController {
 	@ResponseBody
 	public Map<String, Object> getTrainingsPage(
 			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "6") int size) {
+			@RequestParam(defaultValue = "10") int size) {
 
 		int safePage = Math.max(page, 0);
 		int safeSize = Math.max(size, 1);

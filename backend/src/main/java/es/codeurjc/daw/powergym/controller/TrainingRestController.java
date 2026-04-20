@@ -54,7 +54,7 @@ public class TrainingRestController {
     @GetMapping("/")
 	public List<TrainingDTO> getTrainings(
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "6") int size) {
+			@RequestParam(defaultValue = "10") int size) {
 
 		Page<Training> trainingsPage = trainingService.findPage(page, size);
 		return trainingsPage.stream().map(trainingMapper::toDTO).toList();

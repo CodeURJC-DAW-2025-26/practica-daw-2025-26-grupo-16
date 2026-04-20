@@ -79,7 +79,7 @@ public class NutritionRestController {
 	@GetMapping("/")
 	public List<NutritionDTO> getNutritions(
 			@RequestParam(defaultValue = "0") int page,
-			@RequestParam(defaultValue = "6") int size) {
+			@RequestParam(defaultValue = "10") int size) {
 
 		Page<Nutrition> nutritionsPage = nutritionService.findPage(page, size);
 		return nutritionsPage.stream().map(nutritionMapper::toDTO).toList();
