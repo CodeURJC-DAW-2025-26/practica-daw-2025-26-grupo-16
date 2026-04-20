@@ -1,0 +1,21 @@
+{{#nutritions}}
+<div class="card">
+	<div class="card-header">{{name}}</div>
+
+	{{#image}}
+	<img src="/images/{{id}}" class="card-img" alt="{{name}}" />
+	{{/image}}
+	{{^image}}
+	<img src="/assets/images/no_image.png" class="card-img" alt="No image" />
+	{{/image}}
+
+	<div class="card-header">
+		Meals:<br>
+		{{description}}
+		<br><br>
+		<div class="mt-3 text-center">
+			<a href="/nutritions/{{id}}" class="btn btn-primary">More info</a>
+		</div>
+	</div>
+</div>
+{{/nutritions}}

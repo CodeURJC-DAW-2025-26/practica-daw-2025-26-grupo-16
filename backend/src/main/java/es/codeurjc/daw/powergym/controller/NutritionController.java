@@ -3,12 +3,10 @@ package es.codeurjc.daw.powergym.controller;
 import java.io.IOException;
 import java.security.Principal;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,7 +20,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
@@ -82,39 +79,21 @@ public class NutritionController {
 	}
 
 	@GetMapping("/nutritions/page")
-	@ResponseBody
-	public Map<String, Object> getNutritionsPage(
+	public String getNutritionsPage(
 			@RequestParam(defaultValue = "1") int page,
-			@RequestParam(defaultValue = "10") int size) {
+			@RequestParam(defaultValue = "10") int size,
+			Model model,
+			HttpServletResponse response) {
 
 		int safePage = Math.max(page, 0);
 		int safeSize = Math.max(size, 1);
 		Page<Nutrition> nutritionsPage = nutritionService.findPage(safePage, safeSize);
 
-		List<Map<String, Object>> items = nutritionsPage
-				.getContent()
-				.stream()
-				.map(this::toNutritionCardData)
-				.toList();
+		model.addAttribute("nutritions", nutritionsPage.getContent());
+		response.setHeader("X-Has-More", String.valueOf(nutritionsPage.hasNext()));
+		response.setHeader("X-Next-Page", String.valueOf(safePage + 1));
 
-		Map<String, Object> response = new HashMap<>();
-		response.put("items", items);
-		response.put("hasMore", nutritionsPage.hasNext());
-		response.put("nextPage", safePage + 1);
-
-		return response;
-	}
-
-	private Map<String, Object> toNutritionCardData(Nutrition nutrition) {
-		Map<String, Object> item = new HashMap<>();
-		item.put("id", nutrition.getId());
-		item.put("name", nutrition.getName());
-		item.put("description", nutrition.getDescription());
-		item.put("imageUrl", nutrition.getImage() != null
-				? "/images/" + nutrition.getId()
-				: "/assets/images/no_image.png");
-		item.put("detailsUrl", "/nutritions/" + nutrition.getId());
-		return item;
+		return "fragments/nutritionCards";
 	}
 
 	@GetMapping("/nutritions/{id}/pdf")

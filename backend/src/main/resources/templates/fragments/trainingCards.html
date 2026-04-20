@@ -1,0 +1,20 @@
+{{#trainings}}
+<div class="card">
+	<div class="card-header">{{name}}</div>
+
+	{{#image}}
+	<img src="/images/{{id}}" class="card-img" alt="Training image" />
+	{{/image}}
+	{{^image}}
+	<img src="/assets/images/no_image.png" class="card-img" alt="No image" />
+	{{/image}}
+
+	<div class="card-header">
+		Exercises:<br>
+		{{description}}
+		<div class="mt-3 text-center">
+			<a href="/trainings/{{id}}" class="btn btn-primary">More info</a>
+		</div>
+	</div>
+</div>
+{{/trainings}}
