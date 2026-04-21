@@ -1,6 +1,6 @@
 import type ImageDTO from "./ImageDTO";
 
-export interface TrainingDTO {
+export default interface TrainingDTO {
   id: number;
   name: string;
   description: string;
