@@ -3,11 +3,11 @@ import { type RouteConfig, index, layout, route } from "@react-router/dev/routes
 export default [
   layout("routes/home.tsx", [
     index("routes/nutrition-list.tsx"),
-
     route("nutritions/:id", "routes/nutrition-detail.tsx"),
     route("nutritions/:id/edit", "routes/nutrition-edit.tsx"),
     route("nutrition-new", "routes/nutrition-new.tsx"),
 
+	index("routes/training-list.tsx"),
     route("trainings/:id", "routes/training-detail.tsx"),
     route("trainings/:id/edit", "routes/training-edit.tsx"),
     route("training-new", "routes/training-new.tsx"),
