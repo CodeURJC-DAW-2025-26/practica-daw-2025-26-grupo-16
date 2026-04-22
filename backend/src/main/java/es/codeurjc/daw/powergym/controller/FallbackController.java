@@ -1,4 +1,4 @@
-package es.codeurjc.daw.powergym.controller;
+/*package es.codeurjc.daw.powergym.controller;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -30,4 +30,4 @@ public class FallbackController {
 
 		return "error";
 	}
-}
+}*/
