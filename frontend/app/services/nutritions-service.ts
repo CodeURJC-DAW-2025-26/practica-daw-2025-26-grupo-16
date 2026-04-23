@@ -1,7 +1,7 @@
 import type NutritionDTO from "~/dtos/NutritionDTO";
 
 const API_URL = "/api/v1/nutritions";
-const API_PUBLIC_URL = "/nutritions";
+const API_IMAGES_URL = "/api/images";
 
 export async function getNutritions(): Promise<NutritionDTO[]> {
   const res = await fetch(`${API_URL}/`);
