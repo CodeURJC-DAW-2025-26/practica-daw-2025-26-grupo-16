@@ -1,18 +1,19 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./home.css";
-import { Outlet, useNavigate, useNavigation } from "react-router";
-import Header from "~/components/header";
-import type { Route } from "./+types/home";
-import Container from "react-bootstrap/esm/Container";
-import Alert from "react-bootstrap/esm/Alert";
-import Button from "react-bootstrap/esm/Button";
+import "../app.css";
+
+import { Outlet, useNavigation } from "react-router";
+import { Container } from "react-bootstrap";
+
+import { Header } from "~/components/header";
+import { Footer } from "~/components/footer";
 
 export default function Home() {
   const navigation = useNavigation();
   const isLoading = navigation.state === "loading";
 
   return (
-    <>
+    <div className="background-image">
+
       {isLoading && (
         <div className="page-spinner-overlay">
           <div className="dot-spinner" />
@@ -20,29 +21,28 @@ export default function Home() {
       )}
 
       <Header />
-      <Outlet />
-    </>
-  );
-}
 
-export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
-  const navigate = useNavigate();
+      <main className="container-center">
+        <section className="pg-card index-card">
+          <h1 className="background-title">⚡ POWERGYM MÓSTOLES</h1>
 
-  let errorMessage =
-    error instanceof Error ? error.message : "An unexpected error occurred";
+          <div className="grid grid-3 index-info">
+            <div>
+              <p>📍 Av. del Alcalde de Móstoles, Móstoles, Madrid</p>
+              <p>📞 91 665 50 60</p>
+              <p>📧 mostoles@powergym.es</p>
+            </div>
 
-  return (
-    <>
-      <Header />
-      <Container className="mt-4">
-        <Alert variant="danger">
-          <Alert.Heading>Error</Alert.Heading>
-          <p>{errorMessage}</p>
-          <Button variant="outline-danger" onClick={() => navigate("/")}>
-            Back to home
-          </Button>
-        </Alert>
-      </Container>
-    </>
+            <div>
+              <p>🏋️‍♂️ Gimnasio: 6:00h - 1:00h</p>
+              <p>🛎️ Recepción: 8:00 - 22:00h</p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+
+    </div>
   );
 }
