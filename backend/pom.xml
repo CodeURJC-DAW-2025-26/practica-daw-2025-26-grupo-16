@@ -159,7 +159,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<generatorName>html2</generatorName>
+							<generatorName>html</generatorName>
 							<inputSpec>${project.basedir}/api-docs/api-docs.yaml</inputSpec>
 							<output>${project.basedir}/api-docs/</output>
 							<skipValidateSpec>true</skipValidateSpec>
