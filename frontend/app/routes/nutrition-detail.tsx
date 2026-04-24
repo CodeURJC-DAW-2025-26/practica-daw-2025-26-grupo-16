@@ -1,13 +1,17 @@
+import { Link } from "react-router";
 import { useNavigate } from "react-router";
 import type { Route } from "./+types/nutrition-detail";
 import { getNutrition, deleteNutrition } from "~/services/nutritions-service";
 import {
   Alert,
   Button,
-  ButtonGroup,
   Container,
   Image,
   Modal,
+  Card,
+  Row,
+  Col,
+  Form,
 } from "react-bootstrap";
 import { useUserStore } from "~/stores/user-store";
 import { useState } from "react";
@@ -24,6 +28,12 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isPendingDelete, setPendingDelete] = useState(false);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
+
+  const [subscribing, setSubscribing] = useState(false);
+
+  const [subscribed, setSubscribed] = useState<boolean>(
+    Boolean((nutrition as any).subscribed)
+  );
 
   function handleOpenDeleteDialog() {
     setDeleteDialogOpen(true);
@@ -49,62 +59,160 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
     }
   }
 
+  async function handleSubscribe() {
+    try {
+      setSubscribing(true);
+
+      await fetch(`/subscribeNutrition/${nutrition.id}`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      setSubscribed(true);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubscribing(false);
+    }
+  }
+
+  async function handleUnsubscribe() {
+    try {
+      setSubscribing(true);
+
+      await fetch(`/unsubscribeNutrition/${nutrition.id}`, {
+        method: "POST",
+        credentials: "include",
+      });
+
+      setSubscribed(false);
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubscribing(false);
+    }
+  }
+
   return (
     <>
-      <Container className="mt-4 mb-5">
-        <h2>Nutrition "{nutrition.name}"</h2>
+      <Container className="mt-5">
+        <h2 className="text-center mt-5 mb-4">Nutrition Details</h2>
 
-        <Image
-          src={
-            nutrition.image
-              ? `/api/v1/images/${nutrition.image.id}/media`
-              : `/no_image.png`
-          }
-          className="mb-4"
-          alt={nutrition.image ? "Nutrition Image" : "No Image Available"}
-          fluid
-        />
+        <Row>
+          <Col xs={12} lg={5} className="mb-4">
+            <Card className="pg-card">
+              <Card.Body>
+                <Form.Label className="fw-bold">Nutrition Image</Form.Label>
 
-        <p>{nutrition.description}</p>
+                <Image
+                  src={
+                    nutrition.image
+                      ? `/api/v1/images/${nutrition.image.id}/media`
+                      : `/assets/images/no_image.png`
+                  }
+                  alt={nutrition.name}
+                  className="w-100"
+                  fluid
+                />
+              </Card.Body>
+            </Card>
+          </Col>
 
-        <p>
-          <b>Calories:</b> {nutrition.calories}
-        </p>
+          <Col xs={12} lg={7}>
+            <Card className="pg-card mb-3">
+              <Card.Body>
+                <Form.Label className="fw-bold">Name</Form.Label>
+                <p className="form-control">{nutrition.name}</p>
+              </Card.Body>
+            </Card>
 
-        <p>
-          <b>Goal:</b> {nutrition.goal}
-        </p>
+            <Card className="pg-card mb-3">
+              <Card.Body>
+                <Form.Label className="fw-bold">Number of Calories</Form.Label>
+                <p className="form-control">{nutrition.calories} kcal</p>
+              </Card.Body>
+            </Card>
 
-        {user && (
-          <ButtonGroup className="mt-4">
-            {user.roles.includes("ADMIN") && (
-              <Button variant="danger" onClick={handleOpenDeleteDialog}>
-                Remove
-              </Button>
-            )}
+            <Card className="pg-card mb-3">
+              <Card.Body>
+                <Form.Label className="fw-bold">Goal</Form.Label>
+                <p className="form-control">{nutrition.goal}</p>
+              </Card.Body>
+            </Card>
 
-            {user.roles.includes("USER") && (
-              <Button
-                variant="warning"
-                onClick={() => navigate(`/nutritions/${nutrition.id}/edit`)}
+            <Card className="pg-card mb-4">
+              <Card.Body>
+                <Form.Label className="fw-bold">Meals of the Day</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={6}
+                  readOnly
+                  value={nutrition.description}
+                />
+              </Card.Body>
+            </Card>
+
+            <div className="btn-row">
+              {/* PDF */}
+              <Link
+                to={`/nutritions/${nutrition.id}/pdf`}
+                target="_blank"
+                className="pg-btn btn-primary"
               >
-                Edit
-              </Button>
-            )}
-          </ButtonGroup>
-        )}
+                Download PDF
+              </Link>
 
-        <br />
+              {/* EDIT */}
+              {user?.roles.includes("USER") && (
+                <Link
+                  to={`/nutritions/${nutrition.id}/edit`}
+                  className="pg-btn btn-primary"
+                >
+                  Edit
+                </Link>
+              )}
 
-        <Button
-          variant="secondary"
-          className="mt-3"
-          onClick={() => navigate("/nutritions")}
-        >
-          Back to all nutritions
-        </Button>
+              {/* SUBSCRIBE / UNSUBSCRIBE */}
+              {user && (
+                subscribed ? (
+                  <button
+                    className="pg-btn btn-primary"
+                    onClick={handleUnsubscribe}
+                    disabled={subscribing}
+                  >
+                    {subscribing ? "Processing..." : "Unsubscribe"}
+                  </button>
+                ) : (
+                  <button
+                    className="pg-btn btn-primary"
+                    onClick={handleSubscribe}
+                    disabled={subscribing}
+                  >
+                    {subscribing ? "Processing..." : "Subscribe"}
+                  </button>
+                )
+              )}
+
+              {/* DELETE */}
+              {user?.roles.includes("ADMIN") && (
+                <button
+                  className="pg-btn btn-primary"
+                  onClick={handleOpenDeleteDialog}
+                >
+                  Delete
+                </button>
+              )}
+
+              {/* RETURN */}
+              <Link to="/nutritions" className="pg-btn btn-primary">
+                Return
+              </Link>
+            </div>
+          </Col>
+        </Row>
       </Container>
 
+      {/* MODAL */}
       <Modal show={isDeleteDialogOpen} onHide={handleCloseDeleteDialog}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Nutrition</Modal.Title>
