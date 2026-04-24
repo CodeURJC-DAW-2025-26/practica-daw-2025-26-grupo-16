@@ -153,7 +153,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
             </Card>
 
             <div className="btn-row">
-              {/* PDF */}
               <Link
                 to={`/nutritions/${nutrition.id}/pdf`}
                 target="_blank"
@@ -162,7 +161,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                 Download PDF
               </Link>
 
-              {/* EDIT */}
               {user?.roles.includes("USER") && (
                 <Link
                   to={`/nutritions/${nutrition.id}/edit`}
@@ -172,7 +170,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                 </Link>
               )}
 
-              {/* SUBSCRIBE / UNSUBSCRIBE */}
               {user && (
                 subscribed ? (
                   <button
@@ -193,7 +190,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                 )
               )}
 
-              {/* DELETE */}
               {user?.roles.includes("ADMIN") && (
                 <button
                   className="pg-btn btn-primary"
@@ -203,7 +199,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                 </button>
               )}
 
-              {/* RETURN */}
               <Link to="/nutritions" className="pg-btn btn-primary">
                 Return
               </Link>
@@ -212,7 +207,6 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
         </Row>
       </Container>
 
-      {/* MODAL */}
       <Modal show={isDeleteDialogOpen} onHide={handleCloseDeleteDialog}>
         <Modal.Header closeButton>
           <Modal.Title>Delete Nutrition</Modal.Title>

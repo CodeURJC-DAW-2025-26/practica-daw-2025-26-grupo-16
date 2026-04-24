@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import type { Route } from "./+types/training-list";
 import { getTrainings } from "~/services/trainings-service";
 import type TrainingDTO from "~/dtos/TrainingDTO";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { useUserStore } from "~/stores/user-store";
 
 export async function clientLoader({}: Route.ClientLoaderArgs) {
@@ -14,48 +13,74 @@ export default function TrainingList({ loaderData }: Route.ComponentProps) {
   let { user } = useUserStore();
 
   return (
-    <Container className="mt-4 mb-5">
-      <h2 className="mt-4 mb-4">Trainings</h2>
+    <main className="pg-container nutrition-page">
 
-      <Row xs={1} md={3} className="g-4">
-        {trainings.map((training: TrainingDTO) => (
-          <Col key={training.id}>
-            <Card className="h-100">
+      <h2 className="text-center mt-4 mb-3">
+        Training Plans
+      </h2>
 
-              {training.image && (
-                <Card.Img
-                  variant="top"
-                  src={`/images/${training.image.id}`}
+      <div className="grid grid-3">
+
+        {trainings.map((training: TrainingDTO) => {
+
+          console.log("Training:", training);
+          console.log("Training image:", training.image);
+
+          return (
+            <div className="pg-card" key={training.id}>
+
+              <div className="card-header">
+                {training.name}
+              </div>
+
+              {training.image?.id ? (
+                <img
+                  src={`/api/v1/images/${training.image.id}/media`}
+                  className="card-img"
+                  alt={training.name}
+                />
+              ) : (
+                <img
+                  src="/no_image.png"
+                  className="card-img"
+                  alt="No image"
                 />
               )}
 
-              <Card.Body>
-                <Card.Title>
+              <div className="card-header">
+
+                Meals:
+                <br />
+
+                {training.description}
+
+                <div className="mt-3 text-center">
+
                   <Link
                     to={`/trainings/${training.id}`}
-                    className="text-decoration-none text-dark"
+                    className="pg-btn btn-primary"
                   >
-                    {training.name}
+                    More info
                   </Link>
-                </Card.Title>
 
-                <Card.Text>
-                  {training.time} min
-                </Card.Text>
+                </div>
 
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+              </div>
+
+            </div>
+          );
+        })}
+
+      </div>
 
       {user && (
-        <div className="mt-4">
-          <Button as={Link as any} to="/training-new" variant="primary">
-            New Training
-          </Button>
+        <div className="btn-row" style={{ justifyContent: "center", marginTop: "2rem" }}>
+          <Link to="/trainings-new" className="pg-btn btn-primary">
+            Add training
+          </Link>
         </div>
       )}
-    </Container>
+
+    </main>
   );
 }
