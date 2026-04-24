@@ -1,7 +1,7 @@
 import type { UserDTO } from "~/dtos/UserDTO";
 
-const API_USERS_URL = "/api/users";
-const API_AUTH_URL = "/api/auth";
+const API_USERS_URL = "/api/v1/users";
+const API_AUTH_URL = "/api/v1/auth";
 
 export class HttpError extends Error {
   status: number;
@@ -37,6 +37,27 @@ export async function logIn(user: string, pass: string): Promise<void> {
 export async function logOut(): Promise<void> {
   const res = await fetch(`${API_AUTH_URL}/logout`, {
     method: "POST",
+  });
+
+  if (!res.ok) {
+    throw new Error();
+  }
+}
+
+export async function registerUser(
+  fullName: string,
+  email: string,
+  password: string,
+): Promise<void> {
+  const res = await fetch(`${API_USERS_URL}/`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name: fullName,
+      email,
+      password,
+      roles: ["ROLE_USER"],
+    }),
   });
 
   if (!res.ok) {

@@ -15,6 +15,9 @@ export default [
     route("trainings/:id/edit", "routes/training-edit.tsx"),
     route("training-new", "routes/training-new.tsx"),
 
+    route("login", "routes/login.tsx"),
+    route("register", "routes/register.tsx"),
+
     route("*", "routes/not-found.tsx"),
   ]),
 ] satisfies RouteConfig;

@@ -57,7 +57,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
         <Image
           src={
             training.image
-              ? `/api/images/${training.image.id}/media`
+              ? `/api/v1/images/${training.image.id}/media`
               : `/no_image.png`
           }
           className="mb-4"

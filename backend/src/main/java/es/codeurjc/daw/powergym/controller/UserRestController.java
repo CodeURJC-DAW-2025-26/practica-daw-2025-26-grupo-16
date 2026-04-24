@@ -3,6 +3,7 @@ package es.codeurjc.daw.powergym.controller;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,6 +40,16 @@ public class UserRestController {
         return userService.findById(id)
                 .map(user -> ResponseEntity.ok(userMapper.toDTOWithoutPassword(user)))
                 .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<UserDTO> getCurrentUser(Authentication authentication) {
+        if (authentication == null || authentication.getName() == null) {
+            return ResponseEntity.status(401).build();
+        }
+
+        User currentUser = userService.findByEmail(authentication.getName());
+        return ResponseEntity.ok(userMapper.toDTOWithoutPassword(currentUser));
     }
 
     @PostMapping("/")
