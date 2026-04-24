@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import { useUserStore } from "~/stores/user-store";
 
 export function Header() {
@@ -28,25 +29,25 @@ export function Header() {
 
             <div className="ms-auto d-flex flex-column flex-lg-row gap-2 mt-3 mt-lg-0">
 
-              <a href="/" className="pg-btn btn-primary">Home</a>
-              <a href="/nutritions" className="pg-btn btn-primary">Nutritions</a>
-              <a href="/trainings" className="pg-btn btn-primary">Trainings</a>
+              <Link to="/" className="pg-btn btn-primary">Home</Link>
+              <Link to="/nutritions" className="pg-btn btn-primary">Nutritions</Link>
+              <Link to="/trainings" className="pg-btn btn-primary">Trainings</Link>
 
               {!user && (
                 <>
-                  <a href="/login" className="pg-btn btn-primary">Log In</a>
-                  <a href="/register" className="pg-btn btn-primary">Register</a>
+                  <Link to="/login" className="pg-btn btn-primary">Log In</Link>
+                  <Link to="/register" className="pg-btn btn-primary">Register</Link>
                 </>
               )}
 
               {user && (
                 <>
                   {user.roles.includes("ADMIN") && (
-                    <a href="/admin/users" className="pg-btn btn-primary">Users</a>
+                    <Link to="/admin/users" className="pg-btn btn-primary">Users</Link>
                   )}
 
-                  <a href="/progress" className="pg-btn btn-primary">Progress</a>
-                  <a href="/profileUser" className="pg-btn btn-primary">Profile</a>
+                  <Link to="/progress" className="pg-btn btn-primary">Progress</Link>
+                  <Link to="/profileUser" className="pg-btn btn-primary">Profile</Link>
 
                   <form action="/logout" method="post" className="d-inline">
                     <button type="submit" className="pg-btn btn-primary">
