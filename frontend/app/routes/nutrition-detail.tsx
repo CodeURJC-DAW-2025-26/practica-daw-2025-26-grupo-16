@@ -57,7 +57,7 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
         <Image
           src={
             nutrition.image
-              ? `/api/images/${nutrition.image.id}/media`
+              ? `/api/v1/images/${nutrition.image.id}/media`
               : `/no_image.png`
           }
           className="mb-4"

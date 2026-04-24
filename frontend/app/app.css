@@ -39,10 +39,19 @@ html, body {
 }
 
 body {
+  margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-main);
+
   color: var(--text-main);
   font-size: 14px;
+
+  min-height: 100vh;
+
+  background-image: url('../public/background.png');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
   display: flex;
   flex-direction: column;
 }
@@ -129,6 +138,7 @@ p {
   margin-bottom: 0.8rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   padding: 0.6rem;
+  color: var(--secondary);
 }
 
 .card-header {
@@ -223,9 +233,7 @@ p {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active {
+.btn-primary:hover{
   background-color: #000000 !important;
   background-image: none !important;
   color: #ffffff;
@@ -399,7 +407,8 @@ footer {
     font-family: Arial, sans-serif;
     color: white;
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
+    background-attachment: fixed; 
 }
 
 

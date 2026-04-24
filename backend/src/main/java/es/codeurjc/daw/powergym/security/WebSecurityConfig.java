@@ -85,6 +85,7 @@ public class WebSecurityConfig {
             .requestMatchers(HttpMethod.DELETE, "/api/v1/trainings/**").hasAnyRole("USER","ADMIN")
             .requestMatchers(HttpMethod.GET, "/api/v1/trainings/*/pdf").hasAnyRole("USER","ADMIN")
 
+            .requestMatchers(HttpMethod.GET, "/api/v1/images/**").permitAll()
             .requestMatchers(HttpMethod.GET, "/api/v1/progress/**").hasAnyRole("USER","ADMIN")
 
             .anyRequest().authenticated()

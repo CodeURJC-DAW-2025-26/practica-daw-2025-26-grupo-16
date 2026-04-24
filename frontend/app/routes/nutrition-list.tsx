@@ -2,7 +2,6 @@ import { Link } from "react-router";
 import type { Route } from "./+types/nutrition-list";
 import { getNutritions } from "~/services/nutritions-service";
 import type NutritionDTO from "~/dtos/NutritionDTO";
-import { Card, Container, Row, Col, Button } from "react-bootstrap";
 import { useUserStore } from "~/stores/user-store";
 
 export async function clientLoader({}: Route.ClientLoaderArgs) {
@@ -14,48 +13,74 @@ export default function NutritionList({ loaderData }: Route.ComponentProps) {
   let { user } = useUserStore();
 
   return (
-    <Container className="mt-4 mb-5">
-      <h2 className="mt-4 mb-4">Nutritions</h2>
+    <main className="pg-container nutrition-page">
 
-      <Row xs={1} md={3} className="g-4">
-        {nutritions.map((nutrition: NutritionDTO) => (
-          <Col key={nutrition.id}>
-            <Card className="h-100">
+      <h2 className="text-center mt-4 mb-3">
+        Nutrition Plans
+      </h2>
 
-              {nutrition.image && (
-                <Card.Img
-                  variant="top"
-                  src={`/images/${nutrition.image.id}`}
+      <div className="grid grid-3">
+
+        {nutritions.map((nutrition: NutritionDTO) => {
+
+          console.log("Nutrition:", nutrition);
+          console.log("Nutrition image:", nutrition.image);
+
+          return (
+            <div className="pg-card" key={nutrition.id}>
+
+              <div className="card-header">
+                {nutrition.name}
+              </div>
+
+              {nutrition.image?.id ? (
+                <img
+                  src={`/api/v1/images/${nutrition.image.id}/media`}
+                  className="card-img"
+                  alt={nutrition.name}
+                />
+              ) : (
+                <img
+                  src="/no_image.png"
+                  className="card-img"
+                  alt="No image"
                 />
               )}
 
-              <Card.Body>
-                <Card.Title>
+              <div className="card-header">
+
+                Meals:
+                <br />
+
+                {nutrition.description}
+
+                <div className="mt-3 text-center">
+
                   <Link
                     to={`/nutritions/${nutrition.id}`}
-                    className="text-decoration-none text-dark"
+                    className="pg-btn btn-primary"
                   >
-                    {nutrition.name}
+                    More info
                   </Link>
-                </Card.Title>
 
-                <Card.Text>
-                  {nutrition.calories} kcal
-                </Card.Text>
+                </div>
 
-              </Card.Body>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+              </div>
+
+            </div>
+          );
+        })}
+
+      </div>
 
       {user && (
-        <div className="mt-4">
-          <Button as={Link as any} to="/nutrition-new" variant="primary">
-            New Nutrition
-          </Button>
+        <div className="btn-row" style={{ justifyContent: "center", marginTop: "2rem" }}>
+          <Link to="/nutrition-new" className="pg-btn btn-primary">
+            Add nutrition
+          </Link>
         </div>
       )}
-    </Container>
+
+    </main>
   );
 }
