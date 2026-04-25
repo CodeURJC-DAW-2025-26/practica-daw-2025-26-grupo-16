@@ -18,11 +18,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.dto.ImageDTO;
 import es.codeurjc.daw.powergym.dto.ImageMapper;
-import es.codeurjc.daw.powergym.dto.NutritionDTO;
 import es.codeurjc.daw.powergym.dto.TrainingDTO;
 import es.codeurjc.daw.powergym.dto.TrainingMapper;
 import es.codeurjc.daw.powergym.model.Image;
-import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.service.ImageService;
