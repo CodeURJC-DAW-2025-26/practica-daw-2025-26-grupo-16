@@ -8,4 +8,5 @@ export default interface NutritionDTO {
   calories: number;
   image: ImageDTO;
   userId: number;
+  subscribed: boolean;
 };

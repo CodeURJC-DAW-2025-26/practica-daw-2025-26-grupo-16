@@ -1,25 +1,40 @@
 package es.codeurjc.daw.powergym.dto;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import es.codeurjc.daw.powergym.model.Nutrition;
 
-import java.util.Collection;
-import java.util.List;
+@Component
+public class NutritionMapper {
 
-@Mapper(componentModel = "spring", uses = ImageMapper.class)
-public interface NutritionMapper {
+    @Autowired
+    private ImageMapper imageMapper;
 
-    @Mapping(source = "user.id", target = "userId")
-    @Mapping(source = "image", target = "image")
-    NutritionDTO toDTO(Nutrition nutrition);
+    public NutritionDTO toDTO(Nutrition nutrition) {
 
-    List<NutritionDTO> toDTOs(Collection<Nutrition> nutritions);
+        return new NutritionDTO(
+                nutrition.getId(),
+                nutrition.getName(),
+                nutrition.getDescription(),
+                nutrition.getGoal(),
+                nutrition.getCalories(),
+                nutrition.getImage() != null ? imageMapper.toDTO(nutrition.getImage()) : null,
+                nutrition.getUser() != null ? nutrition.getUser().getId() : null,
+                false
+        );
+    }
 
-    @Mapping(source = "userId", target = "user.id")
+    public Nutrition toDomain(NutritionDTO dto) {
 
-    @Mapping(target = "subscribers", ignore = true)
-    @Mapping(target = "image", ignore = true)
-    Nutrition toDomain(NutritionDTO nutritionDTO);
+        Nutrition nutrition = new Nutrition();
+
+        nutrition.setId(dto.id());
+        nutrition.setName(dto.name());
+        nutrition.setDescription(dto.description());
+        nutrition.setGoal(dto.goal());
+        nutrition.setCalories(dto.calories());
+
+        return nutrition;
+    }
 }

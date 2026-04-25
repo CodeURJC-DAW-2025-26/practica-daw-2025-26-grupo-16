@@ -10,6 +10,7 @@ public record NutritionDTO(
     String goal,
     Integer calories,
     ImageDTO image,
-    Long userId) {
+    Long userId,
+    boolean subscribed) {
 }
 

@@ -18,9 +18,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import es.codeurjc.daw.powergym.dto.ImageDTO;
 import es.codeurjc.daw.powergym.dto.ImageMapper;
+import es.codeurjc.daw.powergym.dto.NutritionDTO;
 import es.codeurjc.daw.powergym.dto.TrainingDTO;
 import es.codeurjc.daw.powergym.dto.TrainingMapper;
 import es.codeurjc.daw.powergym.model.Image;
+import es.codeurjc.daw.powergym.model.Nutrition;
 import es.codeurjc.daw.powergym.model.Training;
 import es.codeurjc.daw.powergym.model.User;
 import es.codeurjc.daw.powergym.service.ImageService;
@@ -63,7 +65,34 @@ public class TrainingRestController {
     @GetMapping("/{id}")
 	public TrainingDTO getTraining(@PathVariable long id) {
 
-		return trainingMapper.toDTO(trainingService.getTraining(id));
+		Training training = trainingService.getTraining(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		boolean subscribed = false;
+
+		if (auth != null && auth.isAuthenticated()
+				&& !"anonymousUser".equals(auth.getPrincipal())) {
+
+			User user = userService.findByEmail(auth.getName());
+
+			if (user != null) {
+				subscribed = training.getSubscribers()
+						.stream()
+						.anyMatch(u -> u.getId().equals(user.getId()));
+			}
+		}
+
+		return new TrainingDTO(
+				training.getId(),
+				training.getName(),
+				training.getDescription(),
+				training.getGoal(),
+				training.getTime(),
+				training.getImage() != null ? imageMapper.toDTO(training.getImage()) : null,
+				training.getUser() != null ? training.getUser().getId() : null,
+				subscribed
+		);
 	}
 
 	@PostMapping("/")
@@ -115,15 +144,14 @@ public class TrainingRestController {
 
 		Training training = trainingService.getTraining(id);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-
-		User user = userService.findByEmail(username);
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
 
 		training.getSubscribers().add(user);
 		trainingService.save(training);
 
-		return trainingMapper.toDTO(training);
+		return getTraining(id);
 	}
 
 	@DeleteMapping("/{id}/subscribe")
@@ -131,15 +159,14 @@ public class TrainingRestController {
 
 		Training training = trainingService.getTraining(id);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
 
-		User user = userService.findByEmail(username);
-
-		training.getSubscribers().remove(user);
+		training.getSubscribers().removeIf(u -> u.getId().equals(user.getId()));
 		trainingService.save(training);
 
-		return trainingMapper.toDTO(training);
+		return getTraining(id);
 	}
 
 	@PostMapping("/{id}/images/")

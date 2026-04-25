@@ -1,5 +1,4 @@
-import { Link } from "react-router";
-import { useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
 import type { Route } from "./+types/training-detail";
 import { getTraining, deleteTraining } from "~/services/trainings-service";
 import {
@@ -15,6 +14,7 @@ import {
 } from "react-bootstrap";
 import { useUserStore } from "~/stores/user-store";
 import { useState } from "react";
+import { useRevalidator } from "react-router";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   return await getTraining(params.id!);
@@ -23,17 +23,14 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
   const { user } = useUserStore();
   const training = loaderData;
+
   const navigate = useNavigate();
+  const revalidator = useRevalidator();
 
   const [deleteError, setDeleteError] = useState<string | null>(null);
   const [isPendingDelete, setPendingDelete] = useState(false);
   const [isDeleteDialogOpen, setDeleteDialogOpen] = useState(false);
-
   const [subscribing, setSubscribing] = useState(false);
-
-  const [subscribed, setSubscribed] = useState<boolean>(
-    Boolean((training as any).subscribed)
-  );
 
   function handleOpenDeleteDialog() {
     setDeleteDialogOpen(true);
@@ -63,12 +60,12 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
     try {
       setSubscribing(true);
 
-      await fetch(`/subscribeTraining/${training.id}`, {
+      await fetch(`/api/v1/trainings/${training.id}/subscribe`, {
         method: "POST",
         credentials: "include",
       });
 
-      setSubscribed(true);
+      revalidator.revalidate();
     } catch (err) {
       console.error(err);
     } finally {
@@ -80,12 +77,12 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
     try {
       setSubscribing(true);
 
-      await fetch(`/unsubscribeTraining/${training.id}`, {
-        method: "POST",
+      await fetch(`/api/v1/trainings/${training.id}/subscribe`, {
+        method: "DELETE",
         credentials: "include",
       });
 
-      setSubscribed(false);
+      revalidator.revalidate();
     } catch (err) {
       console.error(err);
     } finally {
@@ -129,7 +126,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
             <Card className="pg-card mb-3">
               <Card.Body>
                 <Form.Label className="fw-bold">Duration</Form.Label>
-                <p className="form-control">{training.time} kcal</p>
+                <p className="form-control">{training.time} minutes</p>
               </Card.Body>
             </Card>
 
@@ -170,8 +167,8 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                 </Link>
               )}
 
-              {user && (
-                subscribed ? (
+              {user &&
+                (training.subscribed ? (
                   <button
                     className="pg-btn btn-primary"
                     onClick={handleUnsubscribe}
@@ -187,8 +184,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                   >
                     {subscribing ? "Processing..." : "Subscribe"}
                   </button>
-                )
-              )}
+                ))}
 
               {user?.roles.includes("ADMIN") && (
                 <button

@@ -10,6 +10,7 @@ public record TrainingDTO(
     String goal,
     Integer time,
     ImageDTO image,
-    Long userId) {
+    Long userId,
+    boolean subscribed) {
     
 }

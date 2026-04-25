@@ -99,7 +99,34 @@ public class NutritionRestController {
 	@GetMapping("/{id}")
 	public NutritionDTO getNutrition(@PathVariable long id) {
 
-		return nutritionMapper.toDTO(nutritionService.getNutrition(id));
+		Nutrition nutrition = nutritionService.getNutrition(id);
+
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+		boolean subscribed = false;
+
+		if (auth != null && auth.isAuthenticated()
+				&& !"anonymousUser".equals(auth.getPrincipal())) {
+
+			User user = userService.findByEmail(auth.getName());
+
+			if (user != null) {
+				subscribed = nutrition.getSubscribers()
+						.stream()
+						.anyMatch(u -> u.getId().equals(user.getId()));
+			}
+		}
+
+		return new NutritionDTO(
+				nutrition.getId(),
+				nutrition.getName(),
+				nutrition.getDescription(),
+				nutrition.getGoal(),
+				nutrition.getCalories(),
+				nutrition.getImage() != null ? imageMapper.toDTO(nutrition.getImage()) : null,
+				nutrition.getUser() != null ? nutrition.getUser().getId() : null,
+				subscribed
+		);
 	}
 
 	@PostMapping("/")
@@ -152,15 +179,14 @@ public class NutritionRestController {
 
 		Nutrition nutrition = nutritionService.getNutrition(id);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
-
-		User user = userService.findByEmail(username);
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
 
 		nutrition.getSubscribers().add(user);
 		nutritionService.save(nutrition);
 
-		return nutritionMapper.toDTO(nutrition);
+		return getNutrition(id);
 	}
 
 	@DeleteMapping("/{id}/subscribe")
@@ -168,15 +194,14 @@ public class NutritionRestController {
 
 		Nutrition nutrition = nutritionService.getNutrition(id);
 
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String username = auth.getName();
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
 
-		User user = userService.findByEmail(username);
-
-		nutrition.getSubscribers().remove(user);
+		nutrition.getSubscribers().removeIf(u -> u.getId().equals(user.getId()));
 		nutritionService.save(nutrition);
 
-		return nutritionMapper.toDTO(nutrition);
+		return getNutrition(id);
 	}
 
 	@PostMapping("/{id}/images/")

@@ -8,4 +8,5 @@ export default interface TrainingDTO {
   time: number;
   image: ImageDTO;
   userId: number;
+  subscribed: boolean;
 }
