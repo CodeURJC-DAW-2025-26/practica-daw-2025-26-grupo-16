@@ -1,25 +1,40 @@
 package es.codeurjc.daw.powergym.dto;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import es.codeurjc.daw.powergym.model.Training;
 
-import java.util.Collection;
-import java.util.List;
+@Component
+public class TrainingMapper {
 
-@Mapper(componentModel = "spring")
-public interface TrainingMapper {
+    @Autowired
+    private ImageMapper imageMapper;
 
-    @Mapping(source = "user.id", target = "userId")
-    TrainingDTO toDTO(Training training);
+    public TrainingDTO toDTO(Training training) {
 
-    List<TrainingDTO> toDTOs(Collection<Training> trainings);
+        return new TrainingDTO(
+                training.getId(),
+                training.getName(),
+                training.getDescription(),
+                training.getGoal(),
+                training.getTime(),
+                training.getImage() != null ? imageMapper.toDTO(training.getImage()) : null,
+                training.getUser() != null ? training.getUser().getId() : null,
+                false
+        );
+    }
 
-    @Mapping(source = "userId", target = "user.id")
+    public Training toDomain(TrainingDTO dto) {
 
-    @Mapping(target = "subscribers", ignore = true)
-    @Mapping(target = "image", ignore = true)
-    Training toDomain(TrainingDTO trainingDTO);
+        Training training = new Training();
+
+        training.setId(dto.id());
+        training.setName(dto.name());
+        training.setDescription(dto.description());
+        training.setGoal(dto.goal());
+        training.setTime(dto.time());
+
+        return training;
+    }
 }
-
