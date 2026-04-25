@@ -75,7 +75,7 @@ export default function TrainingList({ loaderData }: Route.ComponentProps) {
 
       {user && (
         <div className="btn-row" style={{ justifyContent: "center", marginTop: "2rem" }}>
-          <Link to="/trainings-new" className="pg-btn btn-primary">
+          <Link to="/training-new" className="pg-btn btn-primary">
             Add training
           </Link>
         </div>
