@@ -49,7 +49,7 @@ export default function TrainingList({ loaderData }: Route.ComponentProps) {
 
               <div className="card-header">
 
-                Meals:
+                Exercises:
                 <br />
 
                 {training.description}

@@ -7,19 +7,37 @@ import { Container, Card, Form } from "react-bootstrap";
 export default function TrainingNew({}: Route.ComponentProps) {
   const navigate = useNavigate();
 
-  async function saveTrainingAction(
-    prevState: {
-      success: boolean;
-      error: string | null;
-    } | null,
-    formData: FormData
-  ) {
+  async function saveTrainingAction(_prevState: any, formData: FormData) {
     try {
-      await addTraining(formData);
+      const created = await addTraining(formData);
+
+      const image = formData.get("imageField");
+
+      if (image && image instanceof File && image.size > 0) {
+        const imgForm = new FormData();
+        imgForm.append("imageFile", image);
+
+        const res = await fetch(
+          `/api/v1/trainings/${created.id}/images/`,
+          {
+            method: "POST",
+            body: imgForm,
+            credentials: "include",
+          }
+        );
+
+        if (!res.ok) {
+          console.error(await res.text());
+          throw new Error("Error uploading image");
+        }
+      }
+
       navigate("/trainings");
+
       return { success: true, error: null };
     } catch (error) {
       console.error(error);
+
       return {
         success: false,
         error: "Failed to create training. Please try again.",

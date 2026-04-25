@@ -27,14 +27,13 @@ public class TrainingMapper {
 
     public Training toDomain(TrainingDTO dto) {
 
-        Training training = new Training();
+    Training training = new Training();
 
-        training.setId(dto.id());
-        training.setName(dto.name());
-        training.setDescription(dto.description());
-        training.setGoal(dto.goal());
-        training.setTime(dto.time());
+    training.setName(dto.name());
+    training.setDescription(dto.description());
+    training.setGoal(dto.goal());
+    training.setTime(dto.time());
 
-        return training;
-    }
+    return training;
+}
 }

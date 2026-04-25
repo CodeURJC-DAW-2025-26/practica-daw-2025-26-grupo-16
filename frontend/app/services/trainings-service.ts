@@ -23,15 +23,28 @@ export async function getTraining(id: string): Promise<TrainingDTO> {
   return await res.json();
 }
 
-export async function addTraining(formData: FormData): Promise<void> {
-  const res = await fetch("/createTraining", {
+export async function addTraining(formData: FormData): Promise<any> {
+  const data = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    goal: formData.get("goal"),
+    time: Number(formData.get("time")),
+  };
+
+  const res = await fetch("/api/v1/trainings/", {
     method: "POST",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
-    throw new Error("Error creating training");
+    throw new Error(await res.text());
   }
+
+  return res.json();
 }
 
 export async function updateTraining(formData: FormData): Promise<void> {

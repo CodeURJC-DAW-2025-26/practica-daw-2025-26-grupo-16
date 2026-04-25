@@ -7,19 +7,37 @@ import { Container, Row, Col, Card, Form } from "react-bootstrap";
 export default function NutritionNew({}: Route.ComponentProps) {
   const navigate = useNavigate();
 
-  async function saveNutritionAction(
-    prevState: {
-      success: boolean;
-      error: string | null;
-    } | null,
-    formData: FormData
-  ) {
+  async function saveNutritionAction(_prevState: any, formData: FormData) {
     try {
-      await addNutrition(formData);
+      const created = await addNutrition(formData);
+
+      const image = formData.get("imageField");
+
+      if (image && image instanceof File && image.size > 0) {
+        const imgForm = new FormData();
+        imgForm.append("imageFile", image);
+
+        const res = await fetch(
+          `/api/v1/nutritions/${created.id}/images/`,
+          {
+            method: "POST",
+            body: imgForm,
+            credentials: "include",
+          }
+        );
+
+        if (!res.ok) {
+          console.error(await res.text());
+          throw new Error("Error uploading image");
+        }
+      }
+
       navigate("/nutritions");
+
       return { success: true, error: null };
     } catch (error) {
       console.error(error);
+
       return {
         success: false,
         error: "Failed to create nutrition. Please try again.",
@@ -114,7 +132,9 @@ Dinner: 120 g salmon + sautéed vegetables`}
             </Card>
 
             {state?.error && (
-              <div className="alert alert-danger">{state.error}</div>
+              <div className="alert alert-danger">
+                {state.error}
+              </div>
             )}
 
             <div className="btn-row">

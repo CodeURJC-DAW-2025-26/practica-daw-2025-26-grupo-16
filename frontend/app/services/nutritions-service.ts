@@ -23,15 +23,28 @@ export async function getNutrition(id: string): Promise<NutritionDTO> {
   return await res.json();
 }
 
-export async function addNutrition(formData: FormData): Promise<void> {
-  const res = await fetch("/createNutrition", {
+export async function addNutrition(formData: FormData): Promise<any> {
+  const data = {
+    name: formData.get("name"),
+    description: formData.get("description"),
+    goal: formData.get("goal"),
+    calories: Number(formData.get("calories")),
+  };
+
+  const res = await fetch("/api/v1/nutritions/", {
     method: "POST",
-    body: formData,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
-    throw new Error("Error creating nutrition");
+    throw new Error(await res.text());
   }
+
+  return res.json();
 }
 
 export async function updateNutrition(formData: FormData): Promise<void> {

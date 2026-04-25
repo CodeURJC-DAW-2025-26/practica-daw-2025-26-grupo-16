@@ -11,6 +11,6 @@ public record TrainingDTO(
     Integer time,
     ImageDTO image,
     Long userId,
-    boolean subscribed) {
+    Boolean subscribed) {
     
 }

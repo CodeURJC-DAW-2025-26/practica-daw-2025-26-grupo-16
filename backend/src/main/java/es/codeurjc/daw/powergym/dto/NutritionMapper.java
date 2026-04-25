@@ -27,14 +27,13 @@ public class NutritionMapper {
 
     public Nutrition toDomain(NutritionDTO dto) {
 
-        Nutrition nutrition = new Nutrition();
+    Nutrition nutrition = new Nutrition();
 
-        nutrition.setId(dto.id());
-        nutrition.setName(dto.name());
-        nutrition.setDescription(dto.description());
-        nutrition.setGoal(dto.goal());
-        nutrition.setCalories(dto.calories());
+    nutrition.setName(dto.name());
+    nutrition.setDescription(dto.description());
+    nutrition.setGoal(dto.goal());
+    nutrition.setCalories(dto.calories());
 
-        return nutrition;
-    }
+    return nutrition;
+}
 }

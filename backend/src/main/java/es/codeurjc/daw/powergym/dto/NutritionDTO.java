@@ -11,6 +11,6 @@ public record NutritionDTO(
     Integer calories,
     ImageDTO image,
     Long userId,
-    boolean subscribed) {
+    Boolean subscribed) {
 }
 
