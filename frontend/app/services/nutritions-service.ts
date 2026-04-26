@@ -1,10 +1,10 @@
 import type NutritionDTO from "~/dtos/NutritionDTO";
 
 const API_URL = "/api/v1/nutritions";
-const API_IMAGES_URL = "/api/images";
+const DEFAULT_PAGE_SIZE = 10;
 
-export async function getNutritions(): Promise<NutritionDTO[]> {
-  const res = await fetch(`${API_URL}/`);
+export async function getNutritions(page = 0, size = DEFAULT_PAGE_SIZE): Promise<NutritionDTO[]> {
+  const res = await fetch(`${API_URL}/?page=${page}&size=${size}`);
 
   if (!res.ok) {
     throw new Error("Error fetching nutritions");

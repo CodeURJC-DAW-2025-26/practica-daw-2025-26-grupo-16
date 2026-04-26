@@ -13,7 +13,9 @@ export class HttpError extends Error {
 }
 
 export async function reqIsLogged(): Promise<UserDTO> {
-  const res = await fetch(`${API_USERS_URL}/me`);
+  const res = await fetch(`${API_USERS_URL}/me`, {
+    credentials: "include",
+  });
 
   if (!res.ok) {
     throw new HttpError(res.status);
@@ -26,6 +28,7 @@ export async function logIn(user: string, pass: string): Promise<void> {
   const res = await fetch(`${API_AUTH_URL}/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({ username: user, password: pass }),
   });
 
@@ -37,6 +40,7 @@ export async function logIn(user: string, pass: string): Promise<void> {
 export async function logOut(): Promise<void> {
   const res = await fetch(`${API_AUTH_URL}/logout`, {
     method: "POST",
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -52,6 +56,7 @@ export async function registerUser(
   const res = await fetch(`${API_USERS_URL}/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
+    credentials: "include",
     body: JSON.stringify({
       name: fullName,
       email,

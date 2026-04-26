@@ -1,10 +1,10 @@
 import type TrainingDTO from "~/dtos/TrainingDTO";
 
 const API_URL = "/api/v1/trainings";
-const API_PUBLIC_URL = "/trainings";
+const DEFAULT_PAGE_SIZE = 10;
 
-export async function getTrainings(): Promise<TrainingDTO[]> {
-  const res = await fetch(`${API_URL}/`);
+export async function getTrainings(page = 0, size = DEFAULT_PAGE_SIZE): Promise<TrainingDTO[]> {
+  const res = await fetch(`${API_URL}/?page=${page}&size=${size}`);
 
   if (!res.ok) {
     throw new Error("Error fetching trainings");
