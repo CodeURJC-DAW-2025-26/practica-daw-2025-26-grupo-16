@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import type { Route } from "./+types/nutrition-detail";
-import { getNutrition, deleteNutrition } from "~/services/nutritions-service";
+import { getNutrition, deleteNutrition, downloadNutritionPdf } from "~/services/nutritions-service";
 import {
   Alert,
   Button,
@@ -150,13 +150,12 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
             </Card>
 
             <div className="btn-row">
-              <Link
-                to={`/nutritions/${nutrition.id}/pdf`}
-                target="_blank"
+              <button
                 className="pg-btn btn-primary"
+                onClick={() => downloadNutritionPdf(nutrition.id)}
               >
                 Download PDF
-              </Link>
+              </button>
 
               {(user?.roles.includes("ROLE_USER") || user?.roles.includes("ROLE_ADMIN")) && (
                 <Link

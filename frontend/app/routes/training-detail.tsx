@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router";
 import type { Route } from "./+types/training-detail";
-import { getTraining, deleteTraining } from "~/services/trainings-service";
+import { getTraining, deleteTraining, downloadTrainingPdf } from "~/services/trainings-service";
 import {
   Alert,
   Button,
@@ -150,13 +150,12 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
             </Card>
 
             <div className="btn-row">
-              <Link
-                to={`/trainings/${training.id}/pdf`}
-                target="_blank"
+              <button
                 className="pg-btn btn-primary"
+                onClick={() => downloadTrainingPdf(training.id)}
               >
                 Download PDF
-              </Link>
+              </button>
 
               {(user?.roles.includes("ROLE_USER") || user?.roles.includes("ROLE_ADMIN")) && (
                 <Link

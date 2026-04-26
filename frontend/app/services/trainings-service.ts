@@ -130,8 +130,10 @@ export async function unsubscribeTraining(id: number): Promise<void> {
   }
 }
 
-export async function downloadTrainingPdf(id: number): Promise<Blob> {
-  const res = await fetch(`${API_URL}/${id}/pdf`);
+export async function downloadTrainingPdf(id: number): Promise<void> {
+  const res = await fetch(`${API_URL}/${id}/pdf`, {
+    credentials: "include",
+  });
 
   if (!res.ok) {
     const text = await res.text();
@@ -139,5 +141,17 @@ export async function downloadTrainingPdf(id: number): Promise<Blob> {
     throw new Error("Error downloading PDF");
   }
 
-  return await res.blob();
+  const blob = await res.blob();
+
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `training-${id}.pdf`;
+
+  document.body.appendChild(a);
+  a.click();
+
+  a.remove();
+  window.URL.revokeObjectURL(url);
 }
