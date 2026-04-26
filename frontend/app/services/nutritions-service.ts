@@ -47,43 +47,54 @@ export async function addNutrition(formData: FormData): Promise<any> {
   return res.json();
 }
 
-export async function updateNutrition(formData: FormData): Promise<void> {
-  const res = await fetch("/editNutrition", {
-    method: "POST",
-    body: formData,
+export async function updateNutrition(id: number): Promise<void> {
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "PUT",
+    credentials: "include",
   });
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error("Update error:", text);
     throw new Error("Error updating nutrition");
   }
 }
 
 export async function deleteNutrition(id: number): Promise<void> {
-  const res = await fetch(`/deleteNutrition/${id}`, {
-    method: "POST",
+  const res = await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+    credentials: "include",
   });
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error("Delete error:", text);
     throw new Error("Error deleting nutrition");
   }
 }
 
 export async function subscribeNutrition(id: number): Promise<void> {
-  const res = await fetch(`/subscribeNutrition/${id}`, {
+  const res = await fetch(`${API_URL}/${id}/subscribe`, {
     method: "POST",
+    credentials: "include",
   });
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error("Subscribe error:", text);
     throw new Error("Error subscribing nutrition");
   }
 }
 
 export async function unsubscribeNutrition(id: number): Promise<void> {
-  const res = await fetch(`/unsubscribeNutrition/${id}`, {
-    method: "POST",
+  const res = await fetch(`${API_URL}/${id}/subscribe`, {
+    method: "DELETE",
+    credentials: "include",
   });
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error("Unsubscribe error:", text);
     throw new Error("Error unsubscribing nutrition");
   }
 }
@@ -92,6 +103,8 @@ export async function downloadNutritionPdf(id: number): Promise<Blob> {
   const res = await fetch(`${API_URL}/${id}/pdf`);
 
   if (!res.ok) {
+    const text = await res.text();
+    console.error("Download error:", text);
     throw new Error("Error downloading PDF");
   }
 
