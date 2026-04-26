@@ -204,6 +204,8 @@ public class UserWebController {
 		model.addAttribute("averageCalories", averageCalories);
 		model.addAttribute("consistency", consistency);
 		model.addAttribute("level", level);
+		model.addAttribute("subscribedTrainings", trainings);
+		model.addAttribute("subscribedNutritions", nutritions);
 
 		return "progress";
 	}

@@ -52,6 +52,42 @@
 			<canvas id="progressChart" height="120"></canvas>
 		</div>
 	</div>
+
+	<div class="grid grid-2 mb-4">
+		<div class="card">
+			<div class="card-header">Subscribed Trainings</div>
+			<div class="card-body">
+				{{#subscribedTrainings}}
+					<div class="list-group mb-3">
+						<div class="list-group-item">
+							<div class="fw-bold">{{name}}</div>
+							<div class="small text-muted">{{goal}} · {{time}} min</div>
+						</div>
+					</div>
+				{{/subscribedTrainings}}
+				{{^subscribedTrainings}}
+					<p class="text-muted mb-0">No training subscriptions yet.</p>
+				{{/subscribedTrainings}}
+			</div>
+		</div>
+
+		<div class="card">
+			<div class="card-header">Subscribed Nutritions</div>
+			<div class="card-body">
+				{{#subscribedNutritions}}
+					<div class="list-group mb-3">
+						<div class="list-group-item">
+							<div class="fw-bold">{{name}}</div>
+							<div class="small text-muted">{{goal}} · {{calories}} kcal</div>
+						</div>
+					</div>
+				{{/subscribedNutritions}}
+				{{^subscribedNutritions}}
+					<p class="text-muted mb-0">No nutrition subscriptions yet.</p>
+				{{/subscribedNutritions}}
+			</div>
+		</div>
+	</div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
