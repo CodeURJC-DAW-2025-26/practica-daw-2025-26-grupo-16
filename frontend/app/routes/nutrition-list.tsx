@@ -23,9 +23,6 @@ export default function NutritionList({ loaderData }: Route.ComponentProps) {
 
         {nutritions.map((nutrition: NutritionDTO) => {
 
-          console.log("Nutrition:", nutrition);
-          console.log("Nutrition image:", nutrition.image);
-
           return (
             <div className="pg-card" key={nutrition.id}>
 

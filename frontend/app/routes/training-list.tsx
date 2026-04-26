@@ -23,9 +23,6 @@ export default function TrainingList({ loaderData }: Route.ComponentProps) {
 
         {trainings.map((training: TrainingDTO) => {
 
-          console.log("Training:", training);
-          console.log("Training image:", training.image);
-
           return (
             <div className="pg-card" key={training.id}>
 
