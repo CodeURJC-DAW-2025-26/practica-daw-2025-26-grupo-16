@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useActionState } from "react";
 import type { Route } from "./+types/nutrition-edit";
-import { getNutrition, updateNutrition } from "~/services/nutritions-service";
+import { getNutrition, updateNutrition, updateNutritionImage } from "~/services/nutritions-service";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const nutrition = await getNutrition(params.id!);
@@ -12,12 +12,15 @@ export default function NutritionEdit({ loaderData }: Route.ComponentProps) {
   const nutrition = loaderData;
   const navigate = useNavigate();
 
-  async function saveNutritionAction(
-    prevState: { success: boolean; error: string | null } | null,
-    formData: FormData
-  ) {
+  async function saveNutritionAction(prevState: { success: boolean; error: string | null } | null, formData: FormData) {
     try {
-      await updateNutrition(formData);
+      await updateNutrition(nutrition.id, formData)
+
+      const file = formData.get("imageField");
+
+      if (file && file instanceof File && file.size > 0) {
+        await updateNutritionImage(nutrition.id, file);
+      }
 
       navigate(`/nutritions/${nutrition.id}`);
 
@@ -41,7 +44,6 @@ export default function NutritionEdit({ loaderData }: Route.ComponentProps) {
       <h2>Edit Nutrition</h2>
 
       <form action={formAction}>
-        {/* ID oculto (IMPORTANTE) */}
         <input type="hidden" name="id" defaultValue={nutrition.id} />
 
         <div className="mb-3">
@@ -91,10 +93,6 @@ export default function NutritionEdit({ loaderData }: Route.ComponentProps) {
         <div className="mb-3">
           <label>Change Image</label>
           <input type="file" name="imageField" className="form-control" />
-        </div>
-
-        <div className="mb-3">
-          <input type="checkbox" name="removeImage" /> Remove current image
         </div>
 
         {state?.error && (

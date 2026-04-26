@@ -31,7 +31,7 @@ export async function addTraining(formData: FormData): Promise<any> {
     time: Number(formData.get("time")),
   };
 
-  const res = await fetch("/api/v1/trainings/", {
+  const res = await fetch(`${API_URL}/`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -47,16 +47,47 @@ export async function addTraining(formData: FormData): Promise<any> {
   return res.json();
 }
 
-export async function updateTraining(id: number): Promise<void> {
+export async function updateTraining(id: number, formData: FormData): Promise<void> {
+  const existing = await getTraining(String(id));
+  
+    const data = {
+      id,
+      name: String(formData.get("name")),
+      description: String(formData.get("description")),
+      goal: String(formData.get("goal")),
+      time: Number(formData.get("time")),
+      subscribed: existing.subscribed,
+    };
+
   const res = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
     credentials: "include",
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
     const text = await res.text();
     console.error("Update error:", text);
     throw new Error("Error updating training");
+  }
+}
+
+export async function updateTrainingImage(id: number, file: File): Promise<void> {
+  const formData = new FormData();
+  formData.append("imageFile", file);
+
+  const res = await fetch(`${API_URL}/${id}/images`, {
+    method: "PUT",
+    credentials: "include",
+    body: formData,
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text);
   }
 }
 

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router";
 import { useActionState } from "react";
 import type { Route } from "./+types/training-edit";
-import { getTraining, updateTraining } from "~/services/trainings-service";
+import { getTraining, updateTraining, updateTrainingImage } from "~/services/trainings-service";
 
 export async function clientLoader({ params }: Route.ClientLoaderArgs) {
   const training = await getTraining(params.id!);
@@ -12,12 +12,15 @@ export default function TrainingEdit({ loaderData }: Route.ComponentProps) {
   const training = loaderData;
   const navigate = useNavigate();
 
-  async function saveTrainingAction(
-    prevState: { success: boolean; error: string | null } | null,
-    formData: FormData
-  ) {
+  async function saveTrainingAction(prevState: { success: boolean; error: string | null } | null, formData: FormData) {
     try {
-      await updateTraining(formData);
+      await updateTraining(training.id, formData);
+
+      const file = formData.get("imageField");
+  
+      if (file && file instanceof File && file.size > 0) {
+        await updateTrainingImage(training.id, file);
+      }
 
       navigate(`/trainings/${training.id}`);
 
@@ -41,7 +44,6 @@ export default function TrainingEdit({ loaderData }: Route.ComponentProps) {
       <h2>Edit Training</h2>
 
       <form action={formAction}>
-        {/* ID oculto (IMPORTANTE) */}
         <input type="hidden" name="id" defaultValue={training.id} />
 
         <div className="mb-3">
@@ -91,10 +93,6 @@ export default function TrainingEdit({ loaderData }: Route.ComponentProps) {
         <div className="mb-3">
           <label>Change Image</label>
           <input type="file" name="imageField" className="form-control" />
-        </div>
-
-        <div className="mb-3">
-          <input type="checkbox" name="removeImage" /> Remove current image
         </div>
 
         {state?.error && (
