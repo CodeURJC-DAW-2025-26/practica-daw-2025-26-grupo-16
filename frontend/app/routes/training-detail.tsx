@@ -158,7 +158,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                 Download PDF
               </Link>
 
-              {user?.roles.includes("USER") && (
+              {(user?.roles.includes("ROLE_USER") || user?.roles.includes("ROLE_ADMIN")) && (
                 <Link
                   to={`/trainings/${training.id}/edit`}
                   className="pg-btn btn-primary"
@@ -186,7 +186,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                   </button>
                 ))}
 
-              {user?.roles.includes("ADMIN") && (
+              {user?.roles.includes("ROLE_ADMIN") && (
                 <button
                   className="pg-btn btn-primary"
                   onClick={handleOpenDeleteDialog}
