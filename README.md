@@ -445,34 +445,35 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 ### **Preparación del Entorno de Desarrollo**
 
 #### **Requisitos Previos**
-- **Node.js**: versión 18.x o superior
-- **npm**: versión 9.x o superior (se instala con Node.js)
-- **Git**: para clonar el repositorio
+- **Node.js**: versión 20.x o superior
+- **npm**: versión 10.x o superior (incluido con Node.js)
+- **Java**: version 21.x o superior
+- **Maven**: version 3.9.x o superior
+- **MySQL**: version 8.0.x o superior
 
 #### **Pasos para configurar el entorno de desarrollo**
 
-1. **Instalar Node.js y npm**
-   
-   Descarga e instala Node.js desde [https://nodejs.org/](https://nodejs.org/)
-   
-   Verifica la instalación:
-   ```bash
-   node --version
-   npm --version
-   ```
+1. **Clonar el repositorio** (si no lo has hecho ya)
+   git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16.git
+   cd practica-daw-2025-26-grupo-16
 
-2. **Clonar el repositorio** (si no lo has hecho ya)
-   ```bash
-   git clone https://github.com/[usuario]/[nombre-repositorio].git
-   cd [nombre-repositorio]
-   ```
+2. **Configurar y arrancar el backend (Spring Boot)**
+  -e MYSQL_ROOT_PASSWORD=DAW2026
+  -e MYSQL_DATABASE=DAW16 \
 
-3. **Navegar a la carpeta del proyecto React**
-   ```bash
+3. **Configurar y arrancar el frontend (React SPA)**
    cd frontend
-   ```
+   npm install       # instala las dependencias (solo la primera vez)
+   npm run dev       # arranca el servidor de desarrollo con Vite
 
-4. **AQUÍ LOS SIGUIENTES PASOS**
+4. **Comandos útiles del frontend**
+  npm run dev : Servidor de desarrollo con hot reload (HMR)
+  npm run typecheck :	Verifica los tipos TypeScript
+
+5. **Despliegue**
+  La aplicación queda accesible en:
+  Web MVC (Mustache): https://localhost:8443/
+  Web SPA (React): https://localhost:8443/new/
 
 ### **Diagrama de Clases y Templates de la SPA**
 
