@@ -6,8 +6,8 @@ export default defineConfig({
   plugins: [reactRouter(), tsconfigPaths()],
   server: {
     proxy: {
-      "/api": {
-        target: "https://localhost:8443/api",
+			"/api": {
+				target: "https://localhost:8443",
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ""),
         secure: false

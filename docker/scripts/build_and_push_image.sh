@@ -9,9 +9,10 @@ fi
 DOCKERHUB_USER="$1"
 TAG="$2"
 IMAGE="${DOCKERHUB_USER}/powergym:${TAG}"
+ROOT_DIR="$(cd "$(dirname "$0")/../.." && pwd)"
 
 echo "Building image ${IMAGE}..."
-docker build -t "${IMAGE}" -f backend/Dockerfile backend
+docker build -t "${IMAGE}" -f backend/Dockerfile "${ROOT_DIR}"
 
 echo "Pushing image ${IMAGE}..."
 docker push "${IMAGE}"
