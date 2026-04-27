@@ -454,23 +454,28 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 #### **Pasos para configurar el entorno de desarrollo**
 
 1. **Clonar el repositorio** (si no lo has hecho ya)
+
    git clone https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16.git
    cd practica-daw-2025-26-grupo-16
 
 2. **Configurar y arrancar el backend (Spring Boot)**
-  -e MYSQL_ROOT_PASSWORD=DAW2026
+
+   -e MYSQL_ROOT_PASSWORD=DAW2026
   -e MYSQL_DATABASE=DAW16 \
 
 3. **Configurar y arrancar el frontend (React SPA)**
+
    cd frontend
    npm install       # instala las dependencias (solo la primera vez)
    npm run dev       # arranca el servidor de desarrollo con Vite
 
 4. **Comandos útiles del frontend**
+
   npm run dev : Servidor de desarrollo con hot reload (HMR)
   npm run typecheck :	Verifica los tipos TypeScript
 
 5. **Despliegue**
+
   La aplicación queda accesible en:
   Web MVC (Mustache): https://localhost:8443/
   Web SPA (React): https://localhost:8443/new/
@@ -483,17 +488,17 @@ Diagrama mostrando los componentes React, hooks personalizados, servicios y sus 
 
 ### **Participación de Miembros en la Práctica 3**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Adrián Esteban Martín**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Implement function edit](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/96c73d6730bb1e5b62ce5948c042df6fe2274837)  | [nutrition-detail.tsx](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/frontend/app/routes/nutrition-detail.tsx)   |
+|2| [Implement delete function](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/b1d5b6ed049e92c541b1f0e604b946e611ef7110)  | [training-detail.tsx](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/frontend/app/routes/training-detail.tsx)   |
+|3| [Implement subscribe/unsubscribe nutrition](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/cdfc996d12322cd7023e60625344e944961bb9cd)  | [profileUser.tsx](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/frontend/app/routes/profileUser.tsx)   |
+|4| [Implement the creation of new entities](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/751ab3d09eadc39b64240e472b2285b711fa8090)  | [nutritions-service.ts](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/frontend/app/services/nutritions-service.ts)   |
+|5| [Implemente users management](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/3428935dc45ec9062956880ca1bc228f4c1947ca)  | [trainings-service.ts](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/frontend/app/services/trainings-service.ts)   |
 
 ---
 
