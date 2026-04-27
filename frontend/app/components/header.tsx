@@ -46,8 +46,8 @@ export function Header() {
 
               {user && (
                 <>
-                  {user.roles.includes("ADMIN") && (
-                    <Link to="/admin/users" className="pg-btn btn-primary">
+                  {user.roles.includes("ROLE_ADMIN") && (
+                    <Link to="/admin-users" className="pg-btn btn-primary">
                       Users
                     </Link>
                   )}
