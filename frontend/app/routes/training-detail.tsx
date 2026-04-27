@@ -24,6 +24,8 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
   const { user } = useUserStore();
   const training = loaderData;
 
+  const isOwner = user?.id === training.userId;
+
   const navigate = useNavigate();
   const revalidator = useRevalidator();
 
@@ -157,7 +159,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                 Download PDF
               </button>
 
-              {(user?.roles.includes("ROLE_USER") || user?.roles.includes("ROLE_ADMIN")) && (
+              {user && (user.roles.includes("ROLE_ADMIN") || isOwner) && (
                 <Link
                   to={`/trainings/${training.id}/edit`}
                   className="pg-btn btn-primary"
@@ -185,7 +187,7 @@ export default function TrainingDetail({ loaderData }: Route.ComponentProps) {
                   </button>
                 ))}
 
-              {user?.roles.includes("ROLE_ADMIN") && (
+              {user && (user.roles.includes("ROLE_ADMIN") || isOwner) && (
                 <button
                   className="pg-btn btn-primary"
                   onClick={handleOpenDeleteDialog}
