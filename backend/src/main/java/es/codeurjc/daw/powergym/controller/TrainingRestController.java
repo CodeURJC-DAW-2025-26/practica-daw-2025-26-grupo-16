@@ -242,4 +242,15 @@ public class TrainingRestController {
 						"attachment; filename=\"" + fileName + "\"")
 				.body(pdf);
 	}
+
+	@GetMapping("/subscribed")
+	public List<TrainingDTO> getSubscribedTrainings() {
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
+
+		List<Training> trainings = trainingService.findBySubscriber(user);
+
+		return trainings.stream().map(trainingMapper::toDTO).toList();
+	}
 }

@@ -16,6 +16,7 @@ export default [
     route("training-new", "routes/training-new.tsx"),
 
     route("progress", "routes/progress.tsx"),
+    route("profileUser", "routes/profileUser.tsx"),
 
     route("login", "routes/login.tsx"),
     route("register", "routes/register.tsx"),

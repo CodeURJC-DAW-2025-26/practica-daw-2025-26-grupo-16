@@ -279,4 +279,15 @@ public class NutritionRestController {
 						"attachment; filename=\"" + fileName + "\"")
 				.body(pdf);
 	}
+
+	@GetMapping("/subscribed")
+	public List<NutritionDTO> getSubscribedNutritions() {
+		User user = userService.findByEmail(
+			SecurityContextHolder.getContext().getAuthentication().getName()
+		);
+
+		List<Nutrition> nutritions = nutritionService.findBySubscriber(user);
+
+		return nutritions.stream().map(nutritionMapper::toDTO).toList();
+	}
 }
