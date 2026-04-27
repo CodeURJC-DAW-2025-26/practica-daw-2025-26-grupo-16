@@ -1,14 +1,18 @@
-import { Link } from "react-router";
-import { useUserStore } from "~/stores/user-store";
+import { Link, useNavigate } from "react-router";
+import { useUserGym } from "~/gyms/user-gym";
 
 export function Header() {
-  const { user } = useUserStore();
+  const { user, logoutUser } = useUserGym();
+  const navigate = useNavigate();
+
+  async function handleLogout() {
+    await logoutUser();
+    navigate("/");
+  }
 
   return (
     <header className="header">
-
       <nav className="navbar navbar-expand-lg">
-
         <div className="container-fluid">
 
           <span className="logo">⚡ PowerGym</span>
@@ -43,28 +47,28 @@ export function Header() {
               {user && (
                 <>
                   {user.roles.includes("ADMIN") && (
-                    <Link to="/admin/users" className="pg-btn btn-primary">Users</Link>
+                    <Link to="/admin/users" className="pg-btn btn-primary">
+                      Users
+                    </Link>
                   )}
 
                   <Link to="/progress" className="pg-btn btn-primary">Progress</Link>
                   <Link to="/profileUser" className="pg-btn btn-primary">Profile</Link>
 
-                  <form action="/logout" method="post" className="d-inline">
-                    <button type="submit" className="pg-btn btn-primary">
-                      Log Out
-                    </button>
-                  </form>
+                  <button
+                    className="pg-btn btn-primary"
+                    onClick={handleLogout}
+                  >
+                    Log Out
+                  </button>
                 </>
               )}
 
             </div>
 
           </div>
-
         </div>
-
       </nav>
-
     </header>
   );
 }

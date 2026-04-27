@@ -12,7 +12,7 @@ import {
   Col,
   Form,
 } from "react-bootstrap";
-import { useUserStore } from "~/stores/user-store";
+import { useUserGym } from "~/gyms/user-gym";
 import { useState } from "react";
 import { useRevalidator } from "react-router";
 
@@ -21,7 +21,7 @@ export async function clientLoader({ params }: Route.ClientLoaderArgs) {
 }
 
 export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
-  const { user } = useUserStore();
+  const { user } = useUserGym();
   const nutrition = loaderData;
 
   const isOwner = user?.id === nutrition.userId;

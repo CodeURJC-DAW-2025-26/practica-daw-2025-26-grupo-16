@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import type { Route } from "./+types/nutrition-list";
 import { getNutritions } from "~/services/nutritions-service";
 import type NutritionDTO from "~/dtos/NutritionDTO";
-import { useUserStore } from "~/stores/user-store";
+import { useUserGym } from "~/gyms/user-gym";
 import { useState } from "react";
 
 const PAGE_SIZE = 10;
@@ -16,7 +16,7 @@ export default function NutritionList({ loaderData }: Route.ComponentProps) {
   const [page, setPage] = useState(0);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   const [hasMore, setHasMore] = useState(loaderData.length >= PAGE_SIZE);
-  let { user } = useUserStore();
+  let { user } = useUserGym();
 
   async function handleLoadMore() {
     if (isLoadingMore || !hasMore) {

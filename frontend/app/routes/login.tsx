@@ -1,18 +1,17 @@
-import { FormEvent, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import { Alert, Button, Container, Form } from "react-bootstrap";
-import { useUserStore } from "~/stores/user-store";
+import { useUserGym } from "~/gyms/user-gym";
 
 export default function LoginPage() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const { loginUser, loginError } = useUserStore();
+  const { loginUser, loginError } = useUserGym();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isSubmitting, setSubmitting] = useState(false);
 
-  // Pre-fill email from URL query parameter (when redirected after email change)
   useEffect(() => {
     const emailParam = searchParams.get("email");
     if (emailParam) {
@@ -20,13 +19,13 @@ export default function LoginPage() {
     }
   }, [searchParams]);
 
-  async function handleSubmit(event: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setSubmitting(true);
 
     try {
       await loginUser(email, password);
-      const { user } = useUserStore.getState();
+      const { user } = useUserGym.getState();
 
       if (user) {
         navigate("/");
