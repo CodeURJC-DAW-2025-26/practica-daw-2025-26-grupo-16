@@ -17,6 +17,8 @@ export default [
 
     route("progress", "routes/progress.tsx"),
     route("profileUser", "routes/profileUser.tsx"),
+    route("admin-users", "routes/admin/users.tsx"),
+    route("admin/users/:id", "routes/admin/info-users.tsx"),
 
     route("login", "routes/login.tsx"),
     route("register", "routes/register.tsx"),

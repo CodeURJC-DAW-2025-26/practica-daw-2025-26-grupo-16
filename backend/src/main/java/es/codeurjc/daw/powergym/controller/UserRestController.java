@@ -75,6 +75,26 @@ public class UserRestController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{id}/trainings")
+    public ResponseEntity<List<TrainingDTO>> getUserTrainings(@PathVariable long id) {
+        return userService.findById(id)
+                .map(user -> {
+                    List<Training> trainings = trainingService.findBySubscriber(user);
+                    return ResponseEntity.ok(trainings.stream().map(trainingMapper::toDTO).toList());
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @GetMapping("/{id}/nutritions")
+    public ResponseEntity<List<NutritionDTO>> getUserNutritions(@PathVariable long id) {
+        return userService.findById(id)
+                .map(user -> {
+                    List<Nutrition> nutritions = nutritionService.findBySubscriber(user);
+                    return ResponseEntity.ok(nutritions.stream().map(nutritionMapper::toDTO).toList());
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     @GetMapping("/me")
     public ResponseEntity<UserDTO> getCurrentUser(Authentication authentication) {
         if (authentication == null || authentication.getName() == null) {
