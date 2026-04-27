@@ -133,7 +133,6 @@ public class UserRestController {
 
         userService.save(currentUser);
 
-        // If email changed, regenerate tokens with new email
         if (emailChanged) {
             try {
                 UserDetails userDetails = userDetailsService.loadUserByUsername(currentUser.getEmail());
@@ -142,16 +141,13 @@ public class UserRestController {
                 Cookie cookie = new Cookie("ACCESS_TOKEN", newAccessToken);
                 cookie.setHttpOnly(true);
                 cookie.setPath("/");
-                cookie.setMaxAge(3600); // 1 hour
+                cookie.setMaxAge(3600);
                 response.addCookie(cookie);
             } catch (Exception e) {
-                // Log the error but don't fail the request
                 org.slf4j.LoggerFactory.getLogger(getClass())
                         .warn("Could not refresh JWT token after email change", e);
             }
         }
-
-        // Re-fetch user from database to ensure we return the updated data with image
         User updatedUser = userService.findById(currentUser.getId()).orElse(currentUser);
         return ResponseEntity.ok(userMapper.toDTOWithoutPassword(updatedUser));
     }

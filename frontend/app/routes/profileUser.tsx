@@ -31,7 +31,7 @@ export default function ProfileUser({
   const navigate = useNavigate();
   const [name, setName] = useState(loaderData.user?.name || "");
   const [email, setEmail] = useState(loaderData.user?.email || "");
-  const [originalEmail, setOriginalEmail] = useState(loaderData.user?.email || ""); // Store original email for comparison
+  const [originalEmail, setOriginalEmail] = useState(loaderData.user?.email || "");
   const [image, setImage] = useState<File | null>(null);
   const [profileImage, setProfileImage] = useState(loaderData.profileImage);
   const [imageVersion, setImageVersion] = useState<number>(Date.now());
@@ -97,28 +97,23 @@ export default function ProfileUser({
 
       const updatedUser = await res.json();
       console.log("Updated user:", updatedUser);
-      
-      // Check if email changed - redirect to login immediately
+
       if (email !== originalEmail) {
-        // Use window.location for a full page redirect to ensure clean state
         window.location.href = `/login?email=${encodeURIComponent(email)}`;
         return;
       }
-      
-      // Update local state with the returned data
+
       setName(updatedUser.name || name);
       setEmail(updatedUser.email || email);
-      
-      // Handle image update - use the new image ID from response
+
       if (updatedUser.image && updatedUser.image.id) {
         setProfileImage(updatedUser.image);
         setImageVersion(Date.now());
       } else if (image) {
-        // If no image returned but we sent one, force refresh
         setImageVersion(Date.now());
       }
       
-      setImage(null); // Clear the file input
+      setImage(null); 
       setSuccess("Profile updated successfully");
     } catch (err) {
       console.error(err);
