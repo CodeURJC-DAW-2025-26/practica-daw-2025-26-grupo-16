@@ -24,6 +24,8 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
   const { user } = useUserStore();
   const nutrition = loaderData;
 
+  const isOwner = user?.id === nutrition.userId;
+
   const navigate = useNavigate();
   const revalidator = useRevalidator();
 
@@ -157,7 +159,7 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                 Download PDF
               </button>
 
-              {(user?.roles.includes("ROLE_USER") || user?.roles.includes("ROLE_ADMIN")) && (
+              {user && (user.roles.includes("ROLE_ADMIN") || isOwner) && (
                 <Link
                   to={`/nutritions/${nutrition.id}/edit`}
                   className="pg-btn btn-primary"
@@ -185,7 +187,7 @@ export default function NutritionDetail({ loaderData }: Route.ComponentProps) {
                   </button>
                 ))}
 
-              {user?.roles.includes("ROLE_ADMIN") && (
+              {user && (user.roles.includes("ROLE_ADMIN") || isOwner) && (
                 <button
                   className="pg-btn btn-primary"
                   onClick={handleOpenDeleteDialog}
