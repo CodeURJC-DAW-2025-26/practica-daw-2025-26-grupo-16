@@ -119,7 +119,9 @@ public class WebSecurityConfig {
             .requestMatchers("/", "/login", "/loginerror", "/register", "/error").permitAll()
             .requestMatchers("/trainings", "/trainings/**", "/nutritions", "/nutritions/**").permitAll()
             .requestMatchers("/images/**", "/assets/**", "/css/**", "/js/**", "/favicon.ico").permitAll()
-            // PRIVATE PAGES
+            // SPA ROUTES - Accessible to everyone (auth handled by React Router)
+            .requestMatchers("/new", "/new/**").permitAll()
+            // PRIVATE PAGES (Legacy routes, kept for backward compatibility)
             .requestMatchers("/createTraining/**").hasAnyRole("USER")
             .requestMatchers("/editTraining").hasAnyRole("ADMIN", "USER")
             .requestMatchers("/editTraining/**").hasAnyRole("ADMIN", "USER")
@@ -142,11 +144,11 @@ public class WebSecurityConfig {
         .formLogin(form -> form
             .loginPage("/login")
             .failureUrl("/loginerror")
-            .defaultSuccessUrl("/")
+            .defaultSuccessUrl("/new/", true)
             .permitAll())
         .logout(logout -> logout
             .logoutUrl("/logout")
-            .logoutSuccessUrl("/")
+            .logoutSuccessUrl("/new/")
             .permitAll());
 
         return http.build();

@@ -30,7 +30,7 @@
 
             <div class="alert alert-danger text-center">
                 <h4>Error {{status}} - {{error}}</h4>
-                <p>{{message}}</p>
+                <p>{{#message}}{{message}}{{/message}}{{^message}}Unexpected request error{{/message}}</p>
             </div>
 
             <div class="text-center">
