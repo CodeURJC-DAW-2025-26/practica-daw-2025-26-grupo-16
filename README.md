@@ -502,17 +502,17 @@ Diagrama mostrando los componentes React, hooks personalizados, servicios y sus 
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - [Laura Pineda Ballesteros]**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [SPA and background image frontend fix](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/f2bf14c4179b0f2eb8faf244e3ff391f67146bc4)  | [login-service.ts](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/f2bf14c4179b0f2eb8faf244e3ff391f67146bc4#diff-5401a61f154480d7736b4b9783497dc50314b95c5e8b4e60ade74cc773d1eb03URL_archivo_1)   |
+|2| [Error handling and fallback controller](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/7b52814f987a3ba06594421bbd34cc5a17d70261)  | [FallbackController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/7b52814f987a3ba06594421bbd34cc5a17d70261#diff-3015d32b3e8a5a9838552d2de5035839c30c19f6966ef9cb4d082c3e83c58dc4)   |
+|3| [User auth and registration](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/d875be49b7ff1ebd637bcb595efd0b8c39c9a18f)  | [login.tsx](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/d875be49b7ff1ebd637bcb595efd0b8c39c9a18f#diff-0c53fd023f612cd77b500c70166c4799d96da6ab8a7f7c7839f8c69be24a0c39)   |
+|4| [Docker setup](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/4ac70702ec0d6b29c5d5e5b6301d7a008e8a0655)  | [Dockerfile](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/4ac70702ec0d6b29c5d5e5b6301d7a008e8a0655#diff-fed51f49a9f26cb93cc870efdc9419d425b9422354ae41bb651c3333c8bff486)   |
+|5| [Progress tracking](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/480128e4973c7f0c038f762a4683a93ab46b7992)  | [progress.tsx](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/480128e4973c7f0c038f762a4683a93ab46b7992#diff-04b5519ad3156f837dc27003acde982bff0ac68987418476428dbf74079d9baf)   |
 
 ---
 
