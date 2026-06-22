@@ -23,6 +23,6 @@ else
 fi
 
 echo "Deploying on ${REMOTE} using ${OCI_REF} (${MODE})..."
-ssh "${REMOTE}" "DDL_AUTO=${DDL_AUTO} docker compose -f oci://${OCI_REF} up -d"
+ssh -i ../../appWeb16/ssh-keys/appWeb16.key "${REMOTE}" "sudo -E env DOCKERHUB_USER=${DOCKERHUB_USER} APP_IMAGE_TAG=${TAG} DDL_AUTO=${DDL_AUTO} docker compose -f oci://${OCI_REF} up -d"
 
 echo "Deployment command sent."
