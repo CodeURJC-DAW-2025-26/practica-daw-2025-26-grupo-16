@@ -331,10 +331,10 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 #### **Pasos para construir y publicar la imagen:**
 
 1. **Navegar al directorio de Docker**:
-   cd practica-daw-2025-26-grupo-16
+   cd practica-daw-2025-26-grupo-16/docker
 
 2. **Construir la imagen Docker en local**:
-  
+  ./scripts/build_and_push_image.sh aadri2003 v1
 
 3. **Publicar la imagen en DockerHub**:
 
@@ -365,7 +365,6 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 5. **Comprobar los contenedores**:
   sudo docker ps
 
-6. 
 
 ### **URL de la Aplicación Desplegada**
 
@@ -380,31 +379,31 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 
 ### **Participación de Miembros en la Práctica 2**
 
-#### **Alumno 1 - [Nombre Completo]**
+#### **Alumno 1 - Adrián Esteban Martín**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [Initialize DTOs and mappers](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/921db2393fddc4e3588d51ab8cf118da32c1bdbb)  | [NutritionRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/NutritionRestController.java)   |
+|2| [Start of API REST](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/62c16907ca38b945f03b38cfd8f487a2d6593e21)  | [TrainingRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingRestController.java)   |
+|3| [Add user endpoint](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/2e877fc352fb10a96bacb3da74c924eb993af4a1)  | [UserRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/UserRestController.java)   |
+|4| [Implement training endpoints and fix others](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/2d4ba34e8c04243376b29b36876d5f4eae9d04b1)  | [NutritionDTO.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/dto/NutritionDTO.java)   |
+|5| [Add image permissions](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/90dc4381e2cf2e16fa6a79d8f7ba8357974b44d3)  | [TrainingDTO.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/dto/TrainingDTO.java)   |
 
 ---
 
-#### **Alumno 2 - [Nombre Completo]**
+#### **Alumno 2 - Laura Pineda Ballesteros**
 
 [Descripción de las tareas y responsabilidades principales del alumno en el proyecto]
 
 | Nº    | Commits      | Files      |
 |:------------: |:------------:| :------------:|
-|1| [Descripción commit 1](URL_commit_1)  | [Archivo1](URL_archivo_1)   |
-|2| [Descripción commit 2](URL_commit_2)  | [Archivo2](URL_archivo_2)   |
-|3| [Descripción commit 3](URL_commit_3)  | [Archivo3](URL_archivo_3)   |
-|4| [Descripción commit 4](URL_commit_4)  | [Archivo4](URL_archivo_4)   |
-|5| [Descripción commit 5](URL_commit_5)  | [Archivo5](URL_archivo_5)   |
+|1| [dockerfile and docker-compose config](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/f98e0f52389bb72dbc6b701bbdb83ed7ce83d179)  | [docker-compose.yml](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/docker/docker-compose.yml)   |
+|2| [add endpoint to handle progress chart data](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/72e1a3f43819b3db4a956fa03bf09913bd1e3b33)  | [ProgressRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/ProgressRestController.java)   |
+|3| [refactor Docker and deployment scripts](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/57f1d24acc3937ad88e569563b7f3f5619d51d81)  | [NutritionRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/NutritionRestController.java)   |
+|4| [add subscription and unsubscription endpoints for nutrition and training](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/8767c76d2bbf8fe74a5cf4254a509e5126a33264)  | [TrainingRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/TrainingRestController.java)   |
+|5| [Merge branch 'main' of https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/commit/55fc80db44811386743fe0c141ce27279f12e741)  | [UserRestController.java](https://github.com/CodeURJC-DAW-2025-26/practica-daw-2025-26-grupo-16/blob/main/backend/src/main/java/es/codeurjc/daw/powergym/controller/UserRestController.java)   |
 
 ---
 
