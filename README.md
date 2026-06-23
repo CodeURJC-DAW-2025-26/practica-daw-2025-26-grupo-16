@@ -274,7 +274,7 @@ Diagrama de clases de la aplicación con diferenciación por colores o secciones
 ## 🛠 **Práctica 2: Incorporación de una API REST a la aplicación web, despliegue con Docker y despliegue remoto**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://youtu.be/O6pz7UG-ua0)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/vdy9yo8ZqdQ)**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Documentación de la API REST**
@@ -439,7 +439,7 @@ Diagrama actualizado incluyendo los @RestController y su relación con los @Serv
 ## 🛠 **Práctica 3: Implementación de la web con arquitectura SPA**
 
 ### **Vídeo de Demostración**
-📹 **[Enlace al vídeo en YouTube](https://youtu.be/wA4UQ3u8QnY)**
+📹 **[Enlace al vídeo en YouTube](https://youtu.be/wA4UQ3u8QnY  )**
 > Vídeo mostrando las principales funcionalidades de la aplicación web.
 
 ### **Preparación del Entorno de Desarrollo**
